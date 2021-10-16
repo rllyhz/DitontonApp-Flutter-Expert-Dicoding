@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/data/datasources/movie_remote_data_source.dart';
 import 'package:ditonton/data/models/movie_detail_model.dart';
 import 'package:ditonton/data/models/movie_response.dart';
@@ -12,9 +13,6 @@ import '../../json_reader.dart';
 import '../../helpers/test_helper.mocks.dart';
 
 void main() {
-  const API_KEY = 'api_key=2174d146bb9c0eab47529b2e77d6b526';
-  const BASE_URL = 'https://api.themoviedb.org/3';
-
   late MovieRemoteDataSourceImpl dataSource;
   late MockHttpClient mockHttpClient;
 
@@ -56,16 +54,16 @@ void main() {
   });
 
   group('get Popular Movies', () {
-    final tMovieList =
-        MovieResponse.fromJson(json.decode(readJson('dummy_data/popular.json')))
-            .movieList;
+    final tMovieList = MovieResponse.fromJson(
+            json.decode(readJson('dummy_data/popular_movies.json')))
+        .movieList;
 
     test('should return list of movies when response is success (200)',
         () async {
       // arrange
       when(mockHttpClient.get(Uri.parse('$BASE_URL/movie/popular?$API_KEY')))
           .thenAnswer((_) async =>
-              http.Response(readJson('dummy_data/popular.json'), 200));
+              http.Response(readJson('dummy_data/popular_movies.json'), 200));
       // act
       final result = await dataSource.getPopularMovies();
       // assert
@@ -87,14 +85,14 @@ void main() {
 
   group('get Top Rated Movies', () {
     final tMovieList = MovieResponse.fromJson(
-            json.decode(readJson('dummy_data/top_rated.json')))
+            json.decode(readJson('dummy_data/top_rated_movies.json')))
         .movieList;
 
     test('should return list of movies when response code is 200 ', () async {
       // arrange
       when(mockHttpClient.get(Uri.parse('$BASE_URL/movie/top_rated?$API_KEY')))
           .thenAnswer((_) async =>
-              http.Response(readJson('dummy_data/top_rated.json'), 200));
+              http.Response(readJson('dummy_data/top_rated_movies.json'), 200));
       // act
       final result = await dataSource.getTopRatedMovies();
       // assert
