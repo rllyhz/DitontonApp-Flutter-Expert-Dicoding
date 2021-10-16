@@ -1,17 +1,22 @@
 import 'package:ditonton/domain/entities/genre.dart';
+import 'package:ditonton/domain/entities/season.dart';
 import 'package:equatable/equatable.dart';
 
 class TVShowDetail extends Equatable {
-  TVShowDetail(
-      {required this.backdropPath,
-      required this.firstAirDate,
-      required this.genres,
-      required this.id,
-      required this.name,
-      required this.overview,
-      required this.posterPath,
-      required this.voteAverage,
-      required this.voteCount});
+  TVShowDetail({
+    required this.backdropPath,
+    required this.firstAirDate,
+    required this.genres,
+    required this.id,
+    required this.name,
+    required this.overview,
+    required this.posterPath,
+    required this.numberOfEpisodes,
+    required this.numberOfSeasons,
+    required this.seasons,
+    required this.voteAverage,
+    required this.voteCount,
+  });
 
   final String? backdropPath;
   final String firstAirDate;
@@ -20,6 +25,9 @@ class TVShowDetail extends Equatable {
   final String name;
   final String overview;
   final String posterPath;
+  final int numberOfEpisodes;
+  final int numberOfSeasons;
+  final List<Season> seasons;
   final double voteAverage;
   final int voteCount;
 
@@ -33,6 +41,9 @@ class TVShowDetail extends Equatable {
         name,
         overview,
         posterPath,
+        numberOfEpisodes,
+        numberOfSeasons,
+        seasons,
         voteAverage,
         voteCount
       ];
