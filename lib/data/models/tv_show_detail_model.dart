@@ -1,3 +1,4 @@
+import 'package:ditonton/data/models/season_model.dart';
 import 'package:ditonton/domain/entities/tv_show_detail.dart';
 import 'package:equatable/equatable.dart';
 import 'genre_model.dart';
@@ -18,6 +19,7 @@ class TVShowDetailResponse extends Equatable {
     required this.overview,
     required this.popularity,
     required this.posterPath,
+    required this.seasons,
     required this.status,
     required this.tagline,
     required this.type,
@@ -39,6 +41,7 @@ class TVShowDetailResponse extends Equatable {
   final String overview;
   final double popularity;
   final String posterPath;
+  final List<SeasonModel> seasons;
   final String status;
   final String tagline;
   final String type;
@@ -62,6 +65,8 @@ class TVShowDetailResponse extends Equatable {
         overview: json["overview"],
         popularity: json["popularity"].toDouble(),
         posterPath: json["poster_path"],
+        seasons: List<SeasonModel>.from(
+            json["seasons"].map((x) => SeasonModel.fromJson(x))),
         status: json["status"],
         tagline: json["tagline"],
         type: json["type"],
@@ -84,6 +89,7 @@ class TVShowDetailResponse extends Equatable {
         "overview": overview,
         "popularity": popularity,
         "poster_path": posterPath,
+        "seasons": List<dynamic>.from(seasons.map((x) => x.toJson())),
         "status": status,
         "tagline": tagline,
         "type": type,
@@ -99,6 +105,9 @@ class TVShowDetailResponse extends Equatable {
         name: this.name,
         overview: this.overview,
         posterPath: this.posterPath,
+        numberOfEpisodes: this.numberOfEpisodes,
+        numberOfSeasons: this.numberOfSeasons,
+        seasons: this.seasons.map((season) => season.toEntity()).toList(),
         voteAverage: this.voteAverage,
         voteCount: this.voteCount,
       );
@@ -120,6 +129,7 @@ class TVShowDetailResponse extends Equatable {
         overview,
         popularity,
         posterPath,
+        seasons,
         status,
         tagline,
         type,
