@@ -1,3 +1,4 @@
+import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/common/drawer_item_enum.dart';
 import 'package:ditonton/presentation/pages/about_page.dart';
 import 'package:ditonton/presentation/pages/home_movie_page.dart';
@@ -14,9 +15,9 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<HomeNotifier>(builder: (ctx, data, child) {
       return Scaffold(
-        drawer: _buildDrawer(ctx, (DrawerItem selectedItem) {
-          data.setSelectedDrawerItem(selectedItem);
-        }),
+        drawer: _buildDrawer(ctx, (DrawerItem newSelectedItem) {
+          data.setSelectedDrawerItem(newSelectedItem);
+        }, data.selectedDrawerItem),
         appBar: _buildAppBar(ctx, data.selectedDrawerItem),
         body: _buildBody(ctx, data.selectedDrawerItem),
       );
@@ -57,6 +58,7 @@ class HomePage extends StatelessWidget {
   Drawer _buildDrawer(
     BuildContext context,
     Function(DrawerItem) itemCallback,
+    DrawerItem activeDrawerItem,
   ) =>
       Drawer(
         child: Column(
@@ -69,6 +71,8 @@ class HomePage extends StatelessWidget {
               accountEmail: Text('ditonton@dicoding.com'),
             ),
             ListTile(
+              tileColor:
+                  activeDrawerItem == DrawerItem.Movie ? kDavysGrey : kGrey,
               leading: Icon(Icons.movie),
               title: Text('Movies'),
               onTap: () {
@@ -77,6 +81,8 @@ class HomePage extends StatelessWidget {
               },
             ),
             ListTile(
+              tileColor:
+                  activeDrawerItem == DrawerItem.TVShow ? kDavysGrey : kGrey,
               leading: Icon(Icons.live_tv_rounded),
               title: Text('TV Shows'),
               onTap: () {
