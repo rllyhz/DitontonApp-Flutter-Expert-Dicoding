@@ -2,6 +2,7 @@ import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/common/drawer_item_enum.dart';
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/entities/tv_show.dart';
+import 'package:ditonton/presentation/pages/tv_show_detail_page.dart';
 import 'package:ditonton/presentation/provider/tv_show_list_notifier.dart';
 import 'package:ditonton/presentation/widgets/card_image_full.dart';
 import 'package:ditonton/presentation/widgets/sub_heading.dart';
@@ -104,7 +105,7 @@ class TVShowList extends StatelessWidget {
           final _tvShow = tvShows[index];
           return CardImageFull(
             activeDrawerItem: DrawerItem.TVShow,
-            routeNameDestination: "TVShowDetailPage.ROUTE_NAME",
+            routeNameDestination: TVShowDetailPage.ROUTE_NAME,
             tvShow: _tvShow,
           );
         },
