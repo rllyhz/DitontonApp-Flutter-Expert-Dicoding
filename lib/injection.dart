@@ -3,6 +3,7 @@ import 'package:ditonton/data/datasources/movie_local_data_source.dart';
 import 'package:ditonton/data/datasources/movie_remote_data_source.dart';
 import 'package:ditonton/data/repositories/movie_repository_impl.dart';
 import 'package:ditonton/domain/repositories/movie_repository.dart';
+import 'package:ditonton/presentation/provider/home_notifier.dart';
 import 'package:ditonton/presentation/provider/movie_detail_notifier.dart';
 import 'package:ditonton/presentation/provider/movie_list_notifier.dart';
 import 'package:ditonton/presentation/provider/movie_search_notifier.dart';
@@ -62,6 +63,9 @@ void init() {
     () => WatchlistMovieNotifier(
       getWatchlistMovies: locator(),
     ),
+  );
+  locator.registerFactory(
+    () => HomeNotifier(),
   );
 
   // use case
