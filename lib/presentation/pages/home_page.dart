@@ -2,9 +2,10 @@ import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/common/drawer_item_enum.dart';
 import 'package:ditonton/presentation/pages/about_page.dart';
 import 'package:ditonton/presentation/pages/home_movie_page.dart';
-import 'package:ditonton/presentation/provider/home_notifier.dart';
+import 'package:ditonton/presentation/pages/home_tv_show_page.dart';
 import 'package:ditonton/presentation/pages/search_page.dart';
 import 'package:ditonton/presentation/pages/watchlist_movies_page.dart';
+import 'package:ditonton/presentation/provider/home_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -30,9 +31,7 @@ class HomePage extends StatelessWidget {
     if (seletedDrawerItem == DrawerItem.Movie) {
       return HomeMoviePage();
     } else if (seletedDrawerItem == DrawerItem.TVShow) {
-      return Center(
-        child: Text("TV Show"),
-      );
+      return HomeTVShowPage();
     }
     return Container();
   }
