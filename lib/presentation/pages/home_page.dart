@@ -14,12 +14,14 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<HomeNotifier>(builder: (ctx, data, child) {
+      final activeDrawerItem = data.selectedDrawerItem;
+
       return Scaffold(
         drawer: _buildDrawer(ctx, (DrawerItem newSelectedItem) {
           data.setSelectedDrawerItem(newSelectedItem);
-        }, data.selectedDrawerItem),
-        appBar: _buildAppBar(ctx, data.selectedDrawerItem),
-        body: _buildBody(ctx, data.selectedDrawerItem),
+        }, activeDrawerItem),
+        appBar: _buildAppBar(ctx, activeDrawerItem),
+        body: _buildBody(ctx, activeDrawerItem),
       );
     });
   }
