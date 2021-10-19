@@ -14,14 +14,12 @@ import 'package:ditonton/domain/usecases/tv_show/get_tv_show_detail.dart';
 import 'package:ditonton/domain/usecases/tv_show/get_tv_show_recommendations.dart';
 import 'package:ditonton/domain/usecases/tv_show/get_watchlist_status_tv_show.dart';
 import 'package:ditonton/domain/usecases/tv_show/get_watchlist_tv_shows.dart';
-import 'package:ditonton/domain/usecases/tv_show/remove_watchlist.dart';
-import 'package:ditonton/domain/usecases/tv_show/save_watchlist.dart';
 import 'package:ditonton/domain/usecases/tv_show/search_tv_shows.dart';
 import 'package:ditonton/presentation/provider/home_notifier.dart';
 import 'package:ditonton/presentation/provider/movie_detail_notifier.dart';
 import 'package:ditonton/presentation/provider/movie_list_notifier.dart';
-import 'package:ditonton/presentation/provider/movie_search_notifier.dart';
 import 'package:ditonton/presentation/provider/popular_movies_notifier.dart';
+import 'package:ditonton/presentation/provider/search_notifier.dart';
 import 'package:ditonton/presentation/provider/top_rated_movies_notifier.dart';
 import 'package:ditonton/presentation/provider/tv_show_detail_notifier.dart';
 import 'package:ditonton/presentation/provider/tv_show_list_notifier.dart';
@@ -38,9 +36,9 @@ import 'domain/usecases/movie/get_watchlist_movies.dart';
 import 'domain/usecases/movie/get_watchlist_status_movie.dart';
 import 'domain/usecases/movie/remove_watchlist.dart' as movieRm;
 import 'domain/usecases/movie/save_watchlist.dart' as movieSv;
+import 'domain/usecases/movie/search_movies.dart';
 import 'domain/usecases/tv_show/remove_watchlist.dart' as tvShowRm;
 import 'domain/usecases/tv_show/save_watchlist.dart' as tvShowSv;
-import 'domain/usecases/movie/search_movies.dart';
 
 final locator = GetIt.instance;
 
@@ -79,8 +77,9 @@ void init() {
     ),
   );
   locator.registerFactory(
-    () => MovieSearchNotifier(
+    () => SearchNotifier(
       searchMovies: locator(),
+      searchTVShows: locator(),
     ),
   );
   locator.registerFactory(
