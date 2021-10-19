@@ -76,9 +76,9 @@ class DetailContent extends StatelessWidget {
         ElevatedButton(
           onPressed: () async {
             if (!provider.isAddedToWatchlist) {
-              provider.addWatchlist(movie);
+              await provider.addWatchlist(movie);
             } else {
-              provider.removeFromWatchlist(movie);
+              await provider.removeFromWatchlist(movie);
             }
 
             final message = provider.watchlistMessage;
@@ -101,7 +101,9 @@ class DetailContent extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               provider.isAddedToWatchlist ? Icon(Icons.check) : Icon(Icons.add),
+              SizedBox(width: 6.0),
               Text('Watchlist'),
+              SizedBox(width: 4.0),
             ],
           ),
         ),
@@ -163,8 +165,12 @@ class DetailContent extends StatelessWidget {
                           child: CachedNetworkImage(
                             imageUrl:
                                 'https://image.tmdb.org/t/p/w500${movieRecoms.posterPath}',
-                            placeholder: (context, url) => Center(
-                              child: CircularProgressIndicator(),
+                            placeholder: (context, url) => Padding(
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 8.0, horizontal: 12.0),
+                              child: Center(
+                                child: CircularProgressIndicator(),
+                              ),
                             ),
                             errorWidget: (context, url, error) =>
                                 Icon(Icons.error),
