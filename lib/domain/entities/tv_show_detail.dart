@@ -10,6 +10,7 @@ class TVShowDetail extends Equatable {
     required this.id,
     required this.name,
     required this.overview,
+    required this.episodeRunTime,
     required this.posterPath,
     required this.numberOfEpisodes,
     required this.numberOfSeasons,
@@ -21,6 +22,7 @@ class TVShowDetail extends Equatable {
   final String? backdropPath;
   final String firstAirDate;
   final List<Genre> genres;
+  final List<int> episodeRunTime;
   final int id;
   final String name;
   final String overview;
@@ -41,6 +43,7 @@ class TVShowDetail extends Equatable {
         name,
         overview,
         posterPath,
+        episodeRunTime,
         numberOfEpisodes,
         numberOfSeasons,
         seasons,
