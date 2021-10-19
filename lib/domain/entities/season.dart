@@ -9,7 +9,7 @@ class Season extends Equatable {
   });
 
   final int id;
-  final String posterPath;
+  final String? posterPath;
   final int seasonNumber;
   final int episodeCount;
 

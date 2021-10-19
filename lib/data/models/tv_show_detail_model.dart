@@ -100,6 +100,7 @@ class TVShowDetailResponse extends Equatable {
   TVShowDetail toEntity() => TVShowDetail(
         backdropPath: this.backdropPath,
         firstAirDate: this.firstAirDate,
+        episodeRunTime: this.episodeRunTime,
         genres: this.genres.map((genre) => genre.toEntity()).toList(),
         id: this.id,
         name: this.name,

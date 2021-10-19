@@ -1,6 +1,7 @@
+import 'package:ditonton/common/drawer_item_enum.dart';
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/presentation/provider/watchlist_movie_notifier.dart';
-import 'package:ditonton/presentation/widgets/movie_card_list.dart';
+import 'package:ditonton/presentation/widgets/content_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -38,7 +39,11 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage> {
               return ListView.builder(
                 itemBuilder: (context, index) {
                   final movie = data.watchlistMovies[index];
-                  return MovieCard(movie);
+
+                  return ContentCardList(
+                    activeDrawerItem: DrawerItem.Movie,
+                    movie: movie,
+                  );
                 },
                 itemCount: data.watchlistMovies.length,
               );

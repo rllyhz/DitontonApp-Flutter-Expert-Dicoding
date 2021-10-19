@@ -24,7 +24,7 @@ class TVShowRemoteDataSourceImpl implements TVShowRemoteDataSource {
   @override
   Future<List<TVShowModel>> getNowPlayingTVShows() async {
     final response =
-        await client.get(Uri.parse('$BASE_URL/tv/now_playing?$API_KEY'));
+        await client.get(Uri.parse('$BASE_URL/tv/on_the_air?$API_KEY'));
 
     if (response.statusCode == 200) {
       return TVShowResponse.fromJson(json.decode(response.body)).tvShowList;
