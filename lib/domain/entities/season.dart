@@ -14,6 +14,5 @@ class Season extends Equatable {
   final int episodeCount;
 
   @override
-  // TODO: implement props
   List<Object?> get props => [id, posterPath, seasonNumber, episodeCount];
 }

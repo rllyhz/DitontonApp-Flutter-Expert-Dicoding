@@ -36,7 +36,7 @@ class _HomeTVShowPageState extends State<HomeTVShowPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Now Playing',
+              NOW_PLAYING_HEADING_TEXT,
               style: kHeading6,
             ),
             Consumer<TVShowListNotifier>(builder: (context, data, child) {
@@ -48,12 +48,12 @@ class _HomeTVShowPageState extends State<HomeTVShowPage> {
               } else if (state == RequestState.Loaded) {
                 return TVShowList(data.nowPlayingTVShows);
               } else {
-                return Text('Failed');
+                return Text(FAILED_TO_FETCH_DATA_MESSAGE);
               }
             }),
             SizedBox(height: 8.0),
             SubHeading(
-              title: 'Popular',
+              title: POPULAR_HEADING_TEXT,
               onTap: () =>
                   Navigator.pushNamed(context, PopularTVShowsPage.ROUTE_NAME),
             ),
@@ -66,11 +66,11 @@ class _HomeTVShowPageState extends State<HomeTVShowPage> {
               } else if (state == RequestState.Loaded) {
                 return TVShowList(data.popularTVShows);
               } else {
-                return Text('Failed');
+                return Text(FAILED_TO_FETCH_DATA_MESSAGE);
               }
             }),
             SubHeading(
-              title: 'Top Rated',
+              title: TOP_RATED_HEADING_TEXT,
               onTap: () =>
                   Navigator.pushNamed(context, TopRatedTVShowsPage.ROUTE_NAME),
             ),
@@ -84,7 +84,7 @@ class _HomeTVShowPageState extends State<HomeTVShowPage> {
               } else if (state == RequestState.Loaded) {
                 return TVShowList(data.topRatedTVShows);
               } else {
-                return Text('Failed');
+                return Text(FAILED_TO_FETCH_DATA_MESSAGE);
               }
             }),
           ],

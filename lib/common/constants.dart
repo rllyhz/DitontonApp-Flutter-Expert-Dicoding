@@ -4,6 +4,16 @@ import 'package:google_fonts/google_fonts.dart';
 const String BASE_IMAGE_URL = 'https://image.tmdb.org/t/p/w500';
 const API_KEY = 'api_key=2174d146bb9c0eab47529b2e77d6b526';
 const BASE_URL = 'https://api.themoviedb.org/3';
+const WATCHLIST_ADD_SUCCESS_MESSAGE = 'Added to Watchlist';
+const WATCHLIST_REMOVE_SUCCESS_MESSAGE = 'Removed from Watchlist';
+const NOW_PLAYING_HEADING_TEXT = 'Now Playing';
+const POPULAR_HEADING_TEXT = 'Popular';
+const TOP_RATED_HEADING_TEXT = 'Top Rated';
+
+const NOT_STRING_REPLACEMENT = '-';
+const FAILED_TO_FETCH_DATA_MESSAGE = 'Failed to fetch data';
+const ABOUT_DESCRIPTION_TEXT =
+    'Ditonton merupakan sebuah aplikasi katalog film yang dikembangkan oleh Dicoding Indonesia sebagai contoh proyek aplikasi untuk kelas Menjadi Flutter Developer Expert.';
 
 // colors
 const Color kRichBlack = Color(0xFF000814);

@@ -64,7 +64,7 @@ class DetailContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScrollableSheetContainer(
-      backgroundUrl: 'https://image.tmdb.org/t/p/w500${tvShow.posterPath}',
+      backgroundUrl: '$BASE_IMAGE_URL${tvShow.posterPath}',
       scrollableContents: [
         Text(
           tvShow.name,
@@ -80,8 +80,8 @@ class DetailContent extends StatelessWidget {
 
             final message = provider.watchlistMessage;
 
-            if (message == TVShowDetailNotifier.watchlistAddSuccessMessage ||
-                message == TVShowDetailNotifier.watchlistRemoveSuccessMessage) {
+            if (message == WATCHLIST_ADD_SUCCESS_MESSAGE ||
+                message == WATCHLIST_REMOVE_SUCCESS_MESSAGE) {
               ScaffoldMessenger.of(context)
                   .showSnackBar(SnackBar(content: Text(message)));
             } else {
@@ -170,7 +170,7 @@ class DetailContent extends StatelessWidget {
                           ),
                           child: CachedNetworkImage(
                             imageUrl:
-                                'https://image.tmdb.org/t/p/w500${tvShowRecoms.posterPath}',
+                                '$BASE_IMAGE_URL${tvShowRecoms.posterPath}',
                             placeholder: (context, url) => Padding(
                               padding: EdgeInsets.symmetric(
                                   vertical: 8.0, horizontal: 12.0),
@@ -226,7 +226,7 @@ class DetailContent extends StatelessWidget {
                                   )
                                 : CachedNetworkImage(
                                     imageUrl:
-                                        'https://image.tmdb.org/t/p/w500${season.posterPath}',
+                                        '$BASE_IMAGE_URL${season.posterPath}',
                                     placeholder: (context, url) => Center(
                                       child: CircularProgressIndicator(),
                                     ),

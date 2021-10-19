@@ -67,7 +67,7 @@ class DetailContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScrollableSheetContainer(
-      backgroundUrl: 'https://image.tmdb.org/t/p/w500${movie.posterPath}',
+      backgroundUrl: '$BASE_IMAGE_URL${movie.posterPath}',
       scrollableContents: [
         Text(
           movie.title,
@@ -83,8 +83,8 @@ class DetailContent extends StatelessWidget {
 
             final message = provider.watchlistMessage;
 
-            if (message == MovieDetailNotifier.watchlistAddSuccessMessage ||
-                message == MovieDetailNotifier.watchlistRemoveSuccessMessage) {
+            if (message == WATCHLIST_ADD_SUCCESS_MESSAGE ||
+                message == WATCHLIST_REMOVE_SUCCESS_MESSAGE) {
               ScaffoldMessenger.of(context)
                   .showSnackBar(SnackBar(content: Text(message)));
             } else {
@@ -164,7 +164,7 @@ class DetailContent extends StatelessWidget {
                           ),
                           child: CachedNetworkImage(
                             imageUrl:
-                                'https://image.tmdb.org/t/p/w500${movieRecoms.posterPath}',
+                                '$BASE_IMAGE_URL${movieRecoms.posterPath}',
                             placeholder: (context, url) => Padding(
                               padding: EdgeInsets.symmetric(
                                   vertical: 8.0, horizontal: 12.0),

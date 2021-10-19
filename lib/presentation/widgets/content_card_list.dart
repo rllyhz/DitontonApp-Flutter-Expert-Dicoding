@@ -44,14 +44,14 @@ class ContentCardList extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      _getTitle() ?? '-',
+                      _getTitle() ?? NOT_STRING_REPLACEMENT,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: kHeading6,
                     ),
                     SizedBox(height: 16),
                     Text(
-                      _getOverview() ?? '-',
+                      _getOverview() ?? NOT_STRING_REPLACEMENT,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),

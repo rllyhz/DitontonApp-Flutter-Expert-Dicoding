@@ -1,3 +1,4 @@
+import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/common/exception.dart';
 import 'package:ditonton/data/datasources/db/database_helper.dart';
 import 'package:ditonton/data/models/tv_show_table.dart';
@@ -33,7 +34,7 @@ class TVShowLocalDataSourceImpl implements TVShowLocalDataSource {
   Future<String> insertWatchlist(TVShowTable tvShow) async {
     try {
       await databaseHelper.insertTVShowWatchlist(tvShow);
-      return 'Added to Watchlist';
+      return WATCHLIST_ADD_SUCCESS_MESSAGE;
     } catch (e) {
       throw DatabaseException(e.toString());
     }
@@ -43,7 +44,7 @@ class TVShowLocalDataSourceImpl implements TVShowLocalDataSource {
   Future<String> removeWatchlist(TVShowTable tvShow) async {
     try {
       await databaseHelper.removeTVShowWatchlist(tvShow);
-      return 'Removed from Watchlist';
+      return WATCHLIST_REMOVE_SUCCESS_MESSAGE;
     } catch (e) {
       throw DatabaseException(e.toString());
     }

@@ -34,7 +34,6 @@ class TVShowDetail extends Equatable {
   final int voteCount;
 
   @override
-  // TODO: implement props
   List<Object?> get props => [
         backdropPath,
         firstAirDate,
