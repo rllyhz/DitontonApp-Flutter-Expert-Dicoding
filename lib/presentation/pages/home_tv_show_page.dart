@@ -2,6 +2,8 @@ import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/common/drawer_item_enum.dart';
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/entities/tv_show.dart';
+import 'package:ditonton/presentation/pages/popular_tv_shows_page.dart';
+import 'package:ditonton/presentation/pages/top_rated_tv_shows_page.dart';
 import 'package:ditonton/presentation/pages/tv_show_detail_page.dart';
 import 'package:ditonton/presentation/provider/tv_show_list_notifier.dart';
 import 'package:ditonton/presentation/widgets/card_image_full.dart';
@@ -53,7 +55,7 @@ class _HomeTVShowPageState extends State<HomeTVShowPage> {
             SubHeading(
               title: 'Popular',
               onTap: () =>
-                  Navigator.pushNamed(context, "PopularTVShowsPage.ROUTE_NAME"),
+                  Navigator.pushNamed(context, PopularTVShowsPage.ROUTE_NAME),
             ),
             Consumer<TVShowListNotifier>(builder: (context, data, child) {
               final state = data.popularTVShowsState;
@@ -69,8 +71,8 @@ class _HomeTVShowPageState extends State<HomeTVShowPage> {
             }),
             SubHeading(
               title: 'Top Rated',
-              onTap: () => Navigator.pushNamed(
-                  context, "TopRatedTVShowsPage.ROUTE_NAME"),
+              onTap: () =>
+                  Navigator.pushNamed(context, TopRatedTVShowsPage.ROUTE_NAME),
             ),
             SizedBox(height: 8.0),
             Consumer<TVShowListNotifier>(builder: (context, data, child) {
