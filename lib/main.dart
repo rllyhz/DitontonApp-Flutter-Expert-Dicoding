@@ -81,7 +81,7 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: kRichBlack,
           textTheme: kTextTheme,
         ),
-        home: HomePage(),
+        initialRoute: HomePage.ROUTE_NAME,
         onGenerateRoute: (RouteSettings settings) {
           switch (settings.name) {
             case HomePage.ROUTE_NAME:
