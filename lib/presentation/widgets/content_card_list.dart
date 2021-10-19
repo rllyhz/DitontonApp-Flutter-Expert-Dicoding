@@ -3,18 +3,19 @@ import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/common/drawer_item_enum.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/entities/tv_show.dart';
-import 'package:ditonton/presentation/pages/movie_detail_page.dart';
 import 'package:flutter/material.dart';
 
 class ContentCardList extends StatelessWidget {
   final Movie? movie;
   final TVShow? tvShow;
   final DrawerItem activeDrawerItem;
+  final String routeName;
 
   const ContentCardList({
     required this.activeDrawerItem,
     this.movie,
     this.tvShow,
+    required this.routeName,
   });
 
   @override
@@ -25,7 +26,7 @@ class ContentCardList extends StatelessWidget {
         onTap: () {
           Navigator.pushNamed(
             context,
-            MovieDetailPage.ROUTE_NAME,
+            routeName,
             arguments: _getId(),
           );
         },

@@ -4,7 +4,7 @@ import 'package:ditonton/presentation/pages/about_page.dart';
 import 'package:ditonton/presentation/pages/home_movie_page.dart';
 import 'package:ditonton/presentation/pages/home_tv_show_page.dart';
 import 'package:ditonton/presentation/pages/search_page.dart';
-import 'package:ditonton/presentation/pages/watchlist_movies_page.dart';
+import 'package:ditonton/presentation/pages/watchlist_page.dart';
 import 'package:ditonton/presentation/provider/home_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -12,12 +12,15 @@ import 'package:provider/provider.dart';
 class HomePage extends StatelessWidget {
   static const ROUTE_NAME = '/home';
 
+  GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
+
   @override
   Widget build(BuildContext context) {
     return Consumer<HomeNotifier>(builder: (ctx, data, child) {
       final activeDrawerItem = data.selectedDrawerItem;
 
       return Scaffold(
+        key: _drawerKey,
         drawer: _buildDrawer(ctx, (DrawerItem newSelectedItem) {
           data.setSelectedDrawerItem(newSelectedItem);
         }, activeDrawerItem),
@@ -74,7 +77,7 @@ class HomePage extends StatelessWidget {
             ListTile(
               tileColor:
                   activeDrawerItem == DrawerItem.Movie ? kDavysGrey : kGrey,
-              leading: Icon(Icons.movie),
+              leading: Icon(Icons.movie_creation_outlined),
               title: Text('Movies'),
               onTap: () {
                 Navigator.pop(context);
@@ -95,11 +98,13 @@ class HomePage extends StatelessWidget {
               leading: Icon(Icons.save_alt),
               title: Text('Watchlist'),
               onTap: () {
-                Navigator.pushNamed(context, WatchlistMoviesPage.ROUTE_NAME);
+                Navigator.pop(context);
+                Navigator.pushNamed(context, WatchlistPage.ROUTE_NAME);
               },
             ),
             ListTile(
               onTap: () {
+                Navigator.pop(context);
                 Navigator.pushNamed(context, AboutPage.ROUTE_NAME);
               },
               leading: Icon(Icons.info_outline),
