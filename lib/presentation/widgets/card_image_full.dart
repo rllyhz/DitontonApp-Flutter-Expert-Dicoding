@@ -41,8 +41,11 @@ class CardImageFull extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(16)),
           child: CachedNetworkImage(
             imageUrl: '$BASE_IMAGE_URL$posterPath',
-            placeholder: (context, url) => Center(
-              child: CircularProgressIndicator(),
+            placeholder: (context, url) => Padding(
+              padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
             ),
             errorWidget: (context, url, error) => Icon(Icons.error),
           ),

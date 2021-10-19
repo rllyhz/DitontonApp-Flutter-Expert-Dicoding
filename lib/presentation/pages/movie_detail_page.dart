@@ -35,22 +35,24 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Consumer<MovieDetailNotifier>(
-        builder: (context, provider, child) {
-          if (provider.movieState == RequestState.Loading) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          } else if (provider.movieState == RequestState.Loaded) {
-            final movie = provider.movie;
-            return SafeArea(
-              child: DetailContent(movie, provider),
-            );
-          } else {
-            return Text(provider.message);
-          }
-        },
+    return SafeArea(
+      child: Scaffold(
+        body: Consumer<MovieDetailNotifier>(
+          builder: (context, provider, child) {
+            if (provider.movieState == RequestState.Loading) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            } else if (provider.movieState == RequestState.Loaded) {
+              final movie = provider.movie;
+              return DetailContent(movie, provider);
+            } else {
+              return Center(
+                child: Text(provider.message),
+              );
+            }
+          },
+        ),
       ),
     );
   }

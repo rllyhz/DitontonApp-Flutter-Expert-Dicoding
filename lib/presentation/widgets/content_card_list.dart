@@ -67,8 +67,12 @@ class ContentCardList extends StatelessWidget {
                 child: CachedNetworkImage(
                   imageUrl: "$BASE_IMAGE_URL${_getPosterPath()}",
                   width: 80,
-                  placeholder: (context, url) => Center(
-                    child: CircularProgressIndicator(),
+                  placeholder: (context, url) => Padding(
+                    padding:
+                        EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
                   ),
                   errorWidget: (context, url, error) => Icon(Icons.error),
                 ),

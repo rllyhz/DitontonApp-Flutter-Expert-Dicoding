@@ -34,22 +34,22 @@ class _TVShowDetailPageState extends State<TVShowDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Consumer<TVShowDetailNotifier>(
-        builder: (ctx, provider, child) {
-          if (provider.tvShowState == RequestState.Loading) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          } else if (provider.tvShowState == RequestState.Loaded) {
-            final tvShow = provider.tvShowDetail;
-            return SafeArea(
-              child: DetailContent(tvShow, provider),
-            );
-          } else {
-            return Text(provider.message);
-          }
-        },
+    return SafeArea(
+      child: Scaffold(
+        body: Consumer<TVShowDetailNotifier>(
+          builder: (ctx, provider, child) {
+            if (provider.tvShowState == RequestState.Loading) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            } else if (provider.tvShowState == RequestState.Loaded) {
+              final tvShow = provider.tvShowDetail;
+              return DetailContent(tvShow, provider);
+            } else {
+              return Center(child: Text(provider.message));
+            }
+          },
+        ),
       ),
     );
   }
