@@ -27,7 +27,7 @@ class SearchPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Search $_title'),
+        title: Text('Search $_title\s'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
