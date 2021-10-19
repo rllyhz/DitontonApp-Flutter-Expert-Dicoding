@@ -53,6 +53,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                 return Text('Failed');
               }
             }),
+            SizedBox(height: 8.0),
             SubHeading(
               title: 'Popular',
               onTap: () =>
@@ -70,6 +71,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                 return Text('Failed');
               }
             }),
+            SizedBox(height: 8.0),
             SubHeading(
               title: 'Top Rated',
               onTap: () =>

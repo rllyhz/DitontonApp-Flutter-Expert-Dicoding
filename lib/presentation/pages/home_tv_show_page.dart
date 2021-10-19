@@ -49,6 +49,7 @@ class _HomeTVShowPageState extends State<HomeTVShowPage> {
                 return Text('Failed');
               }
             }),
+            SizedBox(height: 8.0),
             SubHeading(
               title: 'Popular',
               onTap: () =>
@@ -71,6 +72,7 @@ class _HomeTVShowPageState extends State<HomeTVShowPage> {
               onTap: () => Navigator.pushNamed(
                   context, "TopRatedTVShowsPage.ROUTE_NAME"),
             ),
+            SizedBox(height: 8.0),
             Consumer<TVShowListNotifier>(builder: (context, data, child) {
               final state = data.topRatedTVShowsState;
               if (state == RequestState.Loading) {
