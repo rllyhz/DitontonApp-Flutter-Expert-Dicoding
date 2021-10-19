@@ -9,9 +9,6 @@ import 'package:ditonton/domain/usecases/tv_show/save_watchlist.dart';
 import 'package:flutter/foundation.dart';
 
 class TVShowDetailNotifier extends ChangeNotifier {
-  static const watchlistAddSuccessMessage = 'Added to Watchlist';
-  static const watchlistRemoveSuccessMessage = 'Removed from Watchlist';
-
   TVShowDetailNotifier({
     required this.getTVShowDetail,
     required this.getTVShowRecommendations,

@@ -34,22 +34,22 @@ class _TVShowDetailPageState extends State<TVShowDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Consumer<TVShowDetailNotifier>(
-        builder: (ctx, provider, child) {
-          if (provider.tvShowState == RequestState.Loading) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          } else if (provider.tvShowState == RequestState.Loaded) {
-            final tvShow = provider.tvShowDetail;
-            return SafeArea(
-              child: DetailContent(tvShow, provider),
-            );
-          } else {
-            return Text(provider.message);
-          }
-        },
+    return SafeArea(
+      child: Scaffold(
+        body: Consumer<TVShowDetailNotifier>(
+          builder: (ctx, provider, child) {
+            if (provider.tvShowState == RequestState.Loading) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            } else if (provider.tvShowState == RequestState.Loaded) {
+              final tvShow = provider.tvShowDetail;
+              return DetailContent(tvShow, provider);
+            } else {
+              return Center(child: Text(provider.message));
+            }
+          },
+        ),
       ),
     );
   }
@@ -64,7 +64,7 @@ class DetailContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScrollableSheetContainer(
-      backgroundUrl: 'https://image.tmdb.org/t/p/w500${tvShow.posterPath}',
+      backgroundUrl: '$BASE_IMAGE_URL${tvShow.posterPath}',
       scrollableContents: [
         Text(
           tvShow.name,
@@ -73,15 +73,15 @@ class DetailContent extends StatelessWidget {
         ElevatedButton(
           onPressed: () async {
             if (!provider.isAddedToWatchlist) {
-              provider.addWatchlist(tvShow);
+              await provider.addWatchlist(tvShow);
             } else {
-              provider.removeFromWatchlist(tvShow);
+              await provider.removeFromWatchlist(tvShow);
             }
 
             final message = provider.watchlistMessage;
 
-            if (message == TVShowDetailNotifier.watchlistAddSuccessMessage ||
-                message == TVShowDetailNotifier.watchlistRemoveSuccessMessage) {
+            if (message == WATCHLIST_ADD_SUCCESS_MESSAGE ||
+                message == WATCHLIST_REMOVE_SUCCESS_MESSAGE) {
               ScaffoldMessenger.of(context)
                   .showSnackBar(SnackBar(content: Text(message)));
             } else {
@@ -98,7 +98,9 @@ class DetailContent extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               provider.isAddedToWatchlist ? Icon(Icons.check) : Icon(Icons.add),
+              SizedBox(width: 6.0),
               Text('Watchlist'),
+              SizedBox(width: 4.0),
             ],
           ),
         ),
@@ -168,9 +170,13 @@ class DetailContent extends StatelessWidget {
                           ),
                           child: CachedNetworkImage(
                             imageUrl:
-                                'https://image.tmdb.org/t/p/w500${tvShowRecoms.posterPath}',
-                            placeholder: (context, url) => Center(
-                              child: CircularProgressIndicator(),
+                                '$BASE_IMAGE_URL${tvShowRecoms.posterPath}',
+                            placeholder: (context, url) => Padding(
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 8.0, horizontal: 12.0),
+                              child: Center(
+                                child: CircularProgressIndicator(),
+                              ),
                             ),
                             errorWidget: (context, url, error) =>
                                 Icon(Icons.error),
@@ -220,7 +226,7 @@ class DetailContent extends StatelessWidget {
                                   )
                                 : CachedNetworkImage(
                                     imageUrl:
-                                        'https://image.tmdb.org/t/p/w500${season.posterPath}',
+                                        '$BASE_IMAGE_URL${season.posterPath}',
                                     placeholder: (context, url) => Center(
                                       child: CircularProgressIndicator(),
                                     ),

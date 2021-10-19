@@ -1,6 +1,6 @@
+import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/entities/movie_detail.dart';
-import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/usecases/movie/get_movie_detail.dart';
 import 'package:ditonton/domain/usecases/movie/get_movie_recommendations.dart';
 import 'package:ditonton/domain/usecases/movie/get_watchlist_status_movie.dart';
@@ -10,9 +10,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class MovieDetailNotifier extends ChangeNotifier {
-  static const watchlistAddSuccessMessage = 'Added to Watchlist';
-  static const watchlistRemoveSuccessMessage = 'Removed from Watchlist';
-
   final GetMovieDetail getMovieDetail;
   final GetMovieRecommendations getMovieRecommendations;
   final GetWatchListStatusMovie getWatchListStatus;

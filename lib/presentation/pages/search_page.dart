@@ -3,6 +3,8 @@ import 'package:ditonton/common/drawer_item_enum.dart';
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/entities/tv_show.dart';
+import 'package:ditonton/presentation/pages/movie_detail_page.dart';
+import 'package:ditonton/presentation/pages/tv_show_detail_page.dart';
 import 'package:ditonton/presentation/provider/search_notifier.dart';
 import 'package:ditonton/presentation/widgets/content_card_list.dart';
 import 'package:flutter/material.dart';
@@ -95,6 +97,7 @@ class SearchPage extends StatelessWidget {
           return ContentCardList(
             movie: movie,
             activeDrawerItem: activeDrawerItem,
+            routeName: MovieDetailPage.ROUTE_NAME,
           );
         },
         itemCount: movies.length,
@@ -113,6 +116,7 @@ class SearchPage extends StatelessWidget {
           return ContentCardList(
             tvShow: tvShow,
             activeDrawerItem: activeDrawerItem,
+            routeName: TVShowDetailPage.ROUTE_NAME,
           );
         },
         itemCount: tvShows.length,

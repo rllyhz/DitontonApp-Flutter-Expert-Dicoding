@@ -3,18 +3,19 @@ import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/common/drawer_item_enum.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/entities/tv_show.dart';
-import 'package:ditonton/presentation/pages/movie_detail_page.dart';
 import 'package:flutter/material.dart';
 
 class ContentCardList extends StatelessWidget {
   final Movie? movie;
   final TVShow? tvShow;
   final DrawerItem activeDrawerItem;
+  final String routeName;
 
   const ContentCardList({
     required this.activeDrawerItem,
     this.movie,
     this.tvShow,
+    required this.routeName,
   });
 
   @override
@@ -25,7 +26,7 @@ class ContentCardList extends StatelessWidget {
         onTap: () {
           Navigator.pushNamed(
             context,
-            MovieDetailPage.ROUTE_NAME,
+            routeName,
             arguments: _getId(),
           );
         },
@@ -43,14 +44,14 @@ class ContentCardList extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      _getTitle() ?? '-',
+                      _getTitle() ?? NOT_STRING_REPLACEMENT,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: kHeading6,
                     ),
                     SizedBox(height: 16),
                     Text(
-                      _getOverview() ?? '-',
+                      _getOverview() ?? NOT_STRING_REPLACEMENT,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -67,8 +68,12 @@ class ContentCardList extends StatelessWidget {
                 child: CachedNetworkImage(
                   imageUrl: "$BASE_IMAGE_URL${_getPosterPath()}",
                   width: 80,
-                  placeholder: (context, url) => Center(
-                    child: CircularProgressIndicator(),
+                  placeholder: (context, url) => Padding(
+                    padding:
+                        EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
                   ),
                   errorWidget: (context, url, error) => Icon(Icons.error),
                 ),

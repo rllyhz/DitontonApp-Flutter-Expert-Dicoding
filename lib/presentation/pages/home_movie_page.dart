@@ -38,7 +38,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Now Playing',
+              NOW_PLAYING_HEADING_TEXT,
               style: kHeading6,
             ),
             Consumer<MovieListNotifier>(builder: (context, data, child) {
@@ -50,12 +50,12 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
               } else if (state == RequestState.Loaded) {
                 return MovieList(data.nowPlayingMovies);
               } else {
-                return Text('Failed');
+                return Text(FAILED_TO_FETCH_DATA_MESSAGE);
               }
             }),
             SizedBox(height: 8.0),
             SubHeading(
-              title: 'Popular',
+              title: POPULAR_HEADING_TEXT,
               onTap: () =>
                   Navigator.pushNamed(context, PopularMoviesPage.ROUTE_NAME),
             ),
@@ -68,12 +68,12 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
               } else if (state == RequestState.Loaded) {
                 return MovieList(data.popularMovies);
               } else {
-                return Text('Failed');
+                return Text(FAILED_TO_FETCH_DATA_MESSAGE);
               }
             }),
             SizedBox(height: 8.0),
             SubHeading(
-              title: 'Top Rated',
+              title: TOP_RATED_HEADING_TEXT,
               onTap: () =>
                   Navigator.pushNamed(context, TopRatedMoviesPage.ROUTE_NAME),
             ),
@@ -86,7 +86,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
               } else if (state == RequestState.Loaded) {
                 return MovieList(data.topRatedMovies);
               } else {
-                return Text('Failed');
+                return Text(FAILED_TO_FETCH_DATA_MESSAGE);
               }
             }),
           ],

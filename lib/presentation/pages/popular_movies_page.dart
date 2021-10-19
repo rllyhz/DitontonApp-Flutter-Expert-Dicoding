@@ -1,5 +1,6 @@
 import 'package:ditonton/common/drawer_item_enum.dart';
 import 'package:ditonton/common/state_enum.dart';
+import 'package:ditonton/presentation/pages/movie_detail_page.dart';
 import 'package:ditonton/presentation/provider/popular_movies_notifier.dart';
 import 'package:ditonton/presentation/widgets/content_card_list.dart';
 import 'package:flutter/material.dart';
@@ -42,6 +43,7 @@ class _PopularMoviesPageState extends State<PopularMoviesPage> {
 
                   return ContentCardList(
                     activeDrawerItem: DrawerItem.Movie,
+                    routeName: MovieDetailPage.ROUTE_NAME,
                     movie: movie,
                   );
                 },
