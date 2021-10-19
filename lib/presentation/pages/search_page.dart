@@ -72,7 +72,7 @@ class SearchPage extends StatelessWidget {
               child: CircularProgressIndicator(),
             ),
           );
-        } else if (data.state == RequestState.Loaded) {
+        } else if (data.state == RequestState.Loaded && _isAlreadySearched) {
           if (activeDrawerItem == DrawerItem.Movie)
             return _buildMovieCardList(data.moviesSearchResult);
           else
@@ -85,14 +85,7 @@ class SearchPage extends StatelessWidget {
   }
 
   Widget _buildMovieCardList(List<Movie> movies) {
-    if (_isAlreadySearched && movies.isEmpty) {
-      return Container(
-        margin: EdgeInsets.only(top: 32.0),
-        child: Center(
-          child: Text('$_title\s not found!'),
-        ),
-      );
-    }
+    if (movies.isEmpty) return _buildErrorMessage();
 
     return Expanded(
       child: ListView.builder(
@@ -110,14 +103,7 @@ class SearchPage extends StatelessWidget {
   }
 
   Widget _buildTVShowCardList(List<TVShow> tvShows) {
-    if (_isAlreadySearched && tvShows.isEmpty) {
-      return Container(
-        margin: EdgeInsets.only(top: 32.0),
-        child: Center(
-          child: Text('$_title\s not found!'),
-        ),
-      );
-    }
+    if (tvShows.isEmpty) return _buildErrorMessage();
 
     return Expanded(
       child: ListView.builder(
@@ -133,4 +119,14 @@ class SearchPage extends StatelessWidget {
       ),
     );
   }
+
+  Widget _buildErrorMessage() => Container(
+        margin: EdgeInsets.only(top: 32.0),
+        child: Center(
+          child: Text(
+            '$_title\s not found!',
+            style: kBodyText,
+          ),
+        ),
+      );
 }
