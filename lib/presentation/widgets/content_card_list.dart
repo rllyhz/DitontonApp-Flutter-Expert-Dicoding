@@ -23,6 +23,7 @@ class ContentCardList extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 4),
       child: Material(
+        color: kRichBlack,
         child: InkWell(
           onTap: () {
             Navigator.pushNamed(
