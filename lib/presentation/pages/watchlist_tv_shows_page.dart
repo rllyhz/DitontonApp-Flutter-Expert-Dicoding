@@ -34,7 +34,7 @@ class _WatchlistTVShowsPageState extends State<WatchlistTVShowsPage> {
           } else if (data.watchlistState == RequestState.Loaded) {
             if (data.watchlistTVShows.isEmpty)
               return Center(
-                child: Text('No watchlist tv show yet!', style: kBodyText),
+                child: Text(WACHLIST_TV_SHOW_EMPTY_MESSAGE, style: kBodyText),
               );
 
             return ListView.builder(
