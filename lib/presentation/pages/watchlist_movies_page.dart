@@ -34,7 +34,7 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage> {
           } else if (data.watchlistState == RequestState.Loaded) {
             if (data.watchlistMovies.isEmpty)
               return Center(
-                child: Text('No watchlist movie yet!', style: kBodyText),
+                child: Text(WACHLIST_MOVIE_EMPTY_MESSAGE, style: kBodyText),
               );
 
             return ListView.builder(

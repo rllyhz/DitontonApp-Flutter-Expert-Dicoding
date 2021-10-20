@@ -6,6 +6,8 @@ const API_KEY = 'api_key=2174d146bb9c0eab47529b2e77d6b526';
 const BASE_URL = 'https://api.themoviedb.org/3';
 const WATCHLIST_ADD_SUCCESS_MESSAGE = 'Added to Watchlist';
 const WATCHLIST_REMOVE_SUCCESS_MESSAGE = 'Removed from Watchlist';
+const WACHLIST_TV_SHOW_EMPTY_MESSAGE = 'No watchlist tv show yet!';
+const WACHLIST_MOVIE_EMPTY_MESSAGE = 'No watchlist movie yet!';
 const NOW_PLAYING_HEADING_TEXT = 'Now Playing';
 const POPULAR_HEADING_TEXT = 'Popular';
 const TOP_RATED_HEADING_TEXT = 'Top Rated';
