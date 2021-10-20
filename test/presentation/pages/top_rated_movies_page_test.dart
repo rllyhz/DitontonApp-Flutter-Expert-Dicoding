@@ -1,13 +1,14 @@
 import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/presentation/pages/top_rated_movies_page.dart';
 import 'package:ditonton/presentation/provider/top_rated_movies_notifier.dart';
+import 'package:ditonton/presentation/widgets/content_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:provider/provider.dart';
 
+import '../../dummy_data/dummy_objects.dart';
 import 'top_rated_movies_page_test.mocks.dart';
 
 @GenerateMocks([TopRatedMoviesNotifier])
@@ -27,6 +28,17 @@ void main() {
     );
   }
 
+  testWidgets('Page should display AppBar when data is loaded',
+      (WidgetTester tester) async {
+    when(mockNotifier.state).thenReturn(RequestState.Loaded);
+    when(mockNotifier.movies).thenReturn(testMovieList);
+
+    await tester.pumpWidget(_makeTestableWidget(TopRatedMoviesPage()));
+
+    expect(find.byType(AppBar), findsOneWidget);
+    expect(find.text('Top Rated Movies'), findsOneWidget);
+  });
+
   testWidgets('Page should display progress bar when loading',
       (WidgetTester tester) async {
     when(mockNotifier.state).thenReturn(RequestState.Loading);
@@ -43,13 +55,14 @@ void main() {
   testWidgets('Page should display when data is loaded',
       (WidgetTester tester) async {
     when(mockNotifier.state).thenReturn(RequestState.Loaded);
-    when(mockNotifier.movies).thenReturn(<Movie>[]);
+    when(mockNotifier.movies).thenReturn(testMovieList);
 
     final listViewFinder = find.byType(ListView);
 
     await tester.pumpWidget(_makeTestableWidget(TopRatedMoviesPage()));
 
     expect(listViewFinder, findsOneWidget);
+    expect(find.byType(ContentCardList), findsWidgets);
   });
 
   testWidgets('Page should display text with message when Error',
