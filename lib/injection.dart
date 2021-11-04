@@ -29,7 +29,6 @@ import 'package:ditonton/presentation/provider/tv_show_list_notifier.dart';
 import 'package:ditonton/presentation/provider/watchlist_movie_notifier.dart';
 import 'package:ditonton/presentation/provider/watchlist_tv_show_notifier.dart';
 import 'package:get_it/get_it.dart';
-import 'package:http/http.dart' as http;
 
 import 'domain/usecases/movie/get_movie_detail.dart';
 import 'domain/usecases/movie/get_movie_recommendations.dart';
