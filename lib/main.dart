@@ -24,13 +24,17 @@ import 'package:ditonton/presentation/provider/tv_show_detail_notifier.dart';
 import 'package:ditonton/presentation/provider/tv_show_list_notifier.dart';
 import 'package:ditonton/presentation/provider/watchlist_movie_notifier.dart';
 import 'package:ditonton/presentation/provider/watchlist_tv_show_notifier.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-void main() {
-  di.init();
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   HttpSSLPinning.init();
+
+  di.init();
 
   runApp(MyApp());
 }
