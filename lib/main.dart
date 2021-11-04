@@ -1,5 +1,6 @@
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/common/drawer_item_enum.dart';
+import 'package:ditonton/common/ssl_pinning/http_ssl_pinning.dart';
 import 'package:ditonton/injection.dart' as di;
 import 'package:ditonton/presentation/pages/about_page.dart';
 import 'package:ditonton/presentation/pages/home_page.dart';
@@ -29,6 +30,8 @@ import 'package:provider/provider.dart';
 
 void main() {
   di.init();
+  HttpSSLPinning.init();
+
   runApp(MyApp());
 }
 
