@@ -1,4 +1,4 @@
-import 'package:ditonton/common/drawer_item_enum.dart';
+import 'package:core_app/core_app.dart' show DrawerItem;
 import 'package:flutter/foundation.dart';
 
 class HomeNotifier extends ChangeNotifier {

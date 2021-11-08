@@ -1,4 +1,4 @@
-import 'package:ditonton/common/constants.dart';
+import 'package:core_app/core_app.dart';
 import 'package:ditonton/presentation/pages/watchlist_movies_page.dart';
 import 'package:ditonton/presentation/pages/watchlist_tv_shows_page.dart';
 import 'package:flutter/material.dart';

@@ -1,8 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:ditonton/common/constants.dart';
-import 'package:ditonton/common/drawer_item_enum.dart';
-import 'package:ditonton/domain/entities/movie.dart';
-import 'package:ditonton/domain/entities/tv_show.dart';
+import 'package:core_app/core_app.dart'
+    show
+        Movie,
+        TVShow,
+        DrawerItem,
+        kRichBlack,
+        NOT_STRING_REPLACEMENT,
+        kHeading6,
+        BASE_IMAGE_URL;
 import 'package:flutter/material.dart';
 
 class ContentCardList extends StatelessWidget {

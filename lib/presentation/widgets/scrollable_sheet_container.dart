@@ -1,5 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:ditonton/common/constants.dart';
+import 'package:core_app/core_app.dart' show kRichBlack;
 import 'package:flutter/material.dart';
 
 class ScrollableSheetContainer extends StatelessWidget {

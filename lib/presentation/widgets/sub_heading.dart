@@ -1,4 +1,4 @@
-import 'package:ditonton/common/constants.dart';
+import 'package:core_app/core_app.dart' show kHeading6;
 import 'package:flutter/material.dart';
 
 class SubHeading extends StatelessWidget {

@@ -2,13 +2,10 @@
 // in ditonton/test/presentation/pages/watchlist_movies_page_test.dart.
 // Do not manually edit this file.
 
-import 'dart:async' as _i6;
-import 'dart:ui' as _i7;
+import 'dart:async' as _i4;
+import 'dart:ui' as _i5;
 
-import 'package:ditonton/common/state_enum.dart' as _i5;
-import 'package:ditonton/domain/entities/movie.dart' as _i4;
-import 'package:ditonton/domain/usecases/movie/get_watchlist_movies.dart'
-    as _i2;
+import 'package:core_app/core_app.dart' as _i2;
 import 'package:ditonton/presentation/provider/watchlist_movie_notifier.dart'
     as _i3;
 import 'package:mockito/mockito.dart' as _i1;
@@ -39,13 +36,13 @@ class MockWatchlistMovieNotifier extends _i1.Mock
       (super.noSuchMethod(Invocation.getter(#getWatchlistMovies),
           returnValue: _FakeGetWatchlistMovies_0()) as _i2.GetWatchlistMovies);
   @override
-  List<_i4.Movie> get watchlistMovies =>
+  List<_i2.Movie> get watchlistMovies =>
       (super.noSuchMethod(Invocation.getter(#watchlistMovies),
-          returnValue: <_i4.Movie>[]) as List<_i4.Movie>);
+          returnValue: <_i2.Movie>[]) as List<_i2.Movie>);
   @override
-  _i5.RequestState get watchlistState =>
+  _i2.RequestState get watchlistState =>
       (super.noSuchMethod(Invocation.getter(#watchlistState),
-          returnValue: _i5.RequestState.Empty) as _i5.RequestState);
+          returnValue: _i2.RequestState.Empty) as _i2.RequestState);
   @override
   String get message =>
       (super.noSuchMethod(Invocation.getter(#message), returnValue: '')
@@ -55,16 +52,16 @@ class MockWatchlistMovieNotifier extends _i1.Mock
       (super.noSuchMethod(Invocation.getter(#hasListeners), returnValue: false)
           as bool);
   @override
-  _i6.Future<void> fetchWatchlistMovies() =>
+  _i4.Future<void> fetchWatchlistMovies() =>
       (super.noSuchMethod(Invocation.method(#fetchWatchlistMovies, []),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
+          returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
   @override
-  void addListener(_i7.VoidCallback? listener) =>
+  void addListener(_i5.VoidCallback? listener) =>
       super.noSuchMethod(Invocation.method(#addListener, [listener]),
           returnValueForMissingStub: null);
   @override
-  void removeListener(_i7.VoidCallback? listener) =>
+  void removeListener(_i5.VoidCallback? listener) =>
       super.noSuchMethod(Invocation.method(#removeListener, [listener]),
           returnValueForMissingStub: null);
   @override

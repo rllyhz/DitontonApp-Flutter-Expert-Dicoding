@@ -1,6 +1,5 @@
-import 'package:ditonton/common/constants.dart';
-import 'package:ditonton/common/drawer_item_enum.dart';
-import 'package:ditonton/common/state_enum.dart';
+import 'package:core_app/core_app.dart'
+    show RequestState, DrawerItem, WACHLIST_MOVIE_EMPTY_MESSAGE, kBodyText;
 import 'package:ditonton/presentation/pages/movie_detail_page.dart';
 import 'package:ditonton/presentation/provider/watchlist_movie_notifier.dart';
 import 'package:ditonton/presentation/widgets/content_card_list.dart';

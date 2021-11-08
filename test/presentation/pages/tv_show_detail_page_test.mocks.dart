@@ -2,22 +2,12 @@
 // in ditonton/test/presentation/pages/tv_show_detail_page_test.dart.
 // Do not manually edit this file.
 
-import 'dart:async' as _i11;
-import 'dart:ui' as _i12;
+import 'dart:async' as _i4;
+import 'dart:ui' as _i5;
 
-import 'package:ditonton/common/state_enum.dart' as _i9;
-import 'package:ditonton/domain/entities/tv_show.dart' as _i10;
-import 'package:ditonton/domain/entities/tv_show_detail.dart' as _i7;
-import 'package:ditonton/domain/usecases/tv_show/get_tv_show_detail.dart'
-    as _i2;
-import 'package:ditonton/domain/usecases/tv_show/get_tv_show_recommendations.dart'
-    as _i3;
-import 'package:ditonton/domain/usecases/tv_show/get_watchlist_status_tv_show.dart'
-    as _i4;
-import 'package:ditonton/domain/usecases/tv_show/remove_watchlist.dart' as _i6;
-import 'package:ditonton/domain/usecases/tv_show/save_watchlist.dart' as _i5;
+import 'package:core_app/core_app.dart' as _i2;
 import 'package:ditonton/presentation/provider/tv_show_detail_notifier.dart'
-    as _i8;
+    as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: avoid_redundant_argument_values
@@ -32,22 +22,24 @@ import 'package:mockito/mockito.dart' as _i1;
 class _FakeGetTVShowDetail_0 extends _i1.Fake implements _i2.GetTVShowDetail {}
 
 class _FakeGetTVShowRecommendations_1 extends _i1.Fake
-    implements _i3.GetTVShowRecommendations {}
+    implements _i2.GetTVShowRecommendations {}
 
 class _FakeGetWatchListStatusTVShow_2 extends _i1.Fake
-    implements _i4.GetWatchListStatusTVShow {}
+    implements _i2.GetWatchListStatusTVShow {}
 
-class _FakeSaveWatchlist_3 extends _i1.Fake implements _i5.SaveWatchlist {}
+class _FakeSaveWatchlistTVShow_3 extends _i1.Fake
+    implements _i2.SaveWatchlistTVShow {}
 
-class _FakeRemoveWatchlist_4 extends _i1.Fake implements _i6.RemoveWatchlist {}
+class _FakeRemoveWatchlistTVShow_4 extends _i1.Fake
+    implements _i2.RemoveWatchlistTVShow {}
 
-class _FakeTVShowDetail_5 extends _i1.Fake implements _i7.TVShowDetail {}
+class _FakeTVShowDetail_5 extends _i1.Fake implements _i2.TVShowDetail {}
 
 /// A class which mocks [TVShowDetailNotifier].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockTVShowDetailNotifier extends _i1.Mock
-    implements _i8.TVShowDetailNotifier {
+    implements _i3.TVShowDetailNotifier {
   MockTVShowDetailNotifier() {
     _i1.throwOnMissingStub(this);
   }
@@ -57,39 +49,40 @@ class MockTVShowDetailNotifier extends _i1.Mock
       (super.noSuchMethod(Invocation.getter(#getTVShowDetail),
           returnValue: _FakeGetTVShowDetail_0()) as _i2.GetTVShowDetail);
   @override
-  _i3.GetTVShowRecommendations get getTVShowRecommendations =>
+  _i2.GetTVShowRecommendations get getTVShowRecommendations =>
       (super.noSuchMethod(Invocation.getter(#getTVShowRecommendations),
               returnValue: _FakeGetTVShowRecommendations_1())
-          as _i3.GetTVShowRecommendations);
+          as _i2.GetTVShowRecommendations);
   @override
-  _i4.GetWatchListStatusTVShow get getWatchListStatusTVShow =>
+  _i2.GetWatchListStatusTVShow get getWatchListStatusTVShow =>
       (super.noSuchMethod(Invocation.getter(#getWatchListStatusTVShow),
               returnValue: _FakeGetWatchListStatusTVShow_2())
-          as _i4.GetWatchListStatusTVShow);
+          as _i2.GetWatchListStatusTVShow);
   @override
-  _i5.SaveWatchlist get saveWatchlist =>
-      (super.noSuchMethod(Invocation.getter(#saveWatchlist),
-          returnValue: _FakeSaveWatchlist_3()) as _i5.SaveWatchlist);
+  _i2.SaveWatchlistTVShow get saveWatchlist => (super.noSuchMethod(
+      Invocation.getter(#saveWatchlist),
+      returnValue: _FakeSaveWatchlistTVShow_3()) as _i2.SaveWatchlistTVShow);
   @override
-  _i6.RemoveWatchlist get removeWatchlist =>
+  _i2.RemoveWatchlistTVShow get removeWatchlist =>
       (super.noSuchMethod(Invocation.getter(#removeWatchlist),
-          returnValue: _FakeRemoveWatchlist_4()) as _i6.RemoveWatchlist);
+              returnValue: _FakeRemoveWatchlistTVShow_4())
+          as _i2.RemoveWatchlistTVShow);
   @override
-  _i7.TVShowDetail get tvShowDetail =>
+  _i2.TVShowDetail get tvShowDetail =>
       (super.noSuchMethod(Invocation.getter(#tvShowDetail),
-          returnValue: _FakeTVShowDetail_5()) as _i7.TVShowDetail);
+          returnValue: _FakeTVShowDetail_5()) as _i2.TVShowDetail);
   @override
-  _i9.RequestState get tvShowState =>
+  _i2.RequestState get tvShowState =>
       (super.noSuchMethod(Invocation.getter(#tvShowState),
-          returnValue: _i9.RequestState.Empty) as _i9.RequestState);
+          returnValue: _i2.RequestState.Empty) as _i2.RequestState);
   @override
-  List<_i10.TVShow> get tvShowRecommendations =>
+  List<_i2.TVShow> get tvShowRecommendations =>
       (super.noSuchMethod(Invocation.getter(#tvShowRecommendations),
-          returnValue: <_i10.TVShow>[]) as List<_i10.TVShow>);
+          returnValue: <_i2.TVShow>[]) as List<_i2.TVShow>);
   @override
-  _i9.RequestState get recommendationState =>
+  _i2.RequestState get recommendationState =>
       (super.noSuchMethod(Invocation.getter(#recommendationState),
-          returnValue: _i9.RequestState.Empty) as _i9.RequestState);
+          returnValue: _i2.RequestState.Empty) as _i2.RequestState);
   @override
   String get message =>
       (super.noSuchMethod(Invocation.getter(#message), returnValue: '')
@@ -107,33 +100,31 @@ class MockTVShowDetailNotifier extends _i1.Mock
       (super.noSuchMethod(Invocation.getter(#hasListeners), returnValue: false)
           as bool);
   @override
-  _i11.Future<void> fetchTVShowDetail(int? id) => (super.noSuchMethod(
-      Invocation.method(#fetchTVShowDetail, [id]),
-      returnValue: Future<void>.value(),
-      returnValueForMissingStub: Future<void>.value()) as _i11.Future<void>);
+  _i4.Future<void> fetchTVShowDetail(int? id) =>
+      (super.noSuchMethod(Invocation.method(#fetchTVShowDetail, [id]),
+          returnValue: Future<void>.value(),
+          returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
   @override
-  _i11.Future<void> addWatchlist(_i7.TVShowDetail? tvShow) =>
+  _i4.Future<void> addWatchlist(_i2.TVShowDetail? tvShow) =>
       (super.noSuchMethod(Invocation.method(#addWatchlist, [tvShow]),
-              returnValue: Future<void>.value(),
-              returnValueForMissingStub: Future<void>.value())
-          as _i11.Future<void>);
+          returnValue: Future<void>.value(),
+          returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
   @override
-  _i11.Future<void> removeFromWatchlist(_i7.TVShowDetail? tvShow) =>
+  _i4.Future<void> removeFromWatchlist(_i2.TVShowDetail? tvShow) =>
       (super.noSuchMethod(Invocation.method(#removeFromWatchlist, [tvShow]),
-              returnValue: Future<void>.value(),
-              returnValueForMissingStub: Future<void>.value())
-          as _i11.Future<void>);
+          returnValue: Future<void>.value(),
+          returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
   @override
-  _i11.Future<void> loadWatchlistStatus(int? id) => (super.noSuchMethod(
-      Invocation.method(#loadWatchlistStatus, [id]),
-      returnValue: Future<void>.value(),
-      returnValueForMissingStub: Future<void>.value()) as _i11.Future<void>);
+  _i4.Future<void> loadWatchlistStatus(int? id) =>
+      (super.noSuchMethod(Invocation.method(#loadWatchlistStatus, [id]),
+          returnValue: Future<void>.value(),
+          returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
   @override
-  void addListener(_i12.VoidCallback? listener) =>
+  void addListener(_i5.VoidCallback? listener) =>
       super.noSuchMethod(Invocation.method(#addListener, [listener]),
           returnValueForMissingStub: null);
   @override
-  void removeListener(_i12.VoidCallback? listener) =>
+  void removeListener(_i5.VoidCallback? listener) =>
       super.noSuchMethod(Invocation.method(#removeListener, [listener]),
           returnValueForMissingStub: null);
   @override

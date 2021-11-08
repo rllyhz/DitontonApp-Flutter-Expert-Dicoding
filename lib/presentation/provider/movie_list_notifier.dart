@@ -1,8 +1,10 @@
-import 'package:ditonton/domain/entities/movie.dart';
-import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/domain/usecases/movie/get_now_playing_movies.dart';
-import 'package:ditonton/domain/usecases/movie/get_popular_movies.dart';
-import 'package:ditonton/domain/usecases/movie/get_top_rated_movies.dart';
+import 'package:core_app/core_app.dart'
+    show
+        GetNowPlayingMovies,
+        GetPopularMovies,
+        GetTopRatedMovies,
+        Movie,
+        RequestState;
 import 'package:flutter/material.dart';
 
 class MovieListNotifier extends ChangeNotifier {

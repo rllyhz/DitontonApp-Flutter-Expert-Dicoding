@@ -1,7 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:ditonton/common/failure.dart';
-import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/domain/usecases/tv_show/get_popular_tv_shows.dart';
+import 'package:core_app/core_app.dart'
+    show GetPopularTVShows, RequestState, ServerFailure;
 import 'package:ditonton/presentation/provider/popular_tv_shows_notifier.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';

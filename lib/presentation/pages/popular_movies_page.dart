@@ -1,5 +1,4 @@
-import 'package:ditonton/common/drawer_item_enum.dart';
-import 'package:ditonton/common/state_enum.dart';
+import 'package:core_app/core_app.dart' show RequestState, DrawerItem;
 import 'package:ditonton/presentation/pages/movie_detail_page.dart';
 import 'package:ditonton/presentation/provider/popular_movies_notifier.dart';
 import 'package:ditonton/presentation/widgets/content_card_list.dart';

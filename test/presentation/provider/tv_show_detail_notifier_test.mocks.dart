@@ -4,19 +4,22 @@
 
 import 'dart:async' as _i5;
 
-import 'package:dartz/dartz.dart' as _i3;
-import 'package:ditonton/common/failure.dart' as _i6;
-import 'package:ditonton/domain/entities/tv_show.dart' as _i9;
-import 'package:ditonton/domain/entities/tv_show_detail.dart' as _i7;
-import 'package:ditonton/domain/repositories/tv_show_repository.dart' as _i2;
-import 'package:ditonton/domain/usecases/tv_show/get_tv_show_detail.dart'
+import 'package:core_app/src/common/failure.dart' as _i6;
+import 'package:core_app/src/domain/entities/tv_show.dart' as _i9;
+import 'package:core_app/src/domain/entities/tv_show_detail.dart' as _i7;
+import 'package:core_app/src/domain/repositories/tv_show_repository.dart'
+    as _i2;
+import 'package:core_app/src/domain/usecases/tv_show/get_tv_show_detail.dart'
     as _i4;
-import 'package:ditonton/domain/usecases/tv_show/get_tv_show_recommendations.dart'
+import 'package:core_app/src/domain/usecases/tv_show/get_tv_show_recommendations.dart'
     as _i8;
-import 'package:ditonton/domain/usecases/tv_show/get_watchlist_status_tv_show.dart'
+import 'package:core_app/src/domain/usecases/tv_show/get_watchlist_status_tv_show.dart'
     as _i10;
-import 'package:ditonton/domain/usecases/tv_show/remove_watchlist.dart' as _i12;
-import 'package:ditonton/domain/usecases/tv_show/save_watchlist.dart' as _i11;
+import 'package:core_app/src/domain/usecases/tv_show/remove_watchlist_tv_show.dart'
+    as _i12;
+import 'package:core_app/src/domain/usecases/tv_show/save_watchlist_tv_show.dart'
+    as _i11;
+import 'package:dartz/dartz.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: avoid_redundant_argument_values
@@ -99,11 +102,12 @@ class MockGetWatchListStatusTVShow extends _i1.Mock
   String toString() => super.toString();
 }
 
-/// A class which mocks [SaveWatchlist].
+/// A class which mocks [SaveWatchlistTVShow].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSaveWatchlist extends _i1.Mock implements _i11.SaveWatchlist {
-  MockSaveWatchlist() {
+class MockSaveWatchlistTVShow extends _i1.Mock
+    implements _i11.SaveWatchlistTVShow {
+  MockSaveWatchlistTVShow() {
     _i1.throwOnMissingStub(this);
   }
 
@@ -122,11 +126,12 @@ class MockSaveWatchlist extends _i1.Mock implements _i11.SaveWatchlist {
   String toString() => super.toString();
 }
 
-/// A class which mocks [RemoveWatchlist].
+/// A class which mocks [RemoveWatchlistTVShow].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockRemoveWatchlist extends _i1.Mock implements _i12.RemoveWatchlist {
-  MockRemoveWatchlist() {
+class MockRemoveWatchlistTVShow extends _i1.Mock
+    implements _i12.RemoveWatchlistTVShow {
+  MockRemoveWatchlistTVShow() {
     _i1.throwOnMissingStub(this);
   }
 

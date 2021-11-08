@@ -1,4 +1,4 @@
-import 'package:ditonton/common/constants.dart';
+import 'package:core_app/core_app.dart' show ABOUT_DESCRIPTION_TEXT;
 import 'package:ditonton/presentation/pages/about_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';

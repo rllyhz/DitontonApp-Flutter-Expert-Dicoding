@@ -1,11 +1,13 @@
-import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/domain/entities/tv_show.dart';
-import 'package:ditonton/domain/entities/tv_show_detail.dart';
-import 'package:ditonton/domain/usecases/tv_show/get_tv_show_detail.dart';
-import 'package:ditonton/domain/usecases/tv_show/get_tv_show_recommendations.dart';
-import 'package:ditonton/domain/usecases/tv_show/get_watchlist_status_tv_show.dart';
-import 'package:ditonton/domain/usecases/tv_show/remove_watchlist.dart';
-import 'package:ditonton/domain/usecases/tv_show/save_watchlist.dart';
+import 'package:core_app/core_app.dart'
+    show
+        GetTVShowDetail,
+        GetTVShowRecommendations,
+        GetWatchListStatusTVShow,
+        RemoveWatchlistTVShow,
+        RequestState,
+        SaveWatchlistTVShow,
+        TVShow,
+        TVShowDetail;
 import 'package:flutter/foundation.dart';
 
 class TVShowDetailNotifier extends ChangeNotifier {
@@ -20,8 +22,8 @@ class TVShowDetailNotifier extends ChangeNotifier {
   final GetTVShowDetail getTVShowDetail;
   final GetTVShowRecommendations getTVShowRecommendations;
   final GetWatchListStatusTVShow getWatchListStatusTVShow;
-  final SaveWatchlist saveWatchlist;
-  final RemoveWatchlist removeWatchlist;
+  final SaveWatchlistTVShow saveWatchlist;
+  final RemoveWatchlistTVShow removeWatchlist;
 
   late TVShowDetail _tvShowDetail;
   TVShowDetail get tvShowDetail => _tvShowDetail;

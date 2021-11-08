@@ -1,4 +1,5 @@
-import 'package:ditonton/common/constants.dart';
+import 'package:core_app/core_app.dart'
+    show ABOUT_DESCRIPTION_TEXT, kMikadoYellow, kPrussianBlue;
 import 'package:flutter/material.dart';
 
 class AboutPage extends StatelessWidget {

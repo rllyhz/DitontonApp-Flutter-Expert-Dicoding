@@ -1,7 +1,13 @@
-import 'package:ditonton/common/constants.dart';
-import 'package:ditonton/common/drawer_item_enum.dart';
-import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/domain/entities/tv_show.dart';
+import 'package:core_app/core_app.dart'
+    show
+        TVShow,
+        RequestState,
+        DrawerItem,
+        FAILED_TO_FETCH_DATA_MESSAGE,
+        NOW_PLAYING_HEADING_TEXT,
+        POPULAR_HEADING_TEXT,
+        TOP_RATED_HEADING_TEXT,
+        kHeading6;
 import 'package:ditonton/presentation/pages/popular_tv_shows_page.dart';
 import 'package:ditonton/presentation/pages/top_rated_tv_shows_page.dart';
 import 'package:ditonton/presentation/pages/tv_show_detail_page.dart';
