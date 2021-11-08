@@ -37,7 +37,10 @@ void main() {
 
       await tester.pumpWidget(_makeTestableWidget(WatchlistMoviesPage()));
 
-      expect(find.byType(ContentCardList), findsOneWidget);
+      expect(find.byType(ListView), findsOneWidget);
+      expect(find.byType(ContentCardList), findsWidgets);
+      expect(find.byType(Padding), findsWidgets);
+      expect(find.byType(Center), findsWidgets);
     });
 
     testWidgets('message for feedback should display when data is empty',

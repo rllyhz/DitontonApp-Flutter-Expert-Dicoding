@@ -38,7 +38,7 @@ void main() {
 
       await tester.pumpWidget(_makeTestableWidget(WatchlistTVShowsPage()));
 
-      expect(find.byType(ContentCardList), findsOneWidget);
+      expect(find.byType(ContentCardList), findsWidgets);
     });
 
     testWidgets('message for feedback should display when data is empty',
