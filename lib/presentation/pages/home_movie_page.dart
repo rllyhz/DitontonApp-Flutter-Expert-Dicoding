@@ -3,10 +3,10 @@ import 'package:core_app/core_app.dart'
         Movie,
         RequestState,
         DrawerItem,
-        FAILED_TO_FETCH_DATA_MESSAGE,
-        NOW_PLAYING_HEADING_TEXT,
-        POPULAR_HEADING_TEXT,
-        TOP_RATED_HEADING_TEXT,
+        failedToFetchDataMessage,
+        nowPlayingHeadingText,
+        popularHeadingText,
+        topRatedHeadingText,
         kHeading6;
 import 'package:ditonton/presentation/pages/movie_detail_page.dart';
 import 'package:ditonton/presentation/pages/popular_movies_page.dart';
@@ -44,55 +44,55 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              NOW_PLAYING_HEADING_TEXT,
+              nowPlayingHeadingText,
               style: kHeading6,
             ),
             Consumer<MovieListNotifier>(builder: (context, data, child) {
               final state = data.nowPlayingState;
-              if (state == RequestState.Loading) {
+              if (state == RequestState.loading) {
                 return Center(
                   child: CircularProgressIndicator(),
                 );
-              } else if (state == RequestState.Loaded) {
+              } else if (state == RequestState.loaded) {
                 return MovieList(data.nowPlayingMovies);
               } else {
-                return Text(FAILED_TO_FETCH_DATA_MESSAGE);
+                return Text(failedToFetchDataMessage);
               }
             }),
             SizedBox(height: 8.0),
             SubHeading(
-              title: POPULAR_HEADING_TEXT,
+              title: popularHeadingText,
               onTap: () =>
                   Navigator.pushNamed(context, PopularMoviesPage.ROUTE_NAME),
             ),
             Consumer<MovieListNotifier>(builder: (context, data, child) {
               final state = data.popularMoviesState;
-              if (state == RequestState.Loading) {
+              if (state == RequestState.loading) {
                 return Center(
                   child: CircularProgressIndicator(),
                 );
-              } else if (state == RequestState.Loaded) {
+              } else if (state == RequestState.loaded) {
                 return MovieList(data.popularMovies);
               } else {
-                return Text(FAILED_TO_FETCH_DATA_MESSAGE);
+                return Text(failedToFetchDataMessage);
               }
             }),
             SizedBox(height: 8.0),
             SubHeading(
-              title: TOP_RATED_HEADING_TEXT,
+              title: topRatedHeadingText,
               onTap: () =>
                   Navigator.pushNamed(context, TopRatedMoviesPage.ROUTE_NAME),
             ),
             Consumer<MovieListNotifier>(builder: (context, data, child) {
               final state = data.topRatedMoviesState;
-              if (state == RequestState.Loading) {
+              if (state == RequestState.loading) {
                 return Center(
                   child: CircularProgressIndicator(),
                 );
-              } else if (state == RequestState.Loaded) {
+              } else if (state == RequestState.loaded) {
                 return MovieList(data.topRatedMovies);
               } else {
-                return Text(FAILED_TO_FETCH_DATA_MESSAGE);
+                return Text(failedToFetchDataMessage);
               }
             }),
           ],
@@ -116,7 +116,7 @@ class MovieList extends StatelessWidget {
         itemBuilder: (context, index) {
           final movie = movies[index];
           return CardImageFull(
-            activeDrawerItem: DrawerItem.Movie,
+            activeDrawerItem: DrawerItem.movie,
             routeNameDestination: MovieDetailPage.ROUTE_NAME,
             movie: movie,
           );

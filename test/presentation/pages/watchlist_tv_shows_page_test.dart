@@ -1,5 +1,5 @@
 import 'package:core_app/core_app.dart'
-    show RequestState, TVShow, WACHLIST_TV_SHOW_EMPTY_MESSAGE;
+    show RequestState, TVShow, watchlistTVShowEmptyMessage;
 import 'package:ditonton/presentation/pages/watchlist_tv_shows_page.dart';
 import 'package:ditonton/presentation/provider/watchlist_tv_show_notifier.dart';
 import 'package:ditonton/presentation/widgets/content_card_list.dart';
@@ -32,7 +32,7 @@ void main() {
   group('watchlist tv shows', () {
     testWidgets('watchlist tv shows should display',
         (WidgetTester tester) async {
-      when(mockNotifier.watchlistState).thenReturn(RequestState.Loaded);
+      when(mockNotifier.watchlistState).thenReturn(RequestState.loaded);
       when(mockNotifier.watchlistTVShows).thenReturn(testTVShowList);
 
       await tester.pumpWidget(_makeTestableWidget(WatchlistTVShowsPage()));
@@ -42,17 +42,17 @@ void main() {
 
     testWidgets('message for feedback should display when data is empty',
         (WidgetTester tester) async {
-      when(mockNotifier.watchlistState).thenReturn(RequestState.Loaded);
+      when(mockNotifier.watchlistState).thenReturn(RequestState.loaded);
       when(mockNotifier.watchlistTVShows).thenReturn(<TVShow>[]);
 
       await tester.pumpWidget(_makeTestableWidget(WatchlistTVShowsPage()));
 
-      expect(find.text(WACHLIST_TV_SHOW_EMPTY_MESSAGE), findsOneWidget);
+      expect(find.text(watchlistTVShowEmptyMessage), findsOneWidget);
     });
 
     testWidgets('loading indicator should display when getting data',
         (WidgetTester tester) async {
-      when(mockNotifier.watchlistState).thenReturn(RequestState.Loading);
+      when(mockNotifier.watchlistState).thenReturn(RequestState.loading);
 
       await tester.pumpWidget(_makeTestableWidget(WatchlistTVShowsPage()));
 

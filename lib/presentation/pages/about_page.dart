@@ -1,5 +1,5 @@
 import 'package:core_app/core_app.dart'
-    show ABOUT_DESCRIPTION_TEXT, kMikadoYellow, kPrussianBlue;
+    show aboutDescriptionText, kMikadoYellow, kPrussianBlue;
 import 'package:flutter/material.dart';
 
 class AboutPage extends StatelessWidget {
@@ -28,7 +28,7 @@ class AboutPage extends StatelessWidget {
                   padding: const EdgeInsets.all(32.0),
                   color: kMikadoYellow,
                   child: Text(
-                    ABOUT_DESCRIPTION_TEXT,
+                    aboutDescriptionText,
                     style: TextStyle(color: Colors.black87, fontSize: 16),
                     textAlign: TextAlign.justify,
                   ),

@@ -1,5 +1,5 @@
 import 'package:core_app/core_app.dart'
-    show RequestState, TVShow, WATCHLIST_ADD_SUCCESS_MESSAGE;
+    show RequestState, TVShow, watchlistAddSuccessMessage;
 import 'package:ditonton/presentation/pages/tv_show_detail_page.dart';
 import 'package:ditonton/presentation/provider/tv_show_detail_notifier.dart';
 import 'package:ditonton/presentation/widgets/scrollable_sheet_container.dart';
@@ -32,9 +32,9 @@ void main() {
 
   testWidgets('All required widget should display',
       (WidgetTester tester) async {
-    when(mockNotifier.tvShowState).thenReturn(RequestState.Loaded);
+    when(mockNotifier.tvShowState).thenReturn(RequestState.loaded);
     when(mockNotifier.tvShowDetail).thenReturn(testTVShowDetail);
-    when(mockNotifier.recommendationState).thenReturn(RequestState.Loaded);
+    when(mockNotifier.recommendationState).thenReturn(RequestState.loaded);
     when(mockNotifier.tvShowRecommendations).thenReturn(<TVShow>[]);
     when(mockNotifier.isAddedToWatchlist).thenReturn(false);
 
@@ -54,9 +54,9 @@ void main() {
   testWidgets(
       'Watchlist button should display add icon when tv show not added to watchlist',
       (WidgetTester tester) async {
-    when(mockNotifier.tvShowState).thenReturn(RequestState.Loaded);
+    when(mockNotifier.tvShowState).thenReturn(RequestState.loaded);
     when(mockNotifier.tvShowDetail).thenReturn(testTVShowDetail);
-    when(mockNotifier.recommendationState).thenReturn(RequestState.Loaded);
+    when(mockNotifier.recommendationState).thenReturn(RequestState.loaded);
     when(mockNotifier.tvShowRecommendations).thenReturn(<TVShow>[]);
     when(mockNotifier.isAddedToWatchlist).thenReturn(false);
 
@@ -70,9 +70,9 @@ void main() {
   testWidgets(
       'Watchlist button should dispay check icon when tv show is added to wathclist',
       (WidgetTester tester) async {
-    when(mockNotifier.tvShowState).thenReturn(RequestState.Loaded);
+    when(mockNotifier.tvShowState).thenReturn(RequestState.loaded);
     when(mockNotifier.tvShowDetail).thenReturn(testTVShowDetail);
-    when(mockNotifier.recommendationState).thenReturn(RequestState.Loaded);
+    when(mockNotifier.recommendationState).thenReturn(RequestState.loaded);
     when(mockNotifier.tvShowRecommendations).thenReturn(<TVShow>[]);
     when(mockNotifier.isAddedToWatchlist).thenReturn(true);
 
@@ -86,13 +86,12 @@ void main() {
   testWidgets(
       'Watchlist button should display Snackbar when added to watchlist',
       (WidgetTester tester) async {
-    when(mockNotifier.tvShowState).thenReturn(RequestState.Loaded);
+    when(mockNotifier.tvShowState).thenReturn(RequestState.loaded);
     when(mockNotifier.tvShowDetail).thenReturn(testTVShowDetail);
-    when(mockNotifier.recommendationState).thenReturn(RequestState.Loaded);
+    when(mockNotifier.recommendationState).thenReturn(RequestState.loaded);
     when(mockNotifier.tvShowRecommendations).thenReturn(<TVShow>[]);
     when(mockNotifier.isAddedToWatchlist).thenReturn(false);
-    when(mockNotifier.watchlistMessage)
-        .thenReturn(WATCHLIST_ADD_SUCCESS_MESSAGE);
+    when(mockNotifier.watchlistMessage).thenReturn(watchlistAddSuccessMessage);
 
     final watchlistButton = find.byType(ElevatedButton);
 
@@ -104,15 +103,15 @@ void main() {
     await tester.pump();
 
     expect(find.byType(SnackBar), findsOneWidget);
-    expect(find.text(WATCHLIST_ADD_SUCCESS_MESSAGE), findsOneWidget);
+    expect(find.text(watchlistAddSuccessMessage), findsOneWidget);
   });
 
   testWidgets(
       'Watchlist button should display AlertDialog when add to watchlist failed',
       (WidgetTester tester) async {
-    when(mockNotifier.tvShowState).thenReturn(RequestState.Loaded);
+    when(mockNotifier.tvShowState).thenReturn(RequestState.loaded);
     when(mockNotifier.tvShowDetail).thenReturn(testTVShowDetail);
-    when(mockNotifier.recommendationState).thenReturn(RequestState.Loaded);
+    when(mockNotifier.recommendationState).thenReturn(RequestState.loaded);
     when(mockNotifier.tvShowRecommendations).thenReturn(<TVShow>[]);
     when(mockNotifier.isAddedToWatchlist).thenReturn(false);
     when(mockNotifier.watchlistMessage).thenReturn('Failed');

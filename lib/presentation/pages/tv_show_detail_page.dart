@@ -3,9 +3,9 @@ import 'package:core_app/core_app.dart'
     show
         RequestState,
         TVShowDetail,
-        BASE_IMAGE_URL,
-        WATCHLIST_ADD_SUCCESS_MESSAGE,
-        WATCHLIST_REMOVE_SUCCESS_MESSAGE,
+        baseImageUrl,
+        watchlistAddSuccessMessage,
+        watchlistRemoveSuccessMessage,
         getFormattedDurationFromList,
         getFormattedGenres,
         kGrey,
@@ -48,11 +48,11 @@ class _TVShowDetailPageState extends State<TVShowDetailPage> {
       child: Scaffold(
         body: Consumer<TVShowDetailNotifier>(
           builder: (ctx, provider, child) {
-            if (provider.tvShowState == RequestState.Loading) {
+            if (provider.tvShowState == RequestState.loading) {
               return Center(
                 child: CircularProgressIndicator(),
               );
-            } else if (provider.tvShowState == RequestState.Loaded) {
+            } else if (provider.tvShowState == RequestState.loaded) {
               final tvShow = provider.tvShowDetail;
               return DetailContent(tvShow, provider);
             } else {
@@ -74,7 +74,7 @@ class DetailContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScrollableSheetContainer(
-      backgroundUrl: '$BASE_IMAGE_URL${tvShow.posterPath}',
+      backgroundUrl: '$baseImageUrl${tvShow.posterPath}',
       scrollableContents: [
         Text(
           tvShow.name,
@@ -90,8 +90,8 @@ class DetailContent extends StatelessWidget {
 
             final message = provider.watchlistMessage;
 
-            if (message == WATCHLIST_ADD_SUCCESS_MESSAGE ||
-                message == WATCHLIST_REMOVE_SUCCESS_MESSAGE) {
+            if (message == watchlistAddSuccessMessage ||
+                message == watchlistRemoveSuccessMessage) {
               ScaffoldMessenger.of(context)
                   .showSnackBar(SnackBar(content: Text(message)));
             } else {
@@ -179,8 +179,7 @@ class DetailContent extends StatelessWidget {
                             Radius.circular(8),
                           ),
                           child: CachedNetworkImage(
-                            imageUrl:
-                                '$BASE_IMAGE_URL${tvShowRecoms.posterPath}',
+                            imageUrl: '$baseImageUrl${tvShowRecoms.posterPath}',
                             placeholder: (context, url) => Padding(
                               padding: EdgeInsets.symmetric(
                                   vertical: 8.0, horizontal: 12.0),
@@ -236,7 +235,7 @@ class DetailContent extends StatelessWidget {
                                   )
                                 : CachedNetworkImage(
                                     imageUrl:
-                                        '$BASE_IMAGE_URL${season.posterPath}',
+                                        '$baseImageUrl${season.posterPath}',
                                     placeholder: (context, url) => Center(
                                       child: CircularProgressIndicator(),
                                     ),

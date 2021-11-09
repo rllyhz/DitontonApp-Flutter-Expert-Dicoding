@@ -77,7 +77,7 @@ void main() {
       // act
       provider.fetchTVShowDetail(tId);
       // assert
-      expect(provider.tvShowState, RequestState.Loading);
+      expect(provider.tvShowState, RequestState.loading);
       expect(listenerCallCount, 1);
     });
 
@@ -87,7 +87,7 @@ void main() {
       // act
       await provider.fetchTVShowDetail(tId);
       // assert
-      expect(provider.tvShowState, RequestState.Loaded);
+      expect(provider.tvShowState, RequestState.loaded);
       expect(provider.tvShowDetail, testTVShowDetail);
       expect(listenerCallCount, 3);
     });
@@ -99,7 +99,7 @@ void main() {
       // act
       await provider.fetchTVShowDetail(tId);
       // assert
-      expect(provider.tvShowState, RequestState.Loaded);
+      expect(provider.tvShowState, RequestState.loaded);
       expect(provider.tvShowRecommendations, testTVShowList);
     });
   });
@@ -122,7 +122,7 @@ void main() {
       // act
       await provider.fetchTVShowDetail(tId);
       // assert
-      expect(provider.recommendationState, RequestState.Loaded);
+      expect(provider.recommendationState, RequestState.loaded);
       expect(provider.tvShowRecommendations, testTVShowList);
     });
 
@@ -135,7 +135,7 @@ void main() {
       // act
       await provider.fetchTVShowDetail(tId);
       // assert
-      expect(provider.recommendationState, RequestState.Error);
+      expect(provider.recommendationState, RequestState.error);
       expect(provider.message, 'Failed');
     });
   });
@@ -213,7 +213,7 @@ void main() {
       // act
       await provider.fetchTVShowDetail(tId);
       // assert
-      expect(provider.tvShowState, RequestState.Error);
+      expect(provider.tvShowState, RequestState.error);
       expect(provider.message, 'Server Failure');
       expect(listenerCallCount, 2);
     });

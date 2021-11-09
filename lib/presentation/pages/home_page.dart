@@ -30,9 +30,9 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _buildBody(BuildContext context, DrawerItem seletedDrawerItem) {
-    if (seletedDrawerItem == DrawerItem.Movie) {
+    if (seletedDrawerItem == DrawerItem.movie) {
       return HomeMoviePage();
-    } else if (seletedDrawerItem == DrawerItem.TVShow) {
+    } else if (seletedDrawerItem == DrawerItem.tvShow) {
       return HomeTVShowPage();
     }
     return Container();
@@ -75,22 +75,22 @@ class HomePage extends StatelessWidget {
             ),
             ListTile(
               tileColor:
-                  activeDrawerItem == DrawerItem.Movie ? kDavysGrey : kGrey,
+                  activeDrawerItem == DrawerItem.movie ? kDavysGrey : kGrey,
               leading: Icon(Icons.movie_creation_outlined),
               title: Text('Movies'),
               onTap: () {
                 Navigator.pop(context);
-                itemCallback(DrawerItem.Movie);
+                itemCallback(DrawerItem.movie);
               },
             ),
             ListTile(
               tileColor:
-                  activeDrawerItem == DrawerItem.TVShow ? kDavysGrey : kGrey,
+                  activeDrawerItem == DrawerItem.tvShow ? kDavysGrey : kGrey,
               leading: Icon(Icons.live_tv_rounded),
               title: Text('TV Shows'),
               onTap: () {
                 Navigator.pop(context);
-                itemCallback(DrawerItem.TVShow);
+                itemCallback(DrawerItem.tvShow);
               },
             ),
             ListTile(

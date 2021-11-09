@@ -20,8 +20,9 @@ class TVShowLocalDataSourceImpl implements TVShowLocalDataSource {
     final result = await databaseHelper.getTVShowById(id);
     if (result != null) {
       return TVShowTable.fromMap(result);
-    } else
+    } else {
       return null;
+    }
   }
 
   @override
@@ -34,7 +35,7 @@ class TVShowLocalDataSourceImpl implements TVShowLocalDataSource {
   Future<String> insertWatchlist(TVShowTable tvShow) async {
     try {
       await databaseHelper.insertTVShowWatchlist(tvShow);
-      return WATCHLIST_ADD_SUCCESS_MESSAGE;
+      return watchlistAddSuccessMessage;
     } catch (e) {
       throw DatabaseException(e.toString());
     }
@@ -44,7 +45,7 @@ class TVShowLocalDataSourceImpl implements TVShowLocalDataSource {
   Future<String> removeWatchlist(TVShowTable tvShow) async {
     try {
       await databaseHelper.removeTVShowWatchlist(tvShow);
-      return WATCHLIST_REMOVE_SUCCESS_MESSAGE;
+      return watchlistRemoveSuccessMessage;
     } catch (e) {
       throw DatabaseException(e.toString());
     }

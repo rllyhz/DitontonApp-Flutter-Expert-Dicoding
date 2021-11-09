@@ -15,16 +15,16 @@ void main() {
     usecase = SearchMovies(mockMovieRepository);
   });
 
-  final tMovies = <Movie>[];
-  final tQuery = 'Spiderman';
+  const tMovies = <Movie>[];
+  const tQuery = 'Spiderman';
 
   test('should get list of movies from the repository', () async {
     // arrange
     when(mockMovieRepository.searchMovies(tQuery))
-        .thenAnswer((_) async => Right(tMovies));
+        .thenAnswer((_) async => const Right(tMovies));
     // act
     final result = await usecase.execute(tQuery);
     // assert
-    expect(result, Right(tMovies));
+    expect(result, const Right(tMovies));
   });
 }

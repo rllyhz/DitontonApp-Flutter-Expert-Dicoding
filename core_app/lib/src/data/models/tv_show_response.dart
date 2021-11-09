@@ -4,7 +4,7 @@ import 'package:equatable/equatable.dart';
 class TVShowResponse extends Equatable {
   final List<TVShowModel> tvShowList;
 
-  TVShowResponse({required this.tvShowList});
+  const TVShowResponse({required this.tvShowList});
 
   factory TVShowResponse.fromJson(Map<String, dynamic> json) => TVShowResponse(
         tvShowList: List<TVShowModel>.from((json["results"] as List)

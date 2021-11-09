@@ -3,7 +3,7 @@ import 'package:core_app/src/domain/entities/tv_show_detail.dart';
 import 'package:equatable/equatable.dart';
 
 class TVShowTable extends Equatable {
-  TVShowTable({
+  const TVShowTable({
     required this.id,
     required this.name,
     required this.posterPath,
@@ -37,10 +37,10 @@ class TVShowTable extends Equatable {
       };
 
   TVShow toEntity() => TVShow.watchlist(
-        id: this.id,
-        overview: this.overview,
-        posterPath: this.posterPath,
-        name: this.name,
+        id: id,
+        overview: overview,
+        posterPath: posterPath,
+        name: name,
       );
 
   @override

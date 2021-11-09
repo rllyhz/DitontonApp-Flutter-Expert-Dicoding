@@ -1,5 +1,5 @@
 import 'package:core_app/core_app.dart'
-    show RequestState, DrawerItem, WACHLIST_MOVIE_EMPTY_MESSAGE, kBodyText;
+    show RequestState, DrawerItem, watchlistMovieEmptyMessage, kBodyText;
 import 'package:ditonton/presentation/pages/movie_detail_page.dart';
 import 'package:ditonton/presentation/provider/watchlist_movie_notifier.dart';
 import 'package:ditonton/presentation/widgets/content_card_list.dart';
@@ -26,14 +26,14 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage> {
       padding: const EdgeInsets.only(left: 8.0, right: 8.0, bottom: 12.0),
       child: Consumer<WatchlistMovieNotifier>(
         builder: (context, data, child) {
-          if (data.watchlistState == RequestState.Loading) {
+          if (data.watchlistState == RequestState.loading) {
             return Center(
               child: CircularProgressIndicator(),
             );
-          } else if (data.watchlistState == RequestState.Loaded) {
+          } else if (data.watchlistState == RequestState.loaded) {
             if (data.watchlistMovies.isEmpty)
               return Center(
-                child: Text(WACHLIST_MOVIE_EMPTY_MESSAGE, style: kBodyText),
+                child: Text(watchlistMovieEmptyMessage, style: kBodyText),
               );
 
             return ListView.builder(
@@ -41,7 +41,7 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage> {
                 final movie = data.watchlistMovies[index];
 
                 return ContentCardList(
-                  activeDrawerItem: DrawerItem.Movie,
+                  activeDrawerItem: DrawerItem.movie,
                   routeName: MovieDetailPage.ROUTE_NAME,
                   movie: movie,
                 );

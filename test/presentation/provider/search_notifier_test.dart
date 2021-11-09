@@ -38,7 +38,7 @@ void main() {
       // act
       provider.fetchMovieSearch(testQueryMovie);
       // assert
-      expect(provider.state, RequestState.Loading);
+      expect(provider.state, RequestState.loading);
     });
 
     test('should change search result data when data is gotten successfully',
@@ -49,7 +49,7 @@ void main() {
       // act
       await provider.fetchMovieSearch(testQueryMovie);
       // assert
-      expect(provider.state, RequestState.Loaded);
+      expect(provider.state, RequestState.loaded);
       expect(provider.moviesSearchResult, testMovieList);
       expect(listenerCallCount, 2);
     });
@@ -61,7 +61,7 @@ void main() {
       // act
       await provider.fetchMovieSearch(testQueryMovie);
       // assert
-      expect(provider.state, RequestState.Error);
+      expect(provider.state, RequestState.error);
       expect(provider.message, 'Server Failure');
       expect(listenerCallCount, 2);
     });
@@ -75,7 +75,7 @@ void main() {
       // act
       provider.fetchTVShowSearch(testQueryTVShow);
       // assert
-      expect(provider.state, RequestState.Loading);
+      expect(provider.state, RequestState.loading);
     });
 
     test('should change search result data when data is gotten successfully',
@@ -86,7 +86,7 @@ void main() {
       // act
       await provider.fetchTVShowSearch(testQueryTVShow);
       // assert
-      expect(provider.state, RequestState.Loaded);
+      expect(provider.state, RequestState.loaded);
       expect(provider.tvShowsSearchResult, testTVShowList);
       expect(listenerCallCount, 2);
     });
@@ -98,7 +98,7 @@ void main() {
       // act
       await provider.fetchTVShowSearch(testQueryTVShow);
       // assert
-      expect(provider.state, RequestState.Error);
+      expect(provider.state, RequestState.error);
       expect(provider.message, 'Server Failure');
       expect(listenerCallCount, 2);
     });

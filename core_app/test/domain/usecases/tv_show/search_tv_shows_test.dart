@@ -16,7 +16,7 @@ void main() {
   });
 
   final testTVShows = <TVShow>[];
-  final tQuery = 'Spiderman';
+  const tQuery = 'Spiderman';
 
   test('should get list of tv shows from the repository', () async {
     // arrange

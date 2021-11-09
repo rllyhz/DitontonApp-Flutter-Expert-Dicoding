@@ -3,9 +3,9 @@ import 'package:core_app/core_app.dart'
     show
         MovieDetail,
         RequestState,
-        BASE_IMAGE_URL,
-        WATCHLIST_ADD_SUCCESS_MESSAGE,
-        WATCHLIST_REMOVE_SUCCESS_MESSAGE,
+        baseImageUrl,
+        watchlistAddSuccessMessage,
+        watchlistRemoveSuccessMessage,
         getFormattedDuration,
         getFormattedGenres,
         kHeading5,
@@ -47,11 +47,11 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
       child: Scaffold(
         body: Consumer<MovieDetailNotifier>(
           builder: (context, provider, child) {
-            if (provider.movieState == RequestState.Loading) {
+            if (provider.movieState == RequestState.loading) {
               return Center(
                 child: CircularProgressIndicator(),
               );
-            } else if (provider.movieState == RequestState.Loaded) {
+            } else if (provider.movieState == RequestState.loaded) {
               final movie = provider.movie;
               return DetailContent(movie, provider);
             } else {
@@ -75,7 +75,7 @@ class DetailContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScrollableSheetContainer(
-      backgroundUrl: '$BASE_IMAGE_URL${movie.posterPath}',
+      backgroundUrl: '$baseImageUrl${movie.posterPath}',
       scrollableContents: [
         Text(
           movie.title,
@@ -91,8 +91,8 @@ class DetailContent extends StatelessWidget {
 
             final message = provider.watchlistMessage;
 
-            if (message == WATCHLIST_ADD_SUCCESS_MESSAGE ||
-                message == WATCHLIST_REMOVE_SUCCESS_MESSAGE) {
+            if (message == watchlistAddSuccessMessage ||
+                message == watchlistRemoveSuccessMessage) {
               ScaffoldMessenger.of(context)
                   .showSnackBar(SnackBar(content: Text(message)));
             } else {
@@ -171,8 +171,7 @@ class DetailContent extends StatelessWidget {
                             Radius.circular(8),
                           ),
                           child: CachedNetworkImage(
-                            imageUrl:
-                                '$BASE_IMAGE_URL${movieRecoms.posterPath}',
+                            imageUrl: '$baseImageUrl${movieRecoms.posterPath}',
                             placeholder: (context, url) => Padding(
                               padding: EdgeInsets.symmetric(
                                   vertical: 8.0, horizontal: 12.0),

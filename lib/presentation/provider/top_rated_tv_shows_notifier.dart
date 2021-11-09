@@ -7,7 +7,7 @@ class TopRatedTVShowsNotifier extends ChangeNotifier {
 
   TopRatedTVShowsNotifier({required this.getTopRatedTVShows});
 
-  RequestState _state = RequestState.Empty;
+  RequestState _state = RequestState.empty;
   RequestState get state => _state;
 
   List<TVShow> _tvShows = [];
@@ -17,7 +17,7 @@ class TopRatedTVShowsNotifier extends ChangeNotifier {
   String get message => _message;
 
   Future<void> fetchTopRatedTVShows() async {
-    _state = RequestState.Loading;
+    _state = RequestState.loading;
     notifyListeners();
 
     final result = await getTopRatedTVShows.execute();
@@ -25,12 +25,12 @@ class TopRatedTVShowsNotifier extends ChangeNotifier {
     result.fold(
       (failure) {
         _message = failure.message;
-        _state = RequestState.Error;
+        _state = RequestState.error;
         notifyListeners();
       },
       (tvShowsData) {
         _tvShows = tvShowsData;
-        _state = RequestState.Loaded;
+        _state = RequestState.loaded;
         notifyListeners();
       },
     );

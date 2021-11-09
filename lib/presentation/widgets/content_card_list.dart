@@ -5,9 +5,9 @@ import 'package:core_app/core_app.dart'
         TVShow,
         DrawerItem,
         kRichBlack,
-        NOT_STRING_REPLACEMENT,
+        notStringReplacement,
         kHeading6,
-        BASE_IMAGE_URL;
+        baseImageUrl;
 import 'package:flutter/material.dart';
 
 class ContentCardList extends StatelessWidget {
@@ -51,14 +51,14 @@ class ContentCardList extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        _getTitle() ?? NOT_STRING_REPLACEMENT,
+                        _getTitle() ?? notStringReplacement,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: kHeading6,
                       ),
                       SizedBox(height: 16),
                       Text(
-                        _getOverview() ?? NOT_STRING_REPLACEMENT,
+                        _getOverview() ?? notStringReplacement,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -73,7 +73,7 @@ class ContentCardList extends StatelessWidget {
                 ),
                 child: ClipRRect(
                   child: CachedNetworkImage(
-                    imageUrl: "$BASE_IMAGE_URL${_getPosterPath()}",
+                    imageUrl: "$baseImageUrl${_getPosterPath()}",
                     width: 80,
                     placeholder: (context, url) => Padding(
                       padding:
@@ -94,17 +94,17 @@ class ContentCardList extends StatelessWidget {
     );
   }
 
-  int _getId() => activeDrawerItem == DrawerItem.Movie
+  int _getId() => activeDrawerItem == DrawerItem.movie
       ? movie?.id as int
       : tvShow?.id as int;
 
   String? _getTitle() =>
-      activeDrawerItem == DrawerItem.Movie ? movie?.title : tvShow?.name;
+      activeDrawerItem == DrawerItem.movie ? movie?.title : tvShow?.name;
 
-  String _getPosterPath() => activeDrawerItem == DrawerItem.Movie
+  String _getPosterPath() => activeDrawerItem == DrawerItem.movie
       ? movie?.posterPath as String
       : tvShow?.posterPath as String;
 
   String? _getOverview() =>
-      activeDrawerItem == DrawerItem.Movie ? movie?.overview : tvShow?.overview;
+      activeDrawerItem == DrawerItem.movie ? movie?.overview : tvShow?.overview;
 }

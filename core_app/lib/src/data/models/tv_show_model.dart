@@ -2,7 +2,7 @@ import 'package:core_app/src/domain/entities/tv_show.dart';
 import 'package:equatable/equatable.dart';
 
 class TVShowModel extends Equatable {
-  TVShowModel(
+  const TVShowModel(
       {required this.backdropPath,
       required this.firstAirDate,
       required this.genreIds,
@@ -64,19 +64,19 @@ class TVShowModel extends Equatable {
       };
 
   TVShow toEntity() => TVShow(
-        backdropPath: this.backdropPath,
-        firstAirDate: this.firstAirDate,
-        genreIds: this.genreIds,
-        id: this.id,
-        name: this.name,
-        originCountry: this.originCountry,
-        originalLanguage: this.originalLanguage,
-        originalName: this.originalName,
-        overview: this.overview,
-        popularity: this.popularity,
-        posterPath: this.posterPath,
-        voteAverage: this.voteAverage,
-        voteCount: this.voteCount,
+        backdropPath: backdropPath,
+        firstAirDate: firstAirDate,
+        genreIds: genreIds,
+        id: id,
+        name: name,
+        originCountry: originCountry,
+        originalLanguage: originalLanguage,
+        originalName: originalName,
+        overview: overview,
+        popularity: popularity,
+        posterPath: posterPath,
+        voteAverage: voteAverage,
+        voteCount: voteCount,
       );
 
   @override

@@ -3,10 +3,10 @@ import 'package:core_app/core_app.dart'
         TVShow,
         RequestState,
         DrawerItem,
-        FAILED_TO_FETCH_DATA_MESSAGE,
-        NOW_PLAYING_HEADING_TEXT,
-        POPULAR_HEADING_TEXT,
-        TOP_RATED_HEADING_TEXT,
+        failedToFetchDataMessage,
+        nowPlayingHeadingText,
+        popularHeadingText,
+        topRatedHeadingText,
         kHeading6;
 import 'package:ditonton/presentation/pages/popular_tv_shows_page.dart';
 import 'package:ditonton/presentation/pages/top_rated_tv_shows_page.dart';
@@ -42,55 +42,55 @@ class _HomeTVShowPageState extends State<HomeTVShowPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              NOW_PLAYING_HEADING_TEXT,
+              nowPlayingHeadingText,
               style: kHeading6,
             ),
             Consumer<TVShowListNotifier>(builder: (context, data, child) {
               final state = data.nowPlayingState;
-              if (state == RequestState.Loading) {
+              if (state == RequestState.loading) {
                 return Center(
                   child: CircularProgressIndicator(),
                 );
-              } else if (state == RequestState.Loaded) {
+              } else if (state == RequestState.loaded) {
                 return TVShowList(data.nowPlayingTVShows);
               } else {
-                return Text(FAILED_TO_FETCH_DATA_MESSAGE);
+                return Text(failedToFetchDataMessage);
               }
             }),
             SizedBox(height: 8.0),
             SubHeading(
-              title: POPULAR_HEADING_TEXT,
+              title: popularHeadingText,
               onTap: () =>
                   Navigator.pushNamed(context, PopularTVShowsPage.ROUTE_NAME),
             ),
             Consumer<TVShowListNotifier>(builder: (context, data, child) {
               final state = data.popularTVShowsState;
-              if (state == RequestState.Loading) {
+              if (state == RequestState.loading) {
                 return Center(
                   child: CircularProgressIndicator(),
                 );
-              } else if (state == RequestState.Loaded) {
+              } else if (state == RequestState.loaded) {
                 return TVShowList(data.popularTVShows);
               } else {
-                return Text(FAILED_TO_FETCH_DATA_MESSAGE);
+                return Text(failedToFetchDataMessage);
               }
             }),
             SubHeading(
-              title: TOP_RATED_HEADING_TEXT,
+              title: topRatedHeadingText,
               onTap: () =>
                   Navigator.pushNamed(context, TopRatedTVShowsPage.ROUTE_NAME),
             ),
             SizedBox(height: 8.0),
             Consumer<TVShowListNotifier>(builder: (context, data, child) {
               final state = data.topRatedTVShowsState;
-              if (state == RequestState.Loading) {
+              if (state == RequestState.loading) {
                 return Center(
                   child: CircularProgressIndicator(),
                 );
-              } else if (state == RequestState.Loaded) {
+              } else if (state == RequestState.loaded) {
                 return TVShowList(data.topRatedTVShows);
               } else {
-                return Text(FAILED_TO_FETCH_DATA_MESSAGE);
+                return Text(failedToFetchDataMessage);
               }
             }),
           ],
@@ -114,7 +114,7 @@ class TVShowList extends StatelessWidget {
         itemBuilder: (context, index) {
           final _tvShow = tvShows[index];
           return CardImageFull(
-            activeDrawerItem: DrawerItem.TVShow,
+            activeDrawerItem: DrawerItem.tvShow,
             routeNameDestination: TVShowDetailPage.ROUTE_NAME,
             tvShow: _tvShow,
           );

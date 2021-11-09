@@ -22,7 +22,7 @@ class SearchPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<SearchNotifier>(context);
-    _title = activeDrawerItem == DrawerItem.Movie ? "Movie" : "TV Show";
+    _title = activeDrawerItem == DrawerItem.movie ? "Movie" : "TV Show";
 
     return Scaffold(
       appBar: AppBar(
@@ -37,7 +37,7 @@ class SearchPage extends StatelessWidget {
               onSubmitted: (query) {
                 _isAlreadySearched = true;
 
-                if (activeDrawerItem == DrawerItem.Movie)
+                if (activeDrawerItem == DrawerItem.movie)
                   provider.fetchMovieSearch(query);
                 else
                   provider.fetchTVShowSearch(query);
@@ -64,15 +64,15 @@ class SearchPage extends StatelessWidget {
   Widget _buildSearchResults() {
     return Consumer<SearchNotifier>(
       builder: (ctx, data, child) {
-        if (data.state == RequestState.Loading) {
+        if (data.state == RequestState.loading) {
           return Container(
             margin: EdgeInsets.only(top: 32.0),
             child: Center(
               child: CircularProgressIndicator(),
             ),
           );
-        } else if (data.state == RequestState.Loaded && _isAlreadySearched) {
-          if (activeDrawerItem == DrawerItem.Movie)
+        } else if (data.state == RequestState.loaded && _isAlreadySearched) {
+          if (activeDrawerItem == DrawerItem.movie)
             return _buildMovieCardList(data.moviesSearchResult);
           else
             return _buildTVShowCardList(data.tvShowsSearchResult);

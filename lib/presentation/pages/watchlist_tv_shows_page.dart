@@ -1,5 +1,5 @@
 import 'package:core_app/core_app.dart'
-    show RequestState, DrawerItem, WACHLIST_TV_SHOW_EMPTY_MESSAGE, kBodyText;
+    show RequestState, DrawerItem, watchlistTVShowEmptyMessage, kBodyText;
 import 'package:ditonton/presentation/pages/tv_show_detail_page.dart';
 import 'package:ditonton/presentation/provider/watchlist_tv_show_notifier.dart';
 import 'package:ditonton/presentation/widgets/content_card_list.dart';
@@ -26,14 +26,14 @@ class _WatchlistTVShowsPageState extends State<WatchlistTVShowsPage> {
       padding: const EdgeInsets.only(left: 8.0, right: 8.0, bottom: 12.0),
       child: Consumer<WatchlistTVShowNotifier>(
         builder: (context, data, child) {
-          if (data.watchlistState == RequestState.Loading) {
+          if (data.watchlistState == RequestState.loading) {
             return Center(
               child: CircularProgressIndicator(),
             );
-          } else if (data.watchlistState == RequestState.Loaded) {
+          } else if (data.watchlistState == RequestState.loaded) {
             if (data.watchlistTVShows.isEmpty)
               return Center(
-                child: Text(WACHLIST_TV_SHOW_EMPTY_MESSAGE, style: kBodyText),
+                child: Text(watchlistTVShowEmptyMessage, style: kBodyText),
               );
 
             return ListView.builder(
@@ -41,7 +41,7 @@ class _WatchlistTVShowsPageState extends State<WatchlistTVShowsPage> {
                 final tvShow = data.watchlistTVShows[index];
 
                 return ContentCardList(
-                  activeDrawerItem: DrawerItem.TVShow,
+                  activeDrawerItem: DrawerItem.tvShow,
                   routeName: TVShowDetailPage.ROUTE_NAME,
                   tvShow: tvShow,
                 );

@@ -31,17 +31,17 @@ class _PopularTVShowsPageState extends State<PopularTVShowsPage> {
         padding: const EdgeInsets.all(8.0),
         child: Consumer<PopularTVShowsNotifier>(
           builder: (context, data, child) {
-            if (data.state == RequestState.Loading) {
+            if (data.state == RequestState.loading) {
               return Center(
                 child: CircularProgressIndicator(),
               );
-            } else if (data.state == RequestState.Loaded) {
+            } else if (data.state == RequestState.loaded) {
               return ListView.builder(
                 itemBuilder: (context, index) {
                   final tvShow = data.tvShows[index];
 
                   return ContentCardList(
-                    activeDrawerItem: DrawerItem.TVShow,
+                    activeDrawerItem: DrawerItem.tvShow,
                     routeName: TVShowDetailPage.ROUTE_NAME,
                     tvShow: tvShow,
                   );

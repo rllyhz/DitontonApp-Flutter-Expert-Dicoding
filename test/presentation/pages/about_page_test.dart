@@ -1,4 +1,4 @@
-import 'package:core_app/core_app.dart' show ABOUT_DESCRIPTION_TEXT;
+import 'package:core_app/core_app.dart' show aboutDescriptionText;
 import 'package:ditonton/presentation/pages/about_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -14,6 +14,6 @@ main() {
       (WidgetTester tester) async {
     await tester.pumpWidget(_makeTestableWidget(AboutPage()));
 
-    expect(find.text(ABOUT_DESCRIPTION_TEXT), findsOneWidget);
+    expect(find.text(aboutDescriptionText), findsOneWidget);
   });
 }

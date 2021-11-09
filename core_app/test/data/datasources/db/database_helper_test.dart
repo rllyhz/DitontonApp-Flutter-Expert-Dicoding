@@ -12,16 +12,13 @@ void main() {
   });
 
   final testMovieTableId = testMovieTable.id;
-  final futureMovieId = (_) async => testMovieTableId;
-
   final testTVShowTableId = testTVShowTable.id;
-  final futureTVShowInt = (_) async => testTVShowTableId;
 
   group('Movie test on db', () {
     test('should return movie id when inserting new movie', () async {
       // arrange
       when(mockDatabaseHelper.insertMovieWatchlist(testMovieTable))
-          .thenAnswer(futureMovieId);
+          .thenAnswer((_) async => testMovieTableId);
       // act
       final result =
           await mockDatabaseHelper.insertMovieWatchlist(testMovieTable);
@@ -32,7 +29,7 @@ void main() {
     test('should return movie id when deleting a movie', () async {
       // arrange
       when(mockDatabaseHelper.removeMovieWatchlist(testMovieTable))
-          .thenAnswer(futureMovieId);
+          .thenAnswer((_) async => testMovieTableId);
       // act
       final result =
           await mockDatabaseHelper.removeMovieWatchlist(testMovieTable);
@@ -77,7 +74,7 @@ void main() {
     test('should return tv show id when inserting new tv show', () async {
       // arrange
       when(mockDatabaseHelper.insertTVShowWatchlist(testTVShowTable))
-          .thenAnswer(futureTVShowInt);
+          .thenAnswer((_) async => testTVShowTableId);
       // act
       final result =
           await mockDatabaseHelper.insertTVShowWatchlist(testTVShowTable);
@@ -88,7 +85,7 @@ void main() {
     test('should return tv show id when deleting a tv show', () async {
       // arrange
       when(mockDatabaseHelper.removeTVShowWatchlist(testTVShowTable))
-          .thenAnswer(futureTVShowInt);
+          .thenAnswer((_) async => testTVShowTableId);
       // act
       final result =
           await mockDatabaseHelper.removeTVShowWatchlist(testTVShowTable);
