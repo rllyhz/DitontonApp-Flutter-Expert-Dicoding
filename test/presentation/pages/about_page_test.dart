@@ -1,5 +1,5 @@
 import 'package:core_app/core_app.dart' show aboutDescriptionText;
-import 'package:ditonton/presentation/pages/about_page.dart';
+import '../../../about/lib/src/about_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 

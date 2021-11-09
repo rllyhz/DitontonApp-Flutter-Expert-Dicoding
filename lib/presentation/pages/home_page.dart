@@ -1,5 +1,5 @@
 import 'package:core_app/core_app.dart' show DrawerItem, kDavysGrey, kGrey;
-import 'package:ditonton/presentation/pages/about_page.dart';
+import 'package:about/about.dart' show AboutPage;
 import 'package:ditonton/presentation/pages/home_movie_page.dart';
 import 'package:ditonton/presentation/pages/home_tv_show_page.dart';
 import 'package:ditonton/presentation/pages/search_page.dart';
