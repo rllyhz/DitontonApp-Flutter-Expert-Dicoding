@@ -1,25 +1,25 @@
 import 'package:core_app/core_app.dart' show ContentCardList, RequestState;
-import 'package:ditonton/presentation/pages/top_rated_tv_shows_page.dart';
-import 'package:ditonton/presentation/provider/top_rated_tv_shows_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:movies/src/presentation/pages/popular_movies_page.dart';
+import 'package:movies/src/presentation/provider/popular_movies_notifier.dart';
 import 'package:provider/provider.dart';
 
-import '../../dummy_data/dummy_objects.dart';
-import 'top_rated_tv_shows_page_test.mocks.dart';
+import '../../../../test/dummy_data/dummy_objects.dart';
+import 'popular_movies_page_test.mocks.dart';
 
-@GenerateMocks([TopRatedTVShowsNotifier])
+@GenerateMocks([PopularMoviesNotifier])
 void main() {
-  late MockTopRatedTVShowsNotifier mockNotifier;
+  late MockPopularMoviesNotifier mockNotifier;
 
   setUp(() {
-    mockNotifier = MockTopRatedTVShowsNotifier();
+    mockNotifier = MockPopularMoviesNotifier();
   });
 
   Widget _makeTestableWidget(Widget body) {
-    return ChangeNotifierProvider<TopRatedTVShowsNotifier>.value(
+    return ChangeNotifierProvider<PopularMoviesNotifier>.value(
       value: mockNotifier,
       child: MaterialApp(
         home: body,
@@ -30,35 +30,35 @@ void main() {
   testWidgets('Page should display AppBar when data is loaded',
       (WidgetTester tester) async {
     when(mockNotifier.state).thenReturn(RequestState.loaded);
-    when(mockNotifier.tvShows).thenReturn(testTVShowList);
+    when(mockNotifier.movies).thenReturn(testMovieList);
 
-    await tester.pumpWidget(_makeTestableWidget(TopRatedTVShowsPage()));
+    await tester.pumpWidget(_makeTestableWidget(PopularMoviesPage()));
 
     expect(find.byType(AppBar), findsOneWidget);
-    expect(find.text('Top Rated TVShows'), findsOneWidget);
+    expect(find.text('Popular Movies'), findsOneWidget);
   });
 
-  testWidgets('Page should display progress bar when loading',
+  testWidgets('Page should display center progress bar when loading',
       (WidgetTester tester) async {
     when(mockNotifier.state).thenReturn(RequestState.loading);
 
-    final progressFinder = find.byType(CircularProgressIndicator);
+    final progressBarFinder = find.byType(CircularProgressIndicator);
     final centerFinder = find.byType(Center);
 
-    await tester.pumpWidget(_makeTestableWidget(TopRatedTVShowsPage()));
+    await tester.pumpWidget(_makeTestableWidget(PopularMoviesPage()));
 
     expect(centerFinder, findsOneWidget);
-    expect(progressFinder, findsOneWidget);
+    expect(progressBarFinder, findsOneWidget);
   });
 
-  testWidgets('Page should display when data is loaded',
+  testWidgets('Page should display ListView when data is loaded',
       (WidgetTester tester) async {
     when(mockNotifier.state).thenReturn(RequestState.loaded);
-    when(mockNotifier.tvShows).thenReturn(testTVShowList);
+    when(mockNotifier.movies).thenReturn(testMovieList);
 
     final listViewFinder = find.byType(ListView);
 
-    await tester.pumpWidget(_makeTestableWidget(TopRatedTVShowsPage()));
+    await tester.pumpWidget(_makeTestableWidget(PopularMoviesPage()));
 
     expect(listViewFinder, findsOneWidget);
     expect(find.byType(ContentCardList), findsWidgets);
@@ -69,9 +69,9 @@ void main() {
     when(mockNotifier.state).thenReturn(RequestState.error);
     when(mockNotifier.message).thenReturn('Error message');
 
-    final textFinder = find.byKey(Key('error_message'));
+    final textFinder = find.byKey(const Key('error_message'));
 
-    await tester.pumpWidget(_makeTestableWidget(TopRatedTVShowsPage()));
+    await tester.pumpWidget(_makeTestableWidget(PopularMoviesPage()));
 
     expect(textFinder, findsOneWidget);
   });

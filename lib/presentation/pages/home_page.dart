@@ -1,11 +1,11 @@
 import 'package:core_app/core_app.dart' show DrawerItem, kDavysGrey, kGrey;
 import 'package:about/about.dart' show AboutPage;
-import 'package:ditonton/presentation/pages/home_movie_page.dart';
 import 'package:ditonton/presentation/pages/home_tv_show_page.dart';
 import 'package:ditonton/presentation/pages/search_page.dart';
 import 'package:ditonton/presentation/pages/watchlist_page.dart';
 import 'package:ditonton/presentation/provider/home_notifier.dart';
 import 'package:flutter/material.dart';
+import 'package:movies/movies.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
@@ -104,7 +104,7 @@ class HomePage extends StatelessWidget {
             ListTile(
               onTap: () {
                 Navigator.pop(context);
-                Navigator.pushNamed(context, AboutPage.ROUTE_NAME);
+                Navigator.pushNamed(context, AboutPage.routeName);
               },
               leading: Icon(Icons.info_outline),
               title: Text('About'),

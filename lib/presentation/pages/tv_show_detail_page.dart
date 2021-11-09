@@ -1,20 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core_app/core_app.dart'
-    show
-        RequestState,
-        TVShowDetail,
-        baseImageUrl,
-        watchlistAddSuccessMessage,
-        watchlistRemoveSuccessMessage,
-        getFormattedDurationFromList,
-        getFormattedGenres,
-        kGrey,
-        kHeading5,
-        kHeading6,
-        kMikadoYellow,
-        kRichBlack;
+    show RequestState, ScrollableSheetContainer, TVShowDetail, baseImageUrl,
+    getFormattedDurationFromList, getFormattedGenres, kGrey, kHeading5,
+    kHeading6, kMikadoYellow, kRichBlack, watchlistAddSuccessMessage,
+    watchlistRemoveSuccessMessage;
 import 'package:ditonton/presentation/provider/tv_show_detail_notifier.dart';
-import 'package:ditonton/presentation/widgets/scrollable_sheet_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';

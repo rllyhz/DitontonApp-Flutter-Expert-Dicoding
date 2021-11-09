@@ -429,6 +429,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "5.0.16"
+  movies:
+    dependency: "direct main"
+    description:
+      path: movies
+      relative: true
+    source: path
+    version: "0.0.1"
   nested:
     dependency: transitive
     description:

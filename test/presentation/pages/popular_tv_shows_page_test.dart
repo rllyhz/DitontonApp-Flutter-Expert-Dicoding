@@ -1,7 +1,6 @@
-import 'package:core_app/core_app.dart' show RequestState;
+import 'package:core_app/core_app.dart' show ContentCardList, RequestState;
 import 'package:ditonton/presentation/pages/popular_tv_shows_page.dart';
 import 'package:ditonton/presentation/provider/popular_tv_shows_notifier.dart';
-import 'package:ditonton/presentation/widgets/content_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';

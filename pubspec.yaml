@@ -35,6 +35,8 @@ dependencies:
   # modules
   core_app:
     path: core_app
+  movies:
+    path: movies
   about:
     path: about
 

@@ -1,19 +1,9 @@
 import 'package:core_app/core_app.dart'
-    show
-        TVShow,
-        RequestState,
-        DrawerItem,
-        failedToFetchDataMessage,
-        nowPlayingHeadingText,
-        popularHeadingText,
-        topRatedHeadingText,
-        kHeading6;
+    show CardImageFull, DrawerItem, RequestState, SubHeading, TVShow, failedToFetchDataMessage, kHeading6, nowPlayingHeadingText, popularHeadingText, topRatedHeadingText;
 import 'package:ditonton/presentation/pages/popular_tv_shows_page.dart';
 import 'package:ditonton/presentation/pages/top_rated_tv_shows_page.dart';
 import 'package:ditonton/presentation/pages/tv_show_detail_page.dart';
 import 'package:ditonton/presentation/provider/tv_show_list_notifier.dart';
-import 'package:ditonton/presentation/widgets/card_image_full.dart';
-import 'package:ditonton/presentation/widgets/sub_heading.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

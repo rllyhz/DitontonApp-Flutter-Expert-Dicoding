@@ -1,8 +1,7 @@
 import 'package:core_app/core_app.dart'
-    show RequestState, DrawerItem, watchlistTVShowEmptyMessage, kBodyText;
+    show ContentCardList, DrawerItem, RequestState, kBodyText, watchlistTVShowEmptyMessage;
 import 'package:ditonton/presentation/pages/tv_show_detail_page.dart';
 import 'package:ditonton/presentation/provider/watchlist_tv_show_notifier.dart';
-import 'package:ditonton/presentation/widgets/content_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

@@ -1,10 +1,9 @@
 import 'package:core_app/core_app.dart'
-    show DrawerItem, Movie, RequestState, TVShow, kBodyText, kHeading6;
-import 'package:ditonton/presentation/pages/movie_detail_page.dart';
+    show ContentCardList, DrawerItem, Movie, RequestState, TVShow, kBodyText, kHeading6;
 import 'package:ditonton/presentation/pages/tv_show_detail_page.dart';
 import 'package:ditonton/presentation/provider/search_notifier.dart';
-import 'package:ditonton/presentation/widgets/content_card_list.dart';
 import 'package:flutter/material.dart';
+import 'package:movies/movies.dart';
 import 'package:provider/provider.dart';
 
 class SearchPage extends StatelessWidget {
@@ -94,7 +93,7 @@ class SearchPage extends StatelessWidget {
           return ContentCardList(
             movie: movie,
             activeDrawerItem: activeDrawerItem,
-            routeName: MovieDetailPage.ROUTE_NAME,
+            routeName: MovieDetailPage.routeName,
           );
         },
         itemCount: movies.length,

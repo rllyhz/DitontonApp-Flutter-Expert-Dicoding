@@ -97,3 +97,10 @@ export './src/domain/usecases/tv_show/search_tv_shows.dart';
 // --> END TV SHOW
 // -> END USECASES
 // --------- END DOMAIN
+
+// --------- PRESENTATION
+export './src/presentation/widgets/card_image_full.dart';
+export './src/presentation/widgets/content_card_list.dart';
+export './src/presentation/widgets/scrollable_sheet_container.dart';
+export './src/presentation/widgets/sub_heading.dart';
+// --------- END PRESENTATION

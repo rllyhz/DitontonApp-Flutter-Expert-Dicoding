@@ -1,8 +1,7 @@
 import 'package:core_app/core_app.dart'
-    show RequestState, TVShow, watchlistTVShowEmptyMessage;
+    show ContentCardList, RequestState, TVShow, watchlistTVShowEmptyMessage;
 import 'package:ditonton/presentation/pages/watchlist_tv_shows_page.dart';
 import 'package:ditonton/presentation/provider/watchlist_tv_show_notifier.dart';
-import 'package:ditonton/presentation/widgets/content_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
