@@ -1,11 +1,18 @@
 import 'package:core_app/core_app.dart'
-    show ContentCardList, DrawerItem, RequestState, kBodyText, watchlistMovieEmptyMessage;
+    show
+        ContentCardList,
+        DrawerItem,
+        RequestState,
+        kBodyText,
+        watchlistMovieEmptyMessage;
 import 'package:flutter/material.dart';
 import 'package:movies/src/presentation/pages/movie_detail_page.dart';
 import 'package:movies/src/presentation/provider/watchlist_movie_notifier.dart';
 import 'package:provider/provider.dart';
 
 class WatchlistMoviesPage extends StatefulWidget {
+  const WatchlistMoviesPage({Key? key}) : super(key: key);
+
   @override
   _WatchlistMoviesPageState createState() => _WatchlistMoviesPageState();
 }

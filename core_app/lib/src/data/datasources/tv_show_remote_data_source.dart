@@ -9,10 +9,15 @@ import 'package:http/http.dart' as http;
 
 abstract class TVShowRemoteDataSource {
   Future<List<TVShowModel>> getNowPlayingTVShows();
+
   Future<List<TVShowModel>> getPopularTVShows();
+
   Future<List<TVShowModel>> getTopRatedTVShows();
+
   Future<TVShowDetailResponse> getTVShowDetail(int id);
+
   Future<List<TVShowModel>> getTVShowRecommendations(int id);
+
   Future<List<TVShowModel>> searchTVShows(String query);
 }
 

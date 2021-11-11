@@ -1,11 +1,12 @@
 import 'package:dartz/dartz.dart';
 import 'package:core_app/core_app.dart'
-    show GetTopRatedMovies, Movie, RequestState, ServerFailure;
+    show GetTopRatedMovies, RequestState, ServerFailure;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:movies/src/presentation/provider/top_rated_movies_notifier.dart';
 
+import '../../../../test/dummy_data/dummy_objects.dart';
 import 'top_rated_movies_notifier_test.mocks.dart';
 
 @GenerateMocks([GetTopRatedMovies])
@@ -23,28 +24,10 @@ void main() {
       });
   });
 
-  final tMovie = Movie(
-    adult: false,
-    backdropPath: 'backdropPath',
-    genreIds: const [1, 2, 3],
-    id: 1,
-    originalTitle: 'originalTitle',
-    overview: 'overview',
-    popularity: 1,
-    posterPath: 'posterPath',
-    releaseDate: 'releaseDate',
-    title: 'title',
-    video: false,
-    voteAverage: 1,
-    voteCount: 1,
-  );
-
-  final tMovieList = <Movie>[tMovie];
-
   test('should change state to loading when usecase is called', () async {
     // arrange
     when(mockGetTopRatedMovies.execute())
-        .thenAnswer((_) async => Right(tMovieList));
+        .thenAnswer((_) async => Right(testMovieList));
     // act
     notifier.fetchTopRatedMovies();
     // assert
@@ -55,12 +38,12 @@ void main() {
   test('should change movies data when data is gotten successfully', () async {
     // arrange
     when(mockGetTopRatedMovies.execute())
-        .thenAnswer((_) async => Right(tMovieList));
+        .thenAnswer((_) async => Right(testMovieList));
     // act
     await notifier.fetchTopRatedMovies();
     // assert
     expect(notifier.state, RequestState.loaded);
-    expect(notifier.movies, tMovieList);
+    expect(notifier.movies, testMovieList);
     expect(listenerCallCount, 2);
   });
 

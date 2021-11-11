@@ -1,5 +1,15 @@
 import 'package:core_app/core_app.dart'
-    show CardImageFull, DrawerItem, Movie, RequestState, SubHeading, failedToFetchDataMessage, kHeading6, nowPlayingHeadingText, popularHeadingText, topRatedHeadingText;
+    show
+        CardImageFull,
+        DrawerItem,
+        Movie,
+        RequestState,
+        SubHeading,
+        failedToFetchDataMessage,
+        kHeading6,
+        nowPlayingHeadingText,
+        popularHeadingText,
+        topRatedHeadingText;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';

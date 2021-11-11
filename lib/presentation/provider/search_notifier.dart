@@ -12,15 +12,19 @@ class SearchNotifier extends ChangeNotifier {
   });
 
   RequestState _state = RequestState.empty;
+
   RequestState get state => _state;
 
   List<Movie> _moviesSearchResult = [];
+
   List<Movie> get moviesSearchResult => _moviesSearchResult;
 
   List<TVShow> _tvShowsSearchResult = [];
+
   List<TVShow> get tvShowsSearchResult => _tvShowsSearchResult;
 
   String _message = '';
+
   String get message => _message;
 
   void resetData() {

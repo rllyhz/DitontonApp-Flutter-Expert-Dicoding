@@ -5,8 +5,11 @@ import 'package:core_app/src/data/models/tv_show_table.dart';
 
 abstract class TVShowLocalDataSource {
   Future<String> insertWatchlist(TVShowTable tvShow);
+
   Future<String> removeWatchlist(TVShowTable tvShow);
+
   Future<TVShowTable?> getTVShowById(int id);
+
   Future<List<TVShowTable>> getWatchlistTVShows();
 }
 

@@ -33,7 +33,7 @@ void main() {
       when(mockNotifier.watchlistState).thenReturn(RequestState.loaded);
       when(mockNotifier.watchlistMovies).thenReturn(testMovieList);
 
-      await tester.pumpWidget(_makeTestableWidget(WatchlistMoviesPage()));
+      await tester.pumpWidget(_makeTestableWidget(const WatchlistMoviesPage()));
 
       expect(find.byType(ListView), findsOneWidget);
       expect(find.byType(ContentCardList), findsWidgets);
@@ -46,7 +46,7 @@ void main() {
       when(mockNotifier.watchlistState).thenReturn(RequestState.loaded);
       when(mockNotifier.watchlistMovies).thenReturn(<Movie>[]);
 
-      await tester.pumpWidget(_makeTestableWidget(WatchlistMoviesPage()));
+      await tester.pumpWidget(_makeTestableWidget(const WatchlistMoviesPage()));
 
       expect(find.text(watchlistMovieEmptyMessage), findsOneWidget);
     });
@@ -55,7 +55,7 @@ void main() {
         (WidgetTester tester) async {
       when(mockNotifier.watchlistState).thenReturn(RequestState.loading);
 
-      await tester.pumpWidget(_makeTestableWidget(WatchlistMoviesPage()));
+      await tester.pumpWidget(_makeTestableWidget(const WatchlistMoviesPage()));
 
       expect(find.byType(CircularProgressIndicator), findsOneWidget);
     });

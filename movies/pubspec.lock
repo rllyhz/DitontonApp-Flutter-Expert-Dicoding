@@ -8,13 +8,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "30.0.0"
-  about:
-    dependency: "direct main"
-    description:
-      path: "../about"
-      relative: true
-    source: path
-    version: "0.0.1"
   analyzer:
     dependency: transitive
     description:
@@ -198,7 +191,7 @@ packages:
     source: hosted
     version: "2.2.0"
   dartz:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: dartz
       url: "https://pub.dartlang.org"

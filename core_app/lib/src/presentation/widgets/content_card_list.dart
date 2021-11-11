@@ -82,7 +82,8 @@ class ContentCardList extends StatelessWidget {
                         child: CircularProgressIndicator(),
                       ),
                     ),
-                    errorWidget: (context, url, error) => const Icon(Icons.error),
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error),
                   ),
                   borderRadius: const BorderRadius.all(Radius.circular(8)),
                 ),

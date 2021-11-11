@@ -10,14 +10,13 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  dartz: ^0.10.0
   provider: ^5.0.0
   flutter_rating_bar: ^4.0.0
 
   # modules
   core_app:
     path: ../core_app
-  about:
-    path: ../about
 
 dev_dependencies:
   flutter_test:

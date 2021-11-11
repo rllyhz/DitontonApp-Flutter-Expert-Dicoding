@@ -1,4 +1,5 @@
-import 'package:core_app/core_app.dart' show ContentCardList, DrawerItem, RequestState;
+import 'package:core_app/core_app.dart'
+    show ContentCardList, DrawerItem, RequestState;
 import 'package:flutter/material.dart';
 import 'package:movies/src/presentation/pages/movie_detail_page.dart';
 import 'package:movies/src/presentation/provider/popular_movies_notifier.dart';
@@ -6,6 +7,8 @@ import 'package:provider/provider.dart';
 
 class PopularMoviesPage extends StatefulWidget {
   static const routeName = '/popular-movie';
+
+  const PopularMoviesPage({Key? key}) : super(key: key);
 
   @override
   _PopularMoviesPageState createState() => _PopularMoviesPageState();

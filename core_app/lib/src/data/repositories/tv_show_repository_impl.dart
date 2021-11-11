@@ -1,14 +1,14 @@
 import 'dart:io';
 
 import 'package:core_app/src/common/exception.dart';
+import 'package:core_app/src/common/failure.dart';
 import 'package:core_app/src/data/datasources/tv_show_local_data_source.dart';
 import 'package:core_app/src/data/datasources/tv_show_remote_data_source.dart';
 import 'package:core_app/src/data/models/tv_show_table.dart';
-import 'package:core_app/src/domain/entities/tv_show_detail.dart';
 import 'package:core_app/src/domain/entities/tv_show.dart';
-import 'package:core_app/src/common/failure.dart';
-import 'package:dartz/dartz.dart';
+import 'package:core_app/src/domain/entities/tv_show_detail.dart';
 import 'package:core_app/src/domain/repositories/tv_show_repository.dart';
+import 'package:dartz/dartz.dart';
 
 class TVShowRepositoryImpl implements TVShowRepository {
   TVShowRepositoryImpl({

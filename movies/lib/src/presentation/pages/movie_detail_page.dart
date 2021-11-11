@@ -1,6 +1,17 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core_app/core_app.dart'
-    show MovieDetail, RequestState, ScrollableSheetContainer, baseImageUrl, getFormattedDuration, getFormattedGenres, kHeading5, kHeading6, kMikadoYellow, watchlistAddSuccessMessage, watchlistRemoveSuccessMessage;
+    show
+        MovieDetail,
+        RequestState,
+        ScrollableSheetContainer,
+        baseImageUrl,
+        getFormattedDuration,
+        getFormattedGenres,
+        kHeading5,
+        kHeading6,
+        kMikadoYellow,
+        watchlistAddSuccessMessage,
+        watchlistRemoveSuccessMessage;
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -10,7 +21,7 @@ import 'package:provider/provider.dart';
 class MovieDetailPage extends StatefulWidget {
   static const routeName = '/detail-movie';
 
-  MovieDetailPage({required this.id});
+  const MovieDetailPage({required this.id});
 
   final int id;
 
@@ -97,7 +108,9 @@ class DetailContent extends StatelessWidget {
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              provider.isAddedToWatchlist ? const Icon(Icons.check) : const Icon(Icons.add),
+              provider.isAddedToWatchlist
+                  ? const Icon(Icons.check)
+                  : const Icon(Icons.add),
               const SizedBox(width: 6.0),
               const Text('Watchlist'),
               const SizedBox(width: 4.0),
@@ -169,7 +182,7 @@ class DetailContent extends StatelessWidget {
                               ),
                             ),
                             errorWidget: (context, url, error) =>
-                            const Icon(Icons.error),
+                                const Icon(Icons.error),
                           ),
                         ),
                       ),

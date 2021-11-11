@@ -5,7 +5,6 @@ import 'package:core_app/core_app.dart'
         GetMovieDetail,
         GetMovieRecommendations,
         GetWatchListStatusMovie,
-        Movie,
         RemoveWatchlistMovie,
         RequestState,
         SaveWatchlistMovie,
@@ -54,28 +53,11 @@ void main() {
 
   const tId = 1;
 
-  final tMovie = Movie(
-    adult: false,
-    backdropPath: 'backdropPath',
-    genreIds: const [1, 2, 3],
-    id: 1,
-    originalTitle: 'originalTitle',
-    overview: 'overview',
-    popularity: 1,
-    posterPath: 'posterPath',
-    releaseDate: 'releaseDate',
-    title: 'title',
-    video: false,
-    voteAverage: 1,
-    voteCount: 1,
-  );
-  final tMovies = <Movie>[tMovie];
-
   void _arrangeUsecase() {
     when(mockGetMovieDetail.execute(tId))
         .thenAnswer((_) async => Right(testMovieDetail));
     when(mockGetMovieRecommendations.execute(tId))
-        .thenAnswer((_) async => Right(tMovies));
+        .thenAnswer((_) async => Right(testMovieList));
   }
 
   group('Get Movie Detail', () {
@@ -118,7 +100,7 @@ void main() {
       await provider.fetchMovieDetail(tId);
       // assert
       expect(provider.movieState, RequestState.loaded);
-      expect(provider.movieRecommendations, tMovies);
+      expect(provider.movieRecommendations, testMovieList);
     });
   });
 
@@ -130,7 +112,7 @@ void main() {
       await provider.fetchMovieDetail(tId);
       // assert
       verify(mockGetMovieRecommendations.execute(tId));
-      expect(provider.movieRecommendations, tMovies);
+      expect(provider.movieRecommendations, testMovieList);
     });
 
     test('should update recommendation state when data is gotten successfully',
@@ -141,7 +123,7 @@ void main() {
       await provider.fetchMovieDetail(tId);
       // assert
       expect(provider.recommendationState, RequestState.loaded);
-      expect(provider.movieRecommendations, tMovies);
+      expect(provider.movieRecommendations, testMovieList);
     });
 
     test('should update error message when request in successful', () async {
@@ -227,7 +209,7 @@ void main() {
       when(mockGetMovieDetail.execute(tId))
           .thenAnswer((_) async => const Left(ServerFailure('Server Failure')));
       when(mockGetMovieRecommendations.execute(tId))
-          .thenAnswer((_) async => Right(tMovies));
+          .thenAnswer((_) async => Right(testMovieList));
       // act
       await provider.fetchMovieDetail(tId);
       // assert
