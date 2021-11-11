@@ -1,12 +1,12 @@
 import 'package:dartz/dartz.dart';
 import 'package:core_app/core_app.dart'
     show GetTopRatedTVShows, RequestState, ServerFailure;
-import 'package:ditonton/presentation/provider/top_rated_tv_shows_notifier.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:tv_shows/src/presentation/provider/top_rated_tv_shows_notifier.dart';
 
-import '../../dummy_data/dummy_objects.dart';
+import '../../dummy_objects.dart';
 import 'top_rated_tv_shows_notifier_test.mocks.dart';
 
 @GenerateMocks([GetTopRatedTVShows])
@@ -52,7 +52,7 @@ void main() {
   test('should return error when data is unsuccessful', () async {
     // arrange
     when(mockGetTopRatedTVShows.execute())
-        .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+        .thenAnswer((_) async => const Left(ServerFailure('Server Failure')));
     // act
     await notifier.fetchTopRatedTVShows();
     // assert

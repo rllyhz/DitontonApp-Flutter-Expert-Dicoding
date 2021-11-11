@@ -6,12 +6,13 @@ import 'package:core_app/core_app.dart'
         GetTopRatedTVShows,
         RequestState,
         ServerFailure;
-import 'package:ditonton/presentation/provider/tv_show_list_notifier.dart';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:tv_shows/src/presentation/provider/tv_show_list_notifier.dart';
 
-import '../../dummy_data/dummy_objects.dart';
+import '../../../../test/dummy_data/dummy_objects.dart';
 import 'tv_show_list_notifier_test.mocks.dart';
 
 @GenerateMocks([GetNowPlayingTVShows, GetPopularTVShows, GetTopRatedTVShows])
@@ -77,7 +78,7 @@ void main() {
     test('should return error when data is unsuccessful', () async {
       // arrange
       when(mockGetNowPlayingTVShows.execute())
-          .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+          .thenAnswer((_) async => const Left(ServerFailure('Server Failure')));
       // act
       await provider.fetchNowPlayingTVShows();
       // assert
@@ -114,7 +115,7 @@ void main() {
     test('should return error when data is unsuccessful', () async {
       // arrange
       when(mockGetPopularTVShows.execute())
-          .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+          .thenAnswer((_) async => const Left(ServerFailure('Server Failure')));
       // act
       await provider.fetchPopularTVShows();
       // assert
@@ -151,7 +152,7 @@ void main() {
     test('should return error when data is unsuccessful', () async {
       // arrange
       when(mockGetTopRatedTVShows.execute())
-          .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+          .thenAnswer((_) async => const Left(ServerFailure('Server Failure')));
       // act
       await provider.fetchTopRatedTVShows();
       // assert

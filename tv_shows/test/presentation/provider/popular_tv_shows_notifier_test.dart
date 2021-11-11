@@ -1,12 +1,12 @@
 import 'package:dartz/dartz.dart';
 import 'package:core_app/core_app.dart'
     show GetPopularTVShows, RequestState, ServerFailure;
-import 'package:ditonton/presentation/provider/popular_tv_shows_notifier.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:tv_shows/src/presentation/provider/popular_tv_shows_notifier.dart';
 
-import '../../dummy_data/dummy_objects.dart';
+import '../../../../test/dummy_data/dummy_objects.dart';
 import 'popular_tv_shows_notifier_test.mocks.dart';
 
 @GenerateMocks([GetPopularTVShows])
@@ -51,7 +51,7 @@ void main() {
   test('should return error when data is unsuccessful', () async {
     // arrange
     when(mockGetPopularTVShows.execute())
-        .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+        .thenAnswer((_) async => const Left(ServerFailure('Server Failure')));
     // act
     await notifier.fetchPopularTVShows();
     // assert

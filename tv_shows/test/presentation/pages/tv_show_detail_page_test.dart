@@ -1,15 +1,19 @@
 import 'package:core_app/core_app.dart'
-    show RequestState, ScrollableSheetContainer, TVShow, watchlistAddSuccessMessage;
-import 'package:ditonton/presentation/pages/tv_show_detail_page.dart';
-import 'package:ditonton/presentation/provider/tv_show_detail_notifier.dart';
+    show
+        RequestState,
+        ScrollableSheetContainer,
+        TVShow,
+        watchlistAddSuccessMessage;
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:provider/provider.dart';
+import 'package:tv_shows/src/presentation/pages/tv_show_detail_page.dart';
+import 'package:tv_shows/src/presentation/provider/tv_show_detail_notifier.dart';
 
-import '../../dummy_data/dummy_objects.dart';
+import '../../../../test/dummy_data/dummy_objects.dart';
 import 'tv_show_detail_page_test.mocks.dart';
 
 @GenerateMocks([TVShowDetailNotifier])
@@ -37,7 +41,7 @@ void main() {
     when(mockNotifier.tvShowRecommendations).thenReturn(<TVShow>[]);
     when(mockNotifier.isAddedToWatchlist).thenReturn(false);
 
-    await tester.pumpWidget(_makeTestableWidget(TVShowDetailPage(id: 1)));
+    await tester.pumpWidget(_makeTestableWidget(const TVShowDetailPage(id: 1)));
 
     expect(find.text('Watchlist'), findsOneWidget);
     expect(find.text('Overview'), findsOneWidget);
@@ -61,7 +65,7 @@ void main() {
 
     final watchlistButtonIcon = find.byIcon(Icons.add);
 
-    await tester.pumpWidget(_makeTestableWidget(TVShowDetailPage(id: 1)));
+    await tester.pumpWidget(_makeTestableWidget(const TVShowDetailPage(id: 1)));
 
     expect(watchlistButtonIcon, findsOneWidget);
   });
@@ -77,7 +81,7 @@ void main() {
 
     final watchlistButtonIcon = find.byIcon(Icons.check);
 
-    await tester.pumpWidget(_makeTestableWidget(TVShowDetailPage(id: 1)));
+    await tester.pumpWidget(_makeTestableWidget(const TVShowDetailPage(id: 1)));
 
     expect(watchlistButtonIcon, findsOneWidget);
   });
@@ -94,7 +98,7 @@ void main() {
 
     final watchlistButton = find.byType(ElevatedButton);
 
-    await tester.pumpWidget(_makeTestableWidget(TVShowDetailPage(id: 1)));
+    await tester.pumpWidget(_makeTestableWidget(const TVShowDetailPage(id: 1)));
 
     expect(find.byIcon(Icons.add), findsOneWidget);
 
@@ -117,7 +121,7 @@ void main() {
 
     final watchlistButton = find.byType(ElevatedButton);
 
-    await tester.pumpWidget(_makeTestableWidget(TVShowDetailPage(id: 1)));
+    await tester.pumpWidget(_makeTestableWidget(const TVShowDetailPage(id: 1)));
 
     expect(find.byIcon(Icons.add), findsOneWidget);
 

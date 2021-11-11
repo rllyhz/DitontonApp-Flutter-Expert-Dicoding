@@ -1,11 +1,21 @@
 import 'package:core_app/core_app.dart'
-    show CardImageFull, DrawerItem, RequestState, SubHeading, TVShow, failedToFetchDataMessage, kHeading6, nowPlayingHeadingText, popularHeadingText, topRatedHeadingText;
-import 'package:ditonton/presentation/pages/popular_tv_shows_page.dart';
-import 'package:ditonton/presentation/pages/top_rated_tv_shows_page.dart';
-import 'package:ditonton/presentation/pages/tv_show_detail_page.dart';
-import 'package:ditonton/presentation/provider/tv_show_list_notifier.dart';
+    show
+        CardImageFull,
+        DrawerItem,
+        RequestState,
+        SubHeading,
+        TVShow,
+        failedToFetchDataMessage,
+        kHeading6,
+        nowPlayingHeadingText,
+        popularHeadingText,
+        topRatedHeadingText;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tv_shows/src/presentation/pages/popular_tv_shows_page.dart';
+import 'package:tv_shows/src/presentation/pages/top_rated_tv_shows_page.dart';
+import 'package:tv_shows/src/presentation/pages/tv_show_detail_page.dart';
+import 'package:tv_shows/src/presentation/provider/tv_show_list_notifier.dart';
 
 class HomeTVShowPage extends StatefulWidget {
   @override
@@ -38,49 +48,49 @@ class _HomeTVShowPageState extends State<HomeTVShowPage> {
             Consumer<TVShowListNotifier>(builder: (context, data, child) {
               final state = data.nowPlayingState;
               if (state == RequestState.loading) {
-                return Center(
+                return const Center(
                   child: CircularProgressIndicator(),
                 );
               } else if (state == RequestState.loaded) {
                 return TVShowList(data.nowPlayingTVShows);
               } else {
-                return Text(failedToFetchDataMessage);
+                return const Text(failedToFetchDataMessage);
               }
             }),
-            SizedBox(height: 8.0),
+            const SizedBox(height: 8.0),
             SubHeading(
               title: popularHeadingText,
               onTap: () =>
-                  Navigator.pushNamed(context, PopularTVShowsPage.ROUTE_NAME),
+                  Navigator.pushNamed(context, PopularTVShowsPage.routeName),
             ),
             Consumer<TVShowListNotifier>(builder: (context, data, child) {
               final state = data.popularTVShowsState;
               if (state == RequestState.loading) {
-                return Center(
+                return const Center(
                   child: CircularProgressIndicator(),
                 );
               } else if (state == RequestState.loaded) {
                 return TVShowList(data.popularTVShows);
               } else {
-                return Text(failedToFetchDataMessage);
+                return const Text(failedToFetchDataMessage);
               }
             }),
             SubHeading(
               title: topRatedHeadingText,
               onTap: () =>
-                  Navigator.pushNamed(context, TopRatedTVShowsPage.ROUTE_NAME),
+                  Navigator.pushNamed(context, TopRatedTVShowsPage.routeName),
             ),
-            SizedBox(height: 8.0),
+            const SizedBox(height: 8.0),
             Consumer<TVShowListNotifier>(builder: (context, data, child) {
               final state = data.topRatedTVShowsState;
               if (state == RequestState.loading) {
-                return Center(
+                return const Center(
                   child: CircularProgressIndicator(),
                 );
               } else if (state == RequestState.loaded) {
                 return TVShowList(data.topRatedTVShows);
               } else {
-                return Text(failedToFetchDataMessage);
+                return const Text(failedToFetchDataMessage);
               }
             }),
           ],
@@ -97,7 +107,7 @@ class TVShowList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 200,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
@@ -105,7 +115,7 @@ class TVShowList extends StatelessWidget {
           final _tvShow = tvShows[index];
           return CardImageFull(
             activeDrawerItem: DrawerItem.tvShow,
-            routeNameDestination: TVShowDetailPage.ROUTE_NAME,
+            routeNameDestination: TVShowDetailPage.routeName,
             tvShow: _tvShow,
           );
         },

@@ -1,15 +1,15 @@
-import 'package:core_app/core_app.dart' show DrawerItem, kDavysGrey, kGrey;
 import 'package:about/about.dart' show AboutPage;
-import 'package:ditonton/presentation/pages/home_tv_show_page.dart';
+import 'package:core_app/core_app.dart' show DrawerItem, kDavysGrey, kGrey;
 import 'package:ditonton/presentation/pages/search_page.dart';
 import 'package:ditonton/presentation/pages/watchlist_page.dart';
 import 'package:ditonton/presentation/provider/home_notifier.dart';
 import 'package:flutter/material.dart';
-import 'package:movies/movies.dart';
+import 'package:movies/movies.dart' show HomeMoviePage;
 import 'package:provider/provider.dart';
+import 'package:tv_shows/tv_shows.dart';
 
 class HomePage extends StatelessWidget {
-  static const ROUTE_NAME = '/home';
+  static const routeName = '/home';
 
   GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
 
@@ -29,10 +29,10 @@ class HomePage extends StatelessWidget {
     });
   }
 
-  Widget _buildBody(BuildContext context, DrawerItem seletedDrawerItem) {
-    if (seletedDrawerItem == DrawerItem.movie) {
+  Widget _buildBody(BuildContext context, DrawerItem selectedDrawerItem) {
+    if (selectedDrawerItem == DrawerItem.movie) {
       return HomeMoviePage();
-    } else if (seletedDrawerItem == DrawerItem.tvShow) {
+    } else if (selectedDrawerItem == DrawerItem.tvShow) {
       return HomeTVShowPage();
     }
     return Container();
@@ -49,7 +49,7 @@ class HomePage extends StatelessWidget {
             onPressed: () {
               Navigator.pushNamed(
                 context,
-                SearchPage.ROUTE_NAME,
+                SearchPage.routeName,
                 arguments: activeDrawerItem,
               );
             },
@@ -98,7 +98,7 @@ class HomePage extends StatelessWidget {
               title: Text('Watchlist'),
               onTap: () {
                 Navigator.pop(context);
-                Navigator.pushNamed(context, WatchlistPage.ROUTE_NAME);
+                Navigator.pushNamed(context, WatchlistPage.routeName);
               },
             ),
             ListTile(

@@ -1,12 +1,12 @@
-import 'package:dartz/dartz.dart';
 import 'package:core_app/core_app.dart'
     show DatabaseFailure, GetWatchlistTVShows, RequestState;
-import 'package:ditonton/presentation/provider/watchlist_tv_show_notifier.dart';
+import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:tv_shows/src/presentation/provider/watchlist_tv_show_notifier.dart';
 
-import '../../dummy_data/dummy_objects.dart';
+import '../../dummy_objects.dart';
 import 'watchlist_tv_show_notifier_test.mocks.dart';
 
 @GenerateMocks([GetWatchlistTVShows])
@@ -41,7 +41,7 @@ void main() {
   test('should return error when data is unsuccessful', () async {
     // arrange
     when(mockGetWatchlistTVShows.execute())
-        .thenAnswer((_) async => Left(DatabaseFailure("Can't get data")));
+        .thenAnswer((_) async => const Left(DatabaseFailure("Can't get data")));
     // act
     await provider.fetchWatchlistTVShows();
     // assert

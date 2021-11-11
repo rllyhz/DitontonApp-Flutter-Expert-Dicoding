@@ -37,6 +37,8 @@ dependencies:
     path: core_app
   movies:
     path: movies
+  tv_shows:
+    path: tv_shows
   about:
     path: about
 

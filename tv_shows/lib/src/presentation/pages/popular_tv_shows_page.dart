@@ -1,37 +1,40 @@
-import 'package:core_app/core_app.dart' show ContentCardList, DrawerItem, RequestState;
-import 'package:ditonton/presentation/pages/tv_show_detail_page.dart';
-import 'package:ditonton/presentation/provider/top_rated_tv_shows_notifier.dart';
+import 'package:core_app/core_app.dart'
+    show ContentCardList, DrawerItem, RequestState;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tv_shows/src/presentation/pages/tv_show_detail_page.dart';
+import 'package:tv_shows/src/presentation/provider/popular_tv_shows_notifier.dart';
 
-class TopRatedTVShowsPage extends StatefulWidget {
-  static const ROUTE_NAME = '/top-rated-tvshow';
+class PopularTVShowsPage extends StatefulWidget {
+  static const routeName = '/popular-tvshow';
+
+  const PopularTVShowsPage({Key? key}) : super(key: key);
 
   @override
-  _TopRatedTVShowsPageState createState() => _TopRatedTVShowsPageState();
+  _PopularTVShowsPageState createState() => _PopularTVShowsPageState();
 }
 
-class _TopRatedTVShowsPageState extends State<TopRatedTVShowsPage> {
+class _PopularTVShowsPageState extends State<PopularTVShowsPage> {
   @override
   void initState() {
     super.initState();
     Future.microtask(() =>
-        Provider.of<TopRatedTVShowsNotifier>(context, listen: false)
-            .fetchTopRatedTVShows());
+        Provider.of<PopularTVShowsNotifier>(context, listen: false)
+            .fetchPopularTVShows());
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Top Rated TVShows'),
+        title: const Text('Popular TVShows'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Consumer<TopRatedTVShowsNotifier>(
+        child: Consumer<PopularTVShowsNotifier>(
           builder: (context, data, child) {
             if (data.state == RequestState.loading) {
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(),
               );
             } else if (data.state == RequestState.loaded) {
@@ -41,7 +44,7 @@ class _TopRatedTVShowsPageState extends State<TopRatedTVShowsPage> {
 
                   return ContentCardList(
                     activeDrawerItem: DrawerItem.tvShow,
-                    routeName: TVShowDetailPage.ROUTE_NAME,
+                    routeName: TVShowDetailPage.routeName,
                     tvShow: tvShow,
                   );
                 },
@@ -49,7 +52,7 @@ class _TopRatedTVShowsPageState extends State<TopRatedTVShowsPage> {
               );
             } else {
               return Center(
-                key: Key('error_message'),
+                key: const Key('error_message'),
                 child: Text(data.message),
               );
             }

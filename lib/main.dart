@@ -2,22 +2,33 @@ import 'package:about/about.dart' show AboutPage;
 import 'package:core_app/core_app.dart';
 import 'package:ditonton/injection.dart' as di;
 import 'package:ditonton/presentation/pages/home_page.dart';
-import 'package:ditonton/presentation/pages/popular_tv_shows_page.dart';
 import 'package:ditonton/presentation/pages/search_page.dart';
-import 'package:ditonton/presentation/pages/top_rated_tv_shows_page.dart';
-import 'package:ditonton/presentation/pages/tv_show_detail_page.dart';
 import 'package:ditonton/presentation/pages/watchlist_page.dart';
 import 'package:ditonton/presentation/provider/home_notifier.dart';
-import 'package:ditonton/presentation/provider/popular_tv_shows_notifier.dart';
 import 'package:ditonton/presentation/provider/search_notifier.dart';
-import 'package:ditonton/presentation/provider/top_rated_tv_shows_notifier.dart';
-import 'package:ditonton/presentation/provider/tv_show_detail_notifier.dart';
-import 'package:ditonton/presentation/provider/tv_show_list_notifier.dart';
-import 'package:ditonton/presentation/provider/watchlist_tv_show_notifier.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:movies/movies.dart';
+import 'package:movies/movies.dart'
+    show
+        MovieDetailNotifier,
+        MovieDetailPage,
+        MovieListNotifier,
+        PopularMoviesNotifier,
+        PopularMoviesPage,
+        TopRatedMoviesNotifier,
+        TopRatedMoviesPage,
+        WatchlistMovieNotifier;
+import 'package:tv_shows/tv_shows.dart'
+    show
+        PopularTVShowsNotifier,
+        PopularTVShowsPage,
+        TVShowDetailNotifier,
+        TVShowDetailPage,
+        TVShowListNotifier,
+        TopRatedTVShowsNotifier,
+        TopRatedTVShowsPage,
+        WatchlistTVShowNotifier;
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -84,15 +95,15 @@ class MyApp extends StatelessWidget {
         home: HomePage(),
         onGenerateRoute: (RouteSettings settings) {
           switch (settings.name) {
-            case HomePage.ROUTE_NAME:
+            case HomePage.routeName:
               return MaterialPageRoute(builder: (_) => HomePage());
             case PopularMoviesPage.routeName:
               return CupertinoPageRoute(builder: (_) => PopularMoviesPage());
-            case PopularTVShowsPage.ROUTE_NAME:
+            case PopularTVShowsPage.routeName:
               return CupertinoPageRoute(builder: (_) => PopularTVShowsPage());
             case TopRatedMoviesPage.routeName:
               return CupertinoPageRoute(builder: (_) => TopRatedMoviesPage());
-            case TopRatedTVShowsPage.ROUTE_NAME:
+            case TopRatedTVShowsPage.routeName:
               return CupertinoPageRoute(builder: (_) => TopRatedTVShowsPage());
             case MovieDetailPage.routeName:
               final id = settings.arguments as int;
@@ -100,20 +111,20 @@ class MyApp extends StatelessWidget {
                 builder: (_) => MovieDetailPage(id: id),
                 settings: settings,
               );
-            case TVShowDetailPage.ROUTE_NAME:
+            case TVShowDetailPage.routeName:
               final id = settings.arguments as int;
               return MaterialPageRoute(
                 builder: (_) => TVShowDetailPage(id: id),
                 settings: settings,
               );
-            case SearchPage.ROUTE_NAME:
+            case SearchPage.routeName:
               final activeDrawerItem = settings.arguments as DrawerItem;
               return CupertinoPageRoute(
                 builder: (_) => SearchPage(
                   activeDrawerItem: activeDrawerItem,
                 ),
               );
-            case WatchlistPage.ROUTE_NAME:
+            case WatchlistPage.routeName:
               return MaterialPageRoute(builder: (_) => WatchlistPage());
             case AboutPage.routeName:
               return MaterialPageRoute(builder: (_) => AboutPage());

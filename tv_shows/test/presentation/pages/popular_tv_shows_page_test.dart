@@ -1,13 +1,13 @@
 import 'package:core_app/core_app.dart' show ContentCardList, RequestState;
-import 'package:ditonton/presentation/pages/popular_tv_shows_page.dart';
-import 'package:ditonton/presentation/provider/popular_tv_shows_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:provider/provider.dart';
+import 'package:tv_shows/src/presentation/pages/popular_tv_shows_page.dart';
+import 'package:tv_shows/src/presentation/provider/popular_tv_shows_notifier.dart';
 
-import '../../dummy_data/dummy_objects.dart';
+import '../../../../test/dummy_data/dummy_objects.dart';
 import 'popular_tv_shows_page_test.mocks.dart';
 
 @GenerateMocks([PopularTVShowsNotifier])
@@ -34,7 +34,7 @@ void main() {
     final progressBarFinder = find.byType(CircularProgressIndicator);
     final centerFinder = find.byType(Center);
 
-    await tester.pumpWidget(_makeTestableWidget(PopularTVShowsPage()));
+    await tester.pumpWidget(_makeTestableWidget(const PopularTVShowsPage()));
 
     expect(centerFinder, findsOneWidget);
     expect(progressBarFinder, findsOneWidget);
@@ -45,7 +45,7 @@ void main() {
     when(mockNotifier.state).thenReturn(RequestState.loaded);
     when(mockNotifier.tvShows).thenReturn(testTVShowList);
 
-    await tester.pumpWidget(_makeTestableWidget(PopularTVShowsPage()));
+    await tester.pumpWidget(_makeTestableWidget(const PopularTVShowsPage()));
 
     expect(find.byType(AppBar), findsOneWidget);
     expect(find.text('Popular TVShows'), findsOneWidget);
@@ -58,7 +58,7 @@ void main() {
 
     final listViewFinder = find.byType(ListView);
 
-    await tester.pumpWidget(_makeTestableWidget(PopularTVShowsPage()));
+    await tester.pumpWidget(_makeTestableWidget(const PopularTVShowsPage()));
 
     expect(listViewFinder, findsOneWidget);
     expect(find.byType(ContentCardList), findsWidgets);
@@ -69,9 +69,9 @@ void main() {
     when(mockNotifier.state).thenReturn(RequestState.error);
     when(mockNotifier.message).thenReturn('Error message');
 
-    final textFinder = find.byKey(Key('error_message'));
+    final textFinder = find.byKey(const Key('error_message'));
 
-    await tester.pumpWidget(_makeTestableWidget(PopularTVShowsPage()));
+    await tester.pumpWidget(_makeTestableWidget(const PopularTVShowsPage()));
 
     expect(textFinder, findsOneWidget);
   });

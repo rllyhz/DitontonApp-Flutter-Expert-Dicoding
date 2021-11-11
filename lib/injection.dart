@@ -1,13 +1,21 @@
 import 'package:core_app/core_app.dart';
 import 'package:ditonton/presentation/provider/home_notifier.dart';
-import 'package:ditonton/presentation/provider/popular_tv_shows_notifier.dart';
 import 'package:ditonton/presentation/provider/search_notifier.dart';
-import 'package:ditonton/presentation/provider/top_rated_tv_shows_notifier.dart';
-import 'package:ditonton/presentation/provider/tv_show_detail_notifier.dart';
-import 'package:ditonton/presentation/provider/tv_show_list_notifier.dart';
-import 'package:ditonton/presentation/provider/watchlist_tv_show_notifier.dart';
 import 'package:get_it/get_it.dart';
-import 'package:movies/movies.dart';
+import 'package:movies/movies.dart'
+    show
+        MovieDetailNotifier,
+        MovieListNotifier,
+        PopularMoviesNotifier,
+        TopRatedMoviesNotifier,
+        WatchlistMovieNotifier;
+import 'package:tv_shows/tv_shows.dart'
+    show
+        PopularTVShowsNotifier,
+        TVShowDetailNotifier,
+        TVShowListNotifier,
+        TopRatedTVShowsNotifier,
+        WatchlistTVShowNotifier;
 
 final locator = GetIt.instance;
 

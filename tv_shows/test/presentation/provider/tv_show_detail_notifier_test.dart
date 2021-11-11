@@ -9,12 +9,12 @@ import 'package:core_app/core_app.dart'
         RequestState,
         SaveWatchlistTVShow,
         ServerFailure;
-import 'package:ditonton/presentation/provider/tv_show_detail_notifier.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:tv_shows/src/presentation/provider/tv_show_detail_notifier.dart';
 
-import '../../dummy_data/dummy_objects.dart';
+import '../../../../test/dummy_data/dummy_objects.dart';
 import 'tv_show_detail_notifier_test.mocks.dart';
 
 @GenerateMocks([
@@ -51,7 +51,7 @@ void main() {
       });
   });
 
-  final tId = 1;
+  const tId = 1;
 
   void _arrangeUsecase() {
     when(mockGetTVShowDetail.execute(tId))
@@ -131,7 +131,7 @@ void main() {
       when(mockGetTVShowDetail.execute(tId))
           .thenAnswer((_) async => Right(testTVShowDetail));
       when(mockGetTVShowRecommendations.execute(tId))
-          .thenAnswer((_) async => Left(ServerFailure('Failed')));
+          .thenAnswer((_) async => const Left(ServerFailure('Failed')));
       // act
       await provider.fetchTVShowDetail(tId);
       // assert
@@ -153,7 +153,7 @@ void main() {
     test('should execute save watchlist when function called', () async {
       // arrange
       when(mockSaveWatchlist.execute(testTVShowDetail))
-          .thenAnswer((_) async => Right('Success'));
+          .thenAnswer((_) async => const Right('Success'));
       when(mockGetWatchlistStatus.execute(testTVShowDetail.id))
           .thenAnswer((_) async => true);
       // act
@@ -165,7 +165,7 @@ void main() {
     test('should execute remove watchlist when function called', () async {
       // arrange
       when(mockRemoveWatchlist.execute(testTVShowDetail))
-          .thenAnswer((_) async => Right('Removed'));
+          .thenAnswer((_) async => const Right('Removed'));
       when(mockGetWatchlistStatus.execute(testTVShowDetail.id))
           .thenAnswer((_) async => false);
       // act
@@ -177,7 +177,7 @@ void main() {
     test('should update watchlist status when add watchlist success', () async {
       // arrange
       when(mockSaveWatchlist.execute(testTVShowDetail))
-          .thenAnswer((_) async => Right('Added to Watchlist'));
+          .thenAnswer((_) async => const Right('Added to Watchlist'));
       when(mockGetWatchlistStatus.execute(testTVShowDetail.id))
           .thenAnswer((_) async => true);
       // act
@@ -192,7 +192,7 @@ void main() {
     test('should update watchlist message when add watchlist failed', () async {
       // arrange
       when(mockSaveWatchlist.execute(testTVShowDetail))
-          .thenAnswer((_) async => Left(DatabaseFailure('Failed')));
+          .thenAnswer((_) async => const Left(DatabaseFailure('Failed')));
       when(mockGetWatchlistStatus.execute(testTVShowDetail.id))
           .thenAnswer((_) async => false);
       // act
@@ -207,7 +207,7 @@ void main() {
     test('should return error when data is unsuccessful', () async {
       // arrange
       when(mockGetTVShowDetail.execute(tId))
-          .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+          .thenAnswer((_) async => const Left(ServerFailure('Server Failure')));
       when(mockGetTVShowRecommendations.execute(tId))
           .thenAnswer((_) async => Right(testTVShowList));
       // act

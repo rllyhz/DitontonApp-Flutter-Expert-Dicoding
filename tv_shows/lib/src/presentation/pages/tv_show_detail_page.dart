@@ -1,18 +1,28 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core_app/core_app.dart'
-    show RequestState, ScrollableSheetContainer, TVShowDetail, baseImageUrl,
-    getFormattedDurationFromList, getFormattedGenres, kGrey, kHeading5,
-    kHeading6, kMikadoYellow, kRichBlack, watchlistAddSuccessMessage,
-    watchlistRemoveSuccessMessage;
-import 'package:ditonton/presentation/provider/tv_show_detail_notifier.dart';
+    show
+        RequestState,
+        ScrollableSheetContainer,
+        TVShowDetail,
+        baseImageUrl,
+        getFormattedDurationFromList,
+        getFormattedGenres,
+        kGrey,
+        kHeading5,
+        kHeading6,
+        kMikadoYellow,
+        kRichBlack,
+        watchlistAddSuccessMessage,
+        watchlistRemoveSuccessMessage;
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
+import 'package:tv_shows/src/presentation/provider/tv_show_detail_notifier.dart';
 
 class TVShowDetailPage extends StatefulWidget {
-  static const ROUTE_NAME = '/detail-tvshow';
+  static const routeName = '/detail-tvshow';
 
-  TVShowDetailPage({Key? key, required this.id}) : super(key: key);
+  const TVShowDetailPage({Key? key, required this.id}) : super(key: key);
 
   final int id;
 
@@ -39,7 +49,7 @@ class _TVShowDetailPageState extends State<TVShowDetailPage> {
         body: Consumer<TVShowDetailNotifier>(
           builder: (ctx, provider, child) {
             if (provider.tvShowState == RequestState.loading) {
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(),
               );
             } else if (provider.tvShowState == RequestState.loaded) {
@@ -97,10 +107,12 @@ class DetailContent extends StatelessWidget {
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              provider.isAddedToWatchlist ? Icon(Icons.check) : Icon(Icons.add),
-              SizedBox(width: 6.0),
-              Text('Watchlist'),
-              SizedBox(width: 4.0),
+              provider.isAddedToWatchlist
+                  ? const Icon(Icons.check)
+                  : const Icon(Icons.add),
+              const SizedBox(width: 6.0),
+              const Text('Watchlist'),
+              const SizedBox(width: 4.0),
             ],
           ),
         ),
@@ -117,7 +129,7 @@ class DetailContent extends StatelessWidget {
             RatingBarIndicator(
               rating: tvShow.voteAverage / 2,
               itemCount: 5,
-              itemBuilder: (context, index) => Icon(
+              itemBuilder: (context, index) => const Icon(
                 Icons.star,
                 color: kMikadoYellow,
               ),
@@ -126,14 +138,14 @@ class DetailContent extends StatelessWidget {
             Text('${tvShow.voteAverage}')
           ],
         ),
-        SizedBox(height: 12.0),
+        const SizedBox(height: 12.0),
         Text(
           'Total Episodes: ' + tvShow.numberOfEpisodes.toString(),
         ),
         Text(
           'Total Seasons: ' + tvShow.numberOfSeasons.toString(),
         ),
-        SizedBox(height: 16),
+        const SizedBox(height: 16),
         Text(
           'Overview',
           style: kHeading6,
@@ -141,14 +153,14 @@ class DetailContent extends StatelessWidget {
         Text(
           tvShow.overview.isNotEmpty ? tvShow.overview : "-",
         ),
-        SizedBox(height: 16),
+        const SizedBox(height: 16),
         Text(
           'Recommendations',
           style: kHeading6,
         ),
         provider.tvShowRecommendations.isNotEmpty
             ? Container(
-                margin: EdgeInsets.only(top: 8.0),
+                margin: const EdgeInsets.only(top: 8.0),
                 height: 150,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
@@ -160,17 +172,17 @@ class DetailContent extends StatelessWidget {
                         onTap: () {
                           Navigator.pushReplacementNamed(
                             context,
-                            TVShowDetailPage.ROUTE_NAME,
+                            TVShowDetailPage.routeName,
                             arguments: tvShowRecoms.id,
                           );
                         },
                         child: ClipRRect(
-                          borderRadius: BorderRadius.all(
+                          borderRadius: const BorderRadius.all(
                             Radius.circular(8),
                           ),
                           child: CachedNetworkImage(
                             imageUrl: '$baseImageUrl${tvShowRecoms.posterPath}',
-                            placeholder: (context, url) => Padding(
+                            placeholder: (context, url) => const Padding(
                               padding: EdgeInsets.symmetric(
                                   vertical: 8.0, horizontal: 12.0),
                               child: Center(
@@ -178,7 +190,7 @@ class DetailContent extends StatelessWidget {
                               ),
                             ),
                             errorWidget: (context, url, error) =>
-                                Icon(Icons.error),
+                                const Icon(Icons.error),
                           ),
                         ),
                       ),
@@ -187,8 +199,8 @@ class DetailContent extends StatelessWidget {
                   itemCount: provider.tvShowRecommendations.length,
                 ),
               )
-            : Text('No recommendations found'),
-        SizedBox(height: 16),
+            : const Text('No recommendations found'),
+        const SizedBox(height: 16),
         Text(
           'Seasons',
           style: kHeading6,
@@ -196,16 +208,16 @@ class DetailContent extends StatelessWidget {
         tvShow.seasons.isNotEmpty
             ? Container(
                 height: 150,
-                margin: EdgeInsets.only(top: 8.0),
+                margin: const EdgeInsets.only(top: 8.0),
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (ctx, index) {
                     final season = tvShow.seasons[index];
 
                     return Padding(
-                      padding: EdgeInsets.all(4.0),
+                      padding: const EdgeInsets.all(4.0),
                       child: ClipRRect(
-                        borderRadius: BorderRadius.all(
+                        borderRadius: const BorderRadius.all(
                           Radius.circular(8),
                         ),
                         child: Stack(
@@ -213,10 +225,10 @@ class DetailContent extends StatelessWidget {
                             season.posterPath == null
                                 ? Container(
                                     width: 96.0,
-                                    decoration: BoxDecoration(
+                                    decoration: const BoxDecoration(
                                       color: kGrey,
                                     ),
-                                    child: Center(
+                                    child: const Center(
                                       child: Text(
                                         'No Image',
                                         style: TextStyle(color: kRichBlack),
@@ -226,11 +238,11 @@ class DetailContent extends StatelessWidget {
                                 : CachedNetworkImage(
                                     imageUrl:
                                         '$baseImageUrl${season.posterPath}',
-                                    placeholder: (context, url) => Center(
+                                    placeholder: (context, url) => const Center(
                                       child: CircularProgressIndicator(),
                                     ),
                                     errorWidget: (context, url, error) =>
-                                        Icon(Icons.error),
+                                        const Icon(Icons.error),
                                   ),
                             Positioned.fill(
                               child: Container(
@@ -253,8 +265,8 @@ class DetailContent extends StatelessWidget {
                   itemCount: tvShow.seasons.length,
                 ),
               )
-            : Text('-'),
-        SizedBox(
+            : const Text('-'),
+        const SizedBox(
           height: 16.0,
         ),
       ],
