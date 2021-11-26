@@ -1,7 +1,9 @@
 import 'package:core_app/core_app.dart'
     show ContentCardList, DrawerItem, RequestState;
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
+import 'package:tv_shows/src/presentation/bloc/top_rated_tv_shows/top_rated_tv_shows_bloc.dart';
 import 'package:tv_shows/src/presentation/pages/tv_show_detail_page.dart';
 import 'package:tv_shows/src/presentation/provider/top_rated_tv_shows_notifier.dart';
 
@@ -19,8 +21,8 @@ class _TopRatedTVShowsPageState extends State<TopRatedTVShowsPage> {
   void initState() {
     super.initState();
     Future.microtask(() =>
-        Provider.of<TopRatedTVShowsNotifier>(context, listen: false)
-            .fetchTopRatedTVShows());
+        BlocProvider.of<TopRatedTVShowsBloc>(context, listen: false)
+            .add(OnTopRatedTVShowsCalled()));
   }
 
   @override
@@ -31,16 +33,19 @@ class _TopRatedTVShowsPageState extends State<TopRatedTVShowsPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Consumer<TopRatedTVShowsNotifier>(
-          builder: (context, data, child) {
-            if (data.state == RequestState.loading) {
+        child: BlocBuilder<TopRatedTVShowsBloc, TopRatedTVShowsState>(
+          key: const Key('top_rated_tv_shows'),
+          builder: (context, state) {
+            if (state is TopRatedTVShowsLoading) {
               return const Center(
                 child: CircularProgressIndicator(),
               );
-            } else if (data.state == RequestState.loaded) {
+            } else if (state is TopRatedTVShowsHasData) {
+              final tvShows = state.result;
+
               return ListView.builder(
                 itemBuilder: (context, index) {
-                  final tvShow = data.tvShows[index];
+                  final tvShow = tvShows[index];
 
                   return ContentCardList(
                     activeDrawerItem: DrawerItem.tvShow,
@@ -48,12 +53,12 @@ class _TopRatedTVShowsPageState extends State<TopRatedTVShowsPage> {
                     tvShow: tvShow,
                   );
                 },
-                itemCount: data.tvShows.length,
+                itemCount: tvShows.length,
               );
             } else {
               return Center(
                 key: const Key('error_message'),
-                child: Text(data.message),
+                child: Text((state as TopRatedTVShowsError).message),
               );
             }
           },

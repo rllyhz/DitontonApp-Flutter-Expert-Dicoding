@@ -1,11 +1,7 @@
 import 'package:core_app/core_app.dart'
-    show
-        ContentCardList,
-        DrawerItem,
-        RequestState,
-        kBodyText,
-        watchlistTVShowEmptyMessage;
-import 'package:tv_shows/src/presentation/provider/watchlist_tv_show_notifier.dart';
+    show ContentCardList, DrawerItem, failedToFetchDataMessage, kBodyText, watchlistTVShowEmptyMessage;
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tv_shows/src/presentation/bloc/watchlist_tv_shows/watchlist_tv_shows_bloc.dart';
 import 'tv_show_detail_page.dart';
 
 import 'package:flutter/material.dart';
@@ -22,31 +18,27 @@ class _WatchlistTVShowsPageState extends State<WatchlistTVShowsPage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() =>
-        Provider.of<WatchlistTVShowNotifier>(context, listen: false)
-            .fetchWatchlistTVShows());
+    Future.microtask(() {
+      context.read<WatchlistTVShowsBloc>().add(OnFetchTVShowWatchlist());
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(left: 8.0, right: 8.0, bottom: 12.0),
-      child: Consumer<WatchlistTVShowNotifier>(
-        builder: (context, data, child) {
-          if (data.watchlistState == RequestState.loading) {
+      child: BlocBuilder<WatchlistTVShowsBloc, WatchlistTVShowsState>(
+        builder: (context, watchlistState) {
+          if (watchlistState is TVShowWatchlistLoading) {
             return const Center(
               child: CircularProgressIndicator(),
             );
-          } else if (data.watchlistState == RequestState.loaded) {
-            if (data.watchlistTVShows.isEmpty) {
-              return Center(
-                child: Text(watchlistTVShowEmptyMessage, style: kBodyText),
-              );
-            }
+          } else if (watchlistState is TVShowWatchlistHasData) {
+            final watchlistTVShows = watchlistState.result;
 
             return ListView.builder(
               itemBuilder: (context, index) {
-                final tvShow = data.watchlistTVShows[index];
+                final tvShow = watchlistTVShows[index];
 
                 return ContentCardList(
                   activeDrawerItem: DrawerItem.tvShow,
@@ -54,12 +46,16 @@ class _WatchlistTVShowsPageState extends State<WatchlistTVShowsPage> {
                   tvShow: tvShow,
                 );
               },
-              itemCount: data.watchlistTVShows.length,
+              itemCount: watchlistTVShows.length,
+            );
+          } else if (watchlistState is TVShowWatchlistEmpty) {
+            return Center(
+              child: Text(watchlistTVShowEmptyMessage, style: kBodyText),
             );
           } else {
-            return Center(
-              key: const Key('error_message'),
-              child: Text(data.message),
+            return const Center(
+              key: Key('error_message'),
+              child: Text(failedToFetchDataMessage),
             );
           }
         },

@@ -9,11 +9,12 @@ export './src/presentation/pages/tv_show_detail_page.dart';
 export './src/presentation/pages/watchlist_tv_shows_page.dart';
 // -> END PAGES
 
-// -> PROVIDER
-export './src/presentation/provider/popular_tv_shows_notifier.dart';
-export './src/presentation/provider/top_rated_tv_shows_notifier.dart';
-export './src/presentation/provider/tv_show_detail_notifier.dart';
-export './src/presentation/provider/tv_show_list_notifier.dart';
-export './src/presentation/provider/watchlist_tv_show_notifier.dart';
-// -> END PROVIDER
+// -> BLOC
+export './src/presentation/bloc/now_playing_tv_shows/now_playing_tv_shows_bloc.dart';
+export './src/presentation/bloc/popular_tv_shows/popular_tv_shows_bloc.dart';
+export './src/presentation/bloc/top_rated_tv_shows/top_rated_tv_shows_bloc.dart';
+export './src/presentation/bloc/tv_show_detail/tv_show_detail_bloc.dart';
+export './src/presentation/bloc/tv_show_recommendations/tv_show_recommendations_bloc.dart';
+export './src/presentation/bloc/watchlist_tv_shows/watchlist_tv_shows_bloc.dart';
+// -> END BLOC
 // ------- END PRESENTATION

@@ -2,7 +2,6 @@ import 'package:core_app/core_app.dart'
     show
         CardImageFull,
         DrawerItem,
-        RequestState,
         SubHeading,
         TVShow,
         failedToFetchDataMessage,
@@ -11,11 +10,14 @@ import 'package:core_app/core_app.dart'
         popularHeadingText,
         topRatedHeadingText;
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
+import 'package:tv_shows/src/presentation/bloc/now_playing_tv_shows/now_playing_tv_shows_bloc.dart';
+import 'package:tv_shows/src/presentation/bloc/popular_tv_shows/popular_tv_shows_bloc.dart';
+import 'package:tv_shows/src/presentation/bloc/top_rated_tv_shows/top_rated_tv_shows_bloc.dart';
 import 'package:tv_shows/src/presentation/pages/popular_tv_shows_page.dart';
 import 'package:tv_shows/src/presentation/pages/top_rated_tv_shows_page.dart';
 import 'package:tv_shows/src/presentation/pages/tv_show_detail_page.dart';
-import 'package:tv_shows/src/presentation/provider/tv_show_list_notifier.dart';
 
 class HomeTVShowPage extends StatefulWidget {
   @override
@@ -26,11 +28,11 @@ class _HomeTVShowPageState extends State<HomeTVShowPage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(
-        () => Provider.of<TVShowListNotifier>(context, listen: false)
-          ..fetchNowPlayingTVShows()
-          ..fetchPopularTVShows()
-          ..fetchTopRatedTVShows());
+    Future.microtask(() {
+      context.read<NowPlayingTVShowsBloc>().add(OnNowPlayingTVShowsCalled());
+      context.read<PopularTVShowsBloc>().add(OnPopularTVShowsCalled());
+      context.read<TopRatedTVShowsBloc>().add(OnTopRatedTVShowsCalled());
+    });
   }
 
   @override
@@ -45,54 +47,69 @@ class _HomeTVShowPageState extends State<HomeTVShowPage> {
               nowPlayingHeadingText,
               style: kHeading6,
             ),
-            Consumer<TVShowListNotifier>(builder: (context, data, child) {
-              final state = data.nowPlayingState;
-              if (state == RequestState.loading) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              } else if (state == RequestState.loaded) {
-                return TVShowList(data.nowPlayingTVShows);
-              } else {
-                return const Text(failedToFetchDataMessage);
-              }
-            }),
+            BlocBuilder<NowPlayingTVShowsBloc, NowPlayingTVShowsState>(
+                key: const Key('now_playing_tv_shows'),
+                builder: (context, state) {
+                  if (state is NowPlayingTVShowsLoading) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else if (state is NowPlayingTVShowsHasData) {
+                    return TVShowList(
+                      tvShows: state.result,
+                      description: 'now_playing_tv_shows',
+                    );
+                  } else {
+                    return const Text(failedToFetchDataMessage);
+                  }
+                },
+            ),
             const SizedBox(height: 8.0),
             SubHeading(
               title: popularHeadingText,
               onTap: () =>
                   Navigator.pushNamed(context, PopularTVShowsPage.routeName),
             ),
-            Consumer<TVShowListNotifier>(builder: (context, data, child) {
-              final state = data.popularTVShowsState;
-              if (state == RequestState.loading) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              } else if (state == RequestState.loaded) {
-                return TVShowList(data.popularTVShows);
-              } else {
-                return const Text(failedToFetchDataMessage);
-              }
-            }),
+            BlocBuilder<PopularTVShowsBloc, PopularTVShowsState>(
+              key: const Key('popular_tv_shows'),
+              builder: (context, state) {
+                if (state is PopularTVShowsLoading) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else if (state is PopularTVShowsHasData) {
+                  return TVShowList(
+                    tvShows: state.result,
+                    description: 'popular_tv_shows',
+                  );
+                } else {
+                  return const Text(failedToFetchDataMessage);
+                }
+              },
+            ),
             SubHeading(
               title: topRatedHeadingText,
               onTap: () =>
                   Navigator.pushNamed(context, TopRatedTVShowsPage.routeName),
             ),
             const SizedBox(height: 8.0),
-            Consumer<TVShowListNotifier>(builder: (context, data, child) {
-              final state = data.topRatedTVShowsState;
-              if (state == RequestState.loading) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              } else if (state == RequestState.loaded) {
-                return TVShowList(data.topRatedTVShows);
-              } else {
-                return const Text(failedToFetchDataMessage);
-              }
-            }),
+            BlocBuilder<TopRatedTVShowsBloc, TopRatedTVShowsState>(
+              key: const Key('top_rated_tv_shows'),
+              builder: (context, state) {
+                if (state is TopRatedTVShowsLoading) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else if (state is TopRatedTVShowsHasData) {
+                  return TVShowList(
+                    tvShows: state.result,
+                    description: 'top_rated_tv_shows',
+                  );
+                } else {
+                  return const Text(failedToFetchDataMessage);
+                }
+              },
+            ),
           ],
         ),
       ),
@@ -102,8 +119,9 @@ class _HomeTVShowPageState extends State<HomeTVShowPage> {
 
 class TVShowList extends StatelessWidget {
   final List<TVShow> tvShows;
+  final String description;
 
-  TVShowList(this.tvShows);
+  const TVShowList({Key? key, required this.tvShows, required this.description,});
 
   @override
   Widget build(BuildContext context) {
@@ -114,6 +132,7 @@ class TVShowList extends StatelessWidget {
         itemBuilder: (context, index) {
           final _tvShow = tvShows[index];
           return CardImageFull(
+            key: Key("$description-$index"),
             activeDrawerItem: DrawerItem.tvShow,
             routeNameDestination: TVShowDetailPage.routeName,
             tvShow: _tvShow,

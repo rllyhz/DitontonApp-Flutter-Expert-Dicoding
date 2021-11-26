@@ -2,31 +2,33 @@ import 'package:about/about.dart' show AboutPage;
 import 'package:core_app/core_app.dart' show DrawerItem, kDavysGrey, kGrey;
 import 'package:ditonton/presentation/pages/search_page.dart';
 import 'package:ditonton/presentation/pages/watchlist_page.dart';
-import 'package:ditonton/presentation/provider/home_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:movies/movies.dart' show HomeMoviePage;
-import 'package:provider/provider.dart';
 import 'package:tv_shows/tv_shows.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   static const routeName = '/home';
 
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
+  DrawerItem _selectedDrawerItem = DrawerItem.movie;
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<HomeNotifier>(builder: (ctx, data, child) {
-      final activeDrawerItem = data.selectedDrawerItem;
-
-      return Scaffold(
-        key: _drawerKey,
-        drawer: _buildDrawer(ctx, (DrawerItem newSelectedItem) {
-          data.setSelectedDrawerItem(newSelectedItem);
-        }, activeDrawerItem),
-        appBar: _buildAppBar(ctx, activeDrawerItem),
-        body: _buildBody(ctx, activeDrawerItem),
-      );
-    });
+    return Scaffold(
+      key: _drawerKey,
+      drawer: _buildDrawer(context, (DrawerItem newSelectedItem) {
+        setState(() {
+          _selectedDrawerItem = newSelectedItem;
+        });
+      }, _selectedDrawerItem),
+      appBar: _buildAppBar(context, _selectedDrawerItem),
+      body: _buildBody(context, _selectedDrawerItem),
+    );
   }
 
   Widget _buildBody(BuildContext context, DrawerItem selectedDrawerItem) {

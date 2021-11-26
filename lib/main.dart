@@ -1,35 +1,19 @@
 import 'package:about/about.dart' show AboutPage;
 import 'package:core_app/core_app.dart';
 import 'package:ditonton/injection.dart' as di;
+import 'package:ditonton/presentation/bloc/search/search_movies_bloc.dart';
+import 'package:ditonton/presentation/bloc/search/search_tv_shows_bloc.dart';
 import 'package:ditonton/presentation/pages/home_page.dart';
 import 'package:ditonton/presentation/pages/search_page.dart';
 import 'package:ditonton/presentation/pages/watchlist_page.dart';
-import 'package:ditonton/presentation/provider/home_notifier.dart';
-import 'package:ditonton/presentation/provider/search_notifier.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies/movies.dart'
-    show
-        MovieDetailNotifier,
-        MovieDetailPage,
-        MovieListNotifier,
-        PopularMoviesNotifier,
-        PopularMoviesPage,
-        TopRatedMoviesNotifier,
-        TopRatedMoviesPage,
-        WatchlistMovieNotifier;
+    show MovieDetailBloc, MovieDetailPage, MovieRecommendationsBloc, NowPlayingMoviesBloc, PopularMoviesBloc, PopularMoviesNotifier, PopularMoviesPage, TopRatedMoviesBloc, TopRatedMoviesNotifier, TopRatedMoviesPage, WatchlistMovieNotifier, WatchlistMoviesBloc;
 import 'package:tv_shows/tv_shows.dart'
-    show
-        PopularTVShowsNotifier,
-        PopularTVShowsPage,
-        TVShowDetailNotifier,
-        TVShowDetailPage,
-        TVShowListNotifier,
-        TopRatedTVShowsNotifier,
-        TopRatedTVShowsPage,
-        WatchlistTVShowNotifier;
-import 'package:provider/provider.dart';
+    show NowPlayingTVShowsBloc, PopularTVShowsBloc, PopularTVShowsPage, TVShowDetailBloc, TVShowDetailPage, TVShowRecommendationsBloc, TopRatedTVShowsBloc, TopRatedTVShowsPage, WatchlistTVShowsBloc;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -44,43 +28,55 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
+    return MultiBlocProvider(
       providers: [
-        ChangeNotifierProvider(
-          create: (_) => di.locator<MovieListNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<NowPlayingMoviesBloc>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TVShowListNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<NowPlayingTVShowsBloc>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<MovieDetailNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<PopularMoviesBloc>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TVShowDetailNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<PopularTVShowsBloc>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<SearchNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<TopRatedMoviesBloc>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TopRatedMoviesNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<TopRatedTVShowsBloc>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TopRatedTVShowsNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<MovieDetailBloc>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<PopularMoviesNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<TVShowDetailBloc>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<PopularTVShowsNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<MovieRecommendationsBloc>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<WatchlistMovieNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<TVShowRecommendationsBloc>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<WatchlistTVShowNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<WatchlistMoviesBloc>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<HomeNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<WatchlistTVShowsBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<MovieDetailBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<TVShowDetailBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<SearchMoviesBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<SearchTVShowsBloc>(),
         ),
       ],
       child: MaterialApp(

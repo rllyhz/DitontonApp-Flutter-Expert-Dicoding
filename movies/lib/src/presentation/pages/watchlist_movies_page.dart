@@ -1,13 +1,9 @@
 import 'package:core_app/core_app.dart'
-    show
-        ContentCardList,
-        DrawerItem,
-        RequestState,
-        kBodyText,
-        watchlistMovieEmptyMessage;
+    show ContentCardList, DrawerItem, failedToFetchDataMessage, kBodyText, watchlistMovieEmptyMessage;
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies/movies.dart';
 import 'package:movies/src/presentation/pages/movie_detail_page.dart';
-import 'package:movies/src/presentation/provider/watchlist_movie_notifier.dart';
 import 'package:provider/provider.dart';
 
 class WatchlistMoviesPage extends StatefulWidget {
@@ -21,31 +17,26 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() =>
-        Provider.of<WatchlistMovieNotifier>(context, listen: false)
-            .fetchWatchlistMovies());
+    Future.microtask(() {
+      context.read<WatchlistMoviesBloc>().add(OnFetchMovieWatchlist());
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(left: 8.0, right: 8.0, bottom: 12.0),
-      child: Consumer<WatchlistMovieNotifier>(
-        builder: (context, data, child) {
-          if (data.watchlistState == RequestState.loading) {
+      child: BlocBuilder<WatchlistMoviesBloc, WatchlistMoviesState>(
+        builder: (context, watchlistState) {
+          if (watchlistState is MovieWatchlistLoading) {
             return const Center(
               child: CircularProgressIndicator(),
             );
-          } else if (data.watchlistState == RequestState.loaded) {
-            if (data.watchlistMovies.isEmpty) {
-              return Center(
-                child: Text(watchlistMovieEmptyMessage, style: kBodyText),
-              );
-            }
-
+          } else if (watchlistState is MovieWatchlistHasData) {
+            final watchlistMovies = watchlistState.result;
             return ListView.builder(
               itemBuilder: (context, index) {
-                final movie = data.watchlistMovies[index];
+                final movie = watchlistMovies[index];
 
                 return ContentCardList(
                   activeDrawerItem: DrawerItem.movie,
@@ -53,12 +44,16 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage> {
                   movie: movie,
                 );
               },
-              itemCount: data.watchlistMovies.length,
+              itemCount: watchlistMovies.length,
+            );
+          } else if (watchlistState is MovieWatchlistEmpty) {
+            return Center(
+              child: Text(watchlistMovieEmptyMessage, style: kBodyText),
             );
           } else {
-            return Center(
-              key: const Key('error_message'),
-              child: Text(data.message),
+            return const Center(
+              key: Key('error_message'),
+              child: Text(failedToFetchDataMessage),
             );
           }
         },

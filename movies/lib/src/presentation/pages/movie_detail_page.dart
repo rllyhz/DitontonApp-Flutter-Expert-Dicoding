@@ -2,9 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core_app/core_app.dart'
     show
         MovieDetail,
-        RequestState,
         ScrollableSheetContainer,
         baseImageUrl,
+        failedToFetchDataMessage,
         getFormattedDuration,
         getFormattedGenres,
         kHeading5,
@@ -14,8 +14,11 @@ import 'package:core_app/core_app.dart'
         watchlistRemoveSuccessMessage;
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:movies/src/presentation/provider/movie_detail_notifier.dart';
+import 'package:movies/src/presentation/bloc/movie_detail/movie_detail_bloc.dart';
+import 'package:movies/src/presentation/bloc/movie_recommendations/movie_recommendations_bloc.dart';
+import 'package:movies/src/presentation/bloc/watchlist_movies/watchlist_movies_bloc.dart';
 import 'package:provider/provider.dart';
 
 class MovieDetailPage extends StatefulWidget {
@@ -34,29 +37,42 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
   void initState() {
     super.initState();
     Future.microtask(() {
-      Provider.of<MovieDetailNotifier>(context, listen: false)
-          .fetchMovieDetail(widget.id);
-      Provider.of<MovieDetailNotifier>(context, listen: false)
-          .loadWatchlistStatus(widget.id);
+      context.read<MovieDetailBloc>().add(OnMovieDetailCalled(widget.id));
+      context
+          .read<MovieRecommendationsBloc>()
+          .add(OnMovieRecommendationsCalled(widget.id));
+      context.read<WatchlistMoviesBloc>().add(FetchWatchlistStatus(widget.id));
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    final isMovieAddedToWatchlist = context.select<WatchlistMoviesBloc, bool>(
+        (bloc) {
+          if (bloc.state is MovieIsAddedToWatchlist) {
+            return (bloc.state as MovieIsAddedToWatchlist).isAdded;
+          }
+          return false;
+        });
+
     return SafeArea(
       child: Scaffold(
-        body: Consumer<MovieDetailNotifier>(
-          builder: (context, provider, child) {
-            if (provider.movieState == RequestState.loading) {
+        body: BlocBuilder<MovieDetailBloc, MovieDetailState>(
+          key: const Key('movie_content'),
+          builder: (context, state) {
+            if (state is MovieDetailLoading) {
               return const Center(
                 child: CircularProgressIndicator(),
               );
-            } else if (provider.movieState == RequestState.loaded) {
-              final movie = provider.movie;
-              return DetailContent(movie, provider);
+            } else if (state is MovieDetailHasData) {
+              final movie = state.result;
+              return DetailContent(
+                movie: movie,
+                isMovieAddedToWatchlist: isMovieAddedToWatchlist,
+              );
             } else {
-              return Center(
-                child: Text(provider.message),
+              return const Center(
+                child: Text(failedToFetchDataMessage),
               );
             }
           },
@@ -67,10 +83,11 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
 }
 
 class DetailContent extends StatelessWidget {
+  final bool isMovieAddedToWatchlist;
   final MovieDetail movie;
-  final MovieDetailNotifier provider;
 
-  DetailContent(this.movie, this.provider);
+  const DetailContent(
+      {required this.movie, required this.isMovieAddedToWatchlist});
 
   @override
   Widget build(BuildContext context) {
@@ -83,13 +100,23 @@ class DetailContent extends StatelessWidget {
         ),
         ElevatedButton(
           onPressed: () async {
-            if (!provider.isAddedToWatchlist) {
-              await provider.addWatchlist(movie);
+            if (!isMovieAddedToWatchlist) {
+              context
+                  .read<WatchlistMoviesBloc>()
+                  .add(AddMovieToWatchlist(movie));
             } else {
-              await provider.removeFromWatchlist(movie);
+              context.read<WatchlistMoviesBloc>().add(
+                  RemoveMovieFromWatchlist(movie));
             }
 
-            final message = provider.watchlistMessage;
+            final message = context.select<WatchlistMoviesBloc, String>((value) {
+              if (value.state is MovieIsAddedToWatchlist) {
+                final isAdded = (value.state as MovieIsAddedToWatchlist).isAdded;
+                return isAdded ? watchlistAddSuccessMessage : watchlistRemoveSuccessMessage;
+              } else {
+                return !isMovieAddedToWatchlist ? watchlistAddSuccessMessage : watchlistRemoveSuccessMessage;
+              }
+            });
 
             if (message == watchlistAddSuccessMessage ||
                 message == watchlistRemoveSuccessMessage) {
@@ -108,7 +135,13 @@ class DetailContent extends StatelessWidget {
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              provider.isAddedToWatchlist
+              context.select<WatchlistMoviesBloc, bool>(
+                  (bloc) {
+                if (bloc.state is MovieIsAddedToWatchlist) {
+                  return (bloc.state as MovieIsAddedToWatchlist).isAdded;
+                }
+                return false;
+              })
                   ? const Icon(Icons.check)
                   : const Icon(Icons.add),
               const SizedBox(width: 6.0),
@@ -150,14 +183,23 @@ class DetailContent extends StatelessWidget {
           'Recommendations',
           style: kHeading6,
         ),
-        provider.movieRecommendations.isNotEmpty
-            ? Container(
+        BlocBuilder<MovieRecommendationsBloc, MovieRecommendationsState>(
+          key: const Key('recommendation_movie'),
+          builder: (context, state) {
+            if (state is MovieRecommendationsLoading) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            } else if (state is MovieRecommendationsHasData) {
+              final recommendationMovies = state.result;
+
+              return Container(
                 margin: const EdgeInsets.only(top: 8.0),
                 height: 150,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) {
-                    final movieRecoms = provider.movieRecommendations[index];
+                    final movieRecoms = recommendationMovies[index];
                     return Padding(
                       padding: const EdgeInsets.all(4.0),
                       child: InkWell(
@@ -174,7 +216,8 @@ class DetailContent extends StatelessWidget {
                           ),
                           child: CachedNetworkImage(
                             imageUrl: '$baseImageUrl${movieRecoms.posterPath}',
-                            placeholder: (context, url) => const Padding(
+                            placeholder: (context, url) =>
+                            const Padding(
                               padding: EdgeInsets.symmetric(
                                   vertical: 8.0, horizontal: 12.0),
                               child: Center(
@@ -182,16 +225,22 @@ class DetailContent extends StatelessWidget {
                               ),
                             ),
                             errorWidget: (context, url, error) =>
-                                const Icon(Icons.error),
+                            const Icon(Icons.error),
                           ),
                         ),
                       ),
                     );
                   },
-                  itemCount: provider.movieRecommendations.length,
+                  itemCount: recommendationMovies.length,
                 ),
-              )
-            : const Text('-'),
+              );
+            } else if (state is MovieRecommendationsEmpty) {
+              return const Text('-');
+            } else {
+              return const Text(failedToFetchDataMessage);
+            }
+          },
+        ),
         const SizedBox(
           height: 16.0,
         ),
