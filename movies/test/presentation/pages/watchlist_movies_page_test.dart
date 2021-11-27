@@ -1,37 +1,51 @@
 import 'package:core_app/core_app.dart'
-    show ContentCardList, Movie, RequestState, watchlistMovieEmptyMessage;
+    show ContentCardList, watchlistMovieEmptyMessage;
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
+import 'package:mocktail/mocktail.dart';
+import 'package:movies/src/presentation/bloc/watchlist_movies/watchlist_movies_bloc.dart';
 import 'package:movies/src/presentation/pages/watchlist_movies_page.dart';
-import 'package:movies/src/presentation/provider/watchlist_movie_notifier.dart';
-import 'package:provider/provider.dart';
 
-import '../../../../test/dummy_data/dummy_objects.dart';
-import 'watchlist_movies_page_test.mocks.dart';
+import '../../dummy_data/dummy_objects.dart';
+import '../../helpers/pages_test_helpers.dart';
 
-@GenerateMocks([WatchlistMovieNotifier])
 void main() {
-  late MockWatchlistMovieNotifier mockNotifier;
+  late FakeWatchlistMoviesBloc fakeWatchlistMoviesBloc;
 
-  setUp(() {
-    mockNotifier = MockWatchlistMovieNotifier();
+  setUpAll(() {
+    registerFallbackValue(FakeWatchlistMoviesEvent());
+    registerFallbackValue(FakeWatchlistMoviesState());
+    fakeWatchlistMoviesBloc = FakeWatchlistMoviesBloc();
   });
 
   Widget _makeTestableWidget(Widget body) {
-    return ChangeNotifierProvider<WatchlistMovieNotifier>.value(
-      value: mockNotifier,
+    return BlocProvider<WatchlistMoviesBloc>(
+      create: (_) => fakeWatchlistMoviesBloc,
       child: MaterialApp(
         home: body,
       ),
     );
   }
 
+  tearDown(() {
+    fakeWatchlistMoviesBloc.close();
+  });
+
   group('watchlist movies', () {
+    testWidgets('loading indicator should display when getting data',
+        (WidgetTester tester) async {
+      when(() => fakeWatchlistMoviesBloc.state)
+          .thenReturn(MovieWatchlistLoading());
+
+      await tester.pumpWidget(_makeTestableWidget(const WatchlistMoviesPage()));
+
+      expect(find.byType(CircularProgressIndicator), findsOneWidget);
+    });
+
     testWidgets('watchlist movies should display', (WidgetTester tester) async {
-      when(mockNotifier.watchlistState).thenReturn(RequestState.loaded);
-      when(mockNotifier.watchlistMovies).thenReturn(testMovieList);
+      when(() => fakeWatchlistMoviesBloc.state)
+          .thenReturn(MovieWatchlistHasData(testMovieList));
 
       await tester.pumpWidget(_makeTestableWidget(const WatchlistMoviesPage()));
 
@@ -43,21 +57,12 @@ void main() {
 
     testWidgets('message for feedback should display when data is empty',
         (WidgetTester tester) async {
-      when(mockNotifier.watchlistState).thenReturn(RequestState.loaded);
-      when(mockNotifier.watchlistMovies).thenReturn(<Movie>[]);
+      when(() => fakeWatchlistMoviesBloc.state)
+          .thenReturn(MovieWatchlistEmpty());
 
       await tester.pumpWidget(_makeTestableWidget(const WatchlistMoviesPage()));
 
       expect(find.text(watchlistMovieEmptyMessage), findsOneWidget);
-    });
-
-    testWidgets('loading indicator should display when getting data',
-        (WidgetTester tester) async {
-      when(mockNotifier.watchlistState).thenReturn(RequestState.loading);
-
-      await tester.pumpWidget(_makeTestableWidget(const WatchlistMoviesPage()));
-
-      expect(find.byType(CircularProgressIndicator), findsOneWidget);
     });
   });
 }

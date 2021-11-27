@@ -17,6 +17,7 @@ class ContentCardList extends StatelessWidget {
   final String routeName;
 
   const ContentCardList({
+    Key? key,
     required this.activeDrawerItem,
     this.movie,
     this.tvShow,

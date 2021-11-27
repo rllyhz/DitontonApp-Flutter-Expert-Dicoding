@@ -67,6 +67,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
             } else if (state is MovieDetailHasData) {
               final movie = state.result;
               return DetailContent(
+                key: const Key('detail_content'),
                 movie: movie,
                 isMovieAddedToWatchlist: isMovieAddedToWatchlist,
               );
@@ -87,7 +88,7 @@ class DetailContent extends StatelessWidget {
   final MovieDetail movie;
 
   const DetailContent(
-      {required this.movie, required this.isMovieAddedToWatchlist});
+      {Key? key, required this.movie, required this.isMovieAddedToWatchlist});
 
   @override
   Widget build(BuildContext context) {

@@ -64,7 +64,10 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                     description: 'now_playing_movies',
                   );
                 } else if (state is NowPlayingMoviesError) {
-                  return const Text(failedToFetchDataMessage);
+                  return const Text(
+                    failedToFetchDataMessage,
+                    key: Key('error_message'),
+                  );
                 } else {
                   return Container();
                 }
@@ -72,6 +75,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
             ),
             const SizedBox(height: 8.0),
             SubHeading(
+              key: const Key('see_more_popular_movies'),
               title: popularHeadingText,
               onTap: () =>
                   Navigator.pushNamed(context, PopularMoviesPage.routeName),
@@ -89,7 +93,10 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                     description: 'popular_movies',
                   );
                 } else if (state is PopularMoviesError) {
-                  return const Text(failedToFetchDataMessage);
+                  return const Text(
+                    failedToFetchDataMessage,
+                    key: Key('error_message'),
+                  );
                 } else {
                   return Container();
                 }
@@ -97,6 +104,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
             ),
             const SizedBox(height: 8.0),
             SubHeading(
+              key: const Key('see_more_top_rated_movies'),
               title: topRatedHeadingText,
               onTap: () =>
                   Navigator.pushNamed(context, TopRatedMoviesPage.routeName),
@@ -114,7 +122,10 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                     description: 'top_rated_movies',
                   );
                 } else if (state is TopRatedMoviesError) {
-                  return const Text(failedToFetchDataMessage);
+                  return const Text(
+                    failedToFetchDataMessage,
+                    key: Key('error_message'),
+                  );
                 } else {
                   return Container();
                 }

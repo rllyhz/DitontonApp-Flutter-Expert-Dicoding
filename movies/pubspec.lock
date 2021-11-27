@@ -418,7 +418,7 @@ packages:
     source: hosted
     version: "5.0.16"
   mocktail:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: mocktail
       url: "https://pub.dartlang.org"
@@ -530,7 +530,7 @@ packages:
     source: hosted
     version: "4.2.4"
   provider:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: provider
       url: "https://pub.dartlang.org"

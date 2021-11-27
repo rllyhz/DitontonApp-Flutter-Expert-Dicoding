@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core_app/core_app.dart'
-    show Movie, TVShow, DrawerItem, baseImageUrl;
+    show DrawerItem, Movie, TVShow, baseImageUrl, kRichBlack;
 import 'package:flutter/material.dart';
 
 class CardImageFull extends StatelessWidget {
@@ -27,25 +27,28 @@ class CardImageFull extends StatelessWidget {
 
     return Container(
       padding: const EdgeInsets.all(8),
-      child: InkWell(
-        onTap: () {
-          Navigator.pushNamed(
-            context,
-            routeNameDestination,
-            arguments: id,
-          );
-        },
-        child: ClipRRect(
-          borderRadius: const BorderRadius.all(Radius.circular(16)),
-          child: CachedNetworkImage(
-            imageUrl: '$baseImageUrl$posterPath',
-            placeholder: (context, url) => const Padding(
-              padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
-              child: Center(
-                child: CircularProgressIndicator(),
+      child: Material(
+        color: kRichBlack,
+        child: InkWell(
+          onTap: () {
+            Navigator.pushNamed(
+              context,
+              routeNameDestination,
+              arguments: id,
+            );
+          },
+          child: ClipRRect(
+            borderRadius: const BorderRadius.all(Radius.circular(16)),
+            child: CachedNetworkImage(
+              imageUrl: '$baseImageUrl$posterPath',
+              placeholder: (context, url) => const Padding(
+                padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
+                child: Center(
+                  child: CircularProgressIndicator(),
+                ),
               ),
+              errorWidget: (context, url, error) => const Icon(Icons.error),
             ),
-            errorWidget: (context, url, error) => const Icon(Icons.error),
           ),
         ),
       ),
