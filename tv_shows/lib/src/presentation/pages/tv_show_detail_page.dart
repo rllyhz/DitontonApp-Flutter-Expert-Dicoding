@@ -56,6 +56,7 @@ class _TVShowDetailPageState extends State<TVShowDetailPage> {
     return SafeArea(
       child: Scaffold(
         body: BlocBuilder<TVShowDetailBloc, TVShowDetailState>(
+          key: const Key('tv_show_content'),
           builder: (ctx, tvShowState) {
             if (tvShowState is TVShowDetailLoading) {
               return const Center(
@@ -64,6 +65,7 @@ class _TVShowDetailPageState extends State<TVShowDetailPage> {
             } else if (tvShowState is TVShowDetailHasData) {
               final tvShow = tvShowState.result;
               return DetailContent(
+                key: const Key('detail_content'),
                 tvShow: tvShow,
                 isTVShowAddedToWatchlist: isTVShowAddedToWatchlist,
               );
