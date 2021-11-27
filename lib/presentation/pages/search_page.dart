@@ -151,6 +151,7 @@ class SearchPage extends StatelessWidget {
   }
 
   Widget _buildErrorMessage() => Container(
+        key: const Key('error_message'),
         margin: EdgeInsets.only(top: 32.0),
         child: Center(
           child: Text(
