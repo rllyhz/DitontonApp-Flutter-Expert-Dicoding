@@ -60,7 +60,10 @@ class _HomeTVShowPageState extends State<HomeTVShowPage> {
                     description: 'now_playing_tv_shows',
                   );
                 } else {
-                  return const Text(failedToFetchDataMessage);
+                  return const Text(
+                    failedToFetchDataMessage,
+                    key: Key('error_message'),
+                  );
                 }
               },
             ),
@@ -83,7 +86,10 @@ class _HomeTVShowPageState extends State<HomeTVShowPage> {
                     description: 'popular_tv_shows',
                   );
                 } else {
-                  return const Text(failedToFetchDataMessage);
+                  return const Text(
+                    failedToFetchDataMessage,
+                    key: Key('error_message'),
+                  );
                 }
               },
             ),
@@ -106,7 +112,10 @@ class _HomeTVShowPageState extends State<HomeTVShowPage> {
                     description: 'top_rated_tv_shows',
                   );
                 } else {
-                  return const Text(failedToFetchDataMessage);
+                  return const Text(
+                    failedToFetchDataMessage,
+                    key: Key('error_message'),
+                  );
                 }
               },
             ),
