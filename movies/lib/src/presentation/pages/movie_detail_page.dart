@@ -47,13 +47,13 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    final isMovieAddedToWatchlist = context.select<WatchlistMoviesBloc, bool>(
-        (bloc) {
-          if (bloc.state is MovieIsAddedToWatchlist) {
-            return (bloc.state as MovieIsAddedToWatchlist).isAdded;
-          }
-          return false;
-        });
+    final isMovieAddedToWatchlist =
+        context.select<WatchlistMoviesBloc, bool>((bloc) {
+      if (bloc.state is MovieIsAddedToWatchlist) {
+        return (bloc.state as MovieIsAddedToWatchlist).isAdded;
+      }
+      return false;
+    });
 
     return SafeArea(
       child: Scaffold(
@@ -105,16 +105,23 @@ class DetailContent extends StatelessWidget {
                   .read<WatchlistMoviesBloc>()
                   .add(AddMovieToWatchlist(movie));
             } else {
-              context.read<WatchlistMoviesBloc>().add(
-                  RemoveMovieFromWatchlist(movie));
+              context
+                  .read<WatchlistMoviesBloc>()
+                  .add(RemoveMovieFromWatchlist(movie));
             }
 
-            final message = context.select<WatchlistMoviesBloc, String>((value) {
+            final message =
+                context.select<WatchlistMoviesBloc, String>((value) {
               if (value.state is MovieIsAddedToWatchlist) {
-                final isAdded = (value.state as MovieIsAddedToWatchlist).isAdded;
-                return isAdded ? watchlistAddSuccessMessage : watchlistRemoveSuccessMessage;
+                final isAdded =
+                    (value.state as MovieIsAddedToWatchlist).isAdded;
+                return isAdded
+                    ? watchlistAddSuccessMessage
+                    : watchlistRemoveSuccessMessage;
               } else {
-                return !isMovieAddedToWatchlist ? watchlistAddSuccessMessage : watchlistRemoveSuccessMessage;
+                return !isMovieAddedToWatchlist
+                    ? watchlistAddSuccessMessage
+                    : watchlistRemoveSuccessMessage;
               }
             });
 
@@ -135,8 +142,7 @@ class DetailContent extends StatelessWidget {
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              context.select<WatchlistMoviesBloc, bool>(
-                  (bloc) {
+              context.select<WatchlistMoviesBloc, bool>((bloc) {
                 if (bloc.state is MovieIsAddedToWatchlist) {
                   return (bloc.state as MovieIsAddedToWatchlist).isAdded;
                 }
@@ -216,8 +222,7 @@ class DetailContent extends StatelessWidget {
                           ),
                           child: CachedNetworkImage(
                             imageUrl: '$baseImageUrl${movieRecoms.posterPath}',
-                            placeholder: (context, url) =>
-                            const Padding(
+                            placeholder: (context, url) => const Padding(
                               padding: EdgeInsets.symmetric(
                                   vertical: 8.0, horizontal: 12.0),
                               child: Center(
@@ -225,7 +230,7 @@ class DetailContent extends StatelessWidget {
                               ),
                             ),
                             errorWidget: (context, url, error) =>
-                            const Icon(Icons.error),
+                                const Icon(Icons.error),
                           ),
                         ),
                       ),

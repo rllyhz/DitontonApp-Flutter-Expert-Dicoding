@@ -16,9 +16,9 @@ class TVShowDetailBloc extends Bloc<TVShowDetailEvent, TVShowDetailState> {
   }
 
   FutureOr<void> _onTVShowDetailCalled(
-      OnTVShowDetailCalled event,
-      Emitter<TVShowDetailState> emit,
-      ) async {
+    OnTVShowDetailCalled event,
+    Emitter<TVShowDetailState> emit,
+  ) async {
     final id = event.id;
 
     emit(TVShowDetailLoading());
@@ -26,10 +26,10 @@ class TVShowDetailBloc extends Bloc<TVShowDetailEvent, TVShowDetailState> {
     final result = await _getTVShowDetail.execute(id);
 
     result.fold(
-          (failure) {
+      (failure) {
         emit(TVShowDetailError(failure.message));
       },
-          (data) {
+      (data) {
         emit(TVShowDetailHasData(data));
       },
     );

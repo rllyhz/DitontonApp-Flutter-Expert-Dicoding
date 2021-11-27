@@ -1,11 +1,16 @@
 import 'package:core_app/core_app.dart'
-    show ContentCardList, DrawerItem, failedToFetchDataMessage, kBodyText, watchlistTVShowEmptyMessage;
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tv_shows/src/presentation/bloc/watchlist_tv_shows/watchlist_tv_shows_bloc.dart';
-import 'tv_show_detail_page.dart';
-
+    show
+        ContentCardList,
+        DrawerItem,
+        failedToFetchDataMessage,
+        kBodyText,
+        watchlistTVShowEmptyMessage;
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
+import 'package:tv_shows/src/presentation/bloc/watchlist_tv_shows/watchlist_tv_shows_bloc.dart';
+
+import 'tv_show_detail_page.dart';
 
 class WatchlistTVShowsPage extends StatefulWidget {
   const WatchlistTVShowsPage({Key? key}) : super(key: key);

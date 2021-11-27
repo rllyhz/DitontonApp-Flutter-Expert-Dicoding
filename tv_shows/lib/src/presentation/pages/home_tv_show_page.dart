@@ -48,21 +48,21 @@ class _HomeTVShowPageState extends State<HomeTVShowPage> {
               style: kHeading6,
             ),
             BlocBuilder<NowPlayingTVShowsBloc, NowPlayingTVShowsState>(
-                key: const Key('now_playing_tv_shows'),
-                builder: (context, state) {
-                  if (state is NowPlayingTVShowsLoading) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  } else if (state is NowPlayingTVShowsHasData) {
-                    return TVShowList(
-                      tvShows: state.result,
-                      description: 'now_playing_tv_shows',
-                    );
-                  } else {
-                    return const Text(failedToFetchDataMessage);
-                  }
-                },
+              key: const Key('now_playing_tv_shows'),
+              builder: (context, state) {
+                if (state is NowPlayingTVShowsLoading) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else if (state is NowPlayingTVShowsHasData) {
+                  return TVShowList(
+                    tvShows: state.result,
+                    description: 'now_playing_tv_shows',
+                  );
+                } else {
+                  return const Text(failedToFetchDataMessage);
+                }
+              },
             ),
             const SizedBox(height: 8.0),
             SubHeading(
@@ -121,7 +121,11 @@ class TVShowList extends StatelessWidget {
   final List<TVShow> tvShows;
   final String description;
 
-  const TVShowList({Key? key, required this.tvShows, required this.description,});
+  const TVShowList({
+    Key? key,
+    required this.tvShows,
+    required this.description,
+  });
 
   @override
   Widget build(BuildContext context) {

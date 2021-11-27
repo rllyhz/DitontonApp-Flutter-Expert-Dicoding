@@ -13,23 +13,25 @@ class NowPlayingTVShowsBloc
   final GetNowPlayingTVShows _getNowPlayingTVShows;
 
   NowPlayingTVShowsBloc(
-      this._getNowPlayingTVShows,
-      ) : super(NowPlayingTVShowsEmpty()) {
+    this._getNowPlayingTVShows,
+  ) : super(NowPlayingTVShowsEmpty()) {
     on<OnNowPlayingTVShowsCalled>(_onNowPlayingTVShowsCalled);
   }
 
-  FutureOr<void> _onNowPlayingTVShowsCalled(
-      NowPlayingTVShowsEvent event, Emitter<NowPlayingTVShowsState> emit) async {
+  FutureOr<void> _onNowPlayingTVShowsCalled(NowPlayingTVShowsEvent event,
+      Emitter<NowPlayingTVShowsState> emit) async {
     emit(NowPlayingTVShowsLoading());
 
     final result = await _getNowPlayingTVShows.execute();
 
     result.fold(
-          (failure) {
+      (failure) {
         emit(NowPlayingTVShowsError(failure.message));
       },
-          (data) {
-        data.isEmpty ? emit(NowPlayingTVShowsEmpty()) : emit(NowPlayingTVShowsHasData(data));
+      (data) {
+        data.isEmpty
+            ? emit(NowPlayingTVShowsEmpty())
+            : emit(NowPlayingTVShowsHasData(data));
       },
     );
   }

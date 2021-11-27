@@ -18,19 +18,19 @@ class MovieRecommendationsBloc
   }
 
   FutureOr<void> _onMovieRecommendationsCalled(
-      OnMovieRecommendationsCalled event,
-      Emitter<MovieRecommendationsState> emit,
-      ) async {
+    OnMovieRecommendationsCalled event,
+    Emitter<MovieRecommendationsState> emit,
+  ) async {
     final id = event.id;
     emit(MovieRecommendationsLoading());
 
     final result = await _getMovieRecommendations.execute(id);
 
     result.fold(
-          (failure) {
+      (failure) {
         emit(MovieRecommendationsError(failure.message));
       },
-          (data) {
+      (data) {
         data.isEmpty
             ? emit(MovieRecommendationsEmpty())
             : emit(MovieRecommendationsHasData(data));

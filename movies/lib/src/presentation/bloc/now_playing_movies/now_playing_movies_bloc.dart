@@ -13,8 +13,8 @@ class NowPlayingMoviesBloc
   final GetNowPlayingMovies _getNowPlayingMovies;
 
   NowPlayingMoviesBloc(
-      this._getNowPlayingMovies,
-      ) : super(NowPlayingMoviesEmpty()) {
+    this._getNowPlayingMovies,
+  ) : super(NowPlayingMoviesEmpty()) {
     on<OnNowPlayingMoviesCalled>(_onNowPlayingMoviesCalled);
   }
 
@@ -25,11 +25,13 @@ class NowPlayingMoviesBloc
     final result = await _getNowPlayingMovies.execute();
 
     result.fold(
-          (failure) {
+      (failure) {
         emit(NowPlayingMoviesError(failure.message));
       },
-          (data) {
-        data.isEmpty ? emit(NowPlayingMoviesEmpty()) : emit(NowPlayingMoviesHasData(data));
+      (data) {
+        data.isEmpty
+            ? emit(NowPlayingMoviesEmpty())
+            : emit(NowPlayingMoviesHasData(data));
       },
     );
   }

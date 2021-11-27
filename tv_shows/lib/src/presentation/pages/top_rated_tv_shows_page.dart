@@ -1,11 +1,8 @@
-import 'package:core_app/core_app.dart'
-    show ContentCardList, DrawerItem, RequestState;
+import 'package:core_app/core_app.dart' show ContentCardList, DrawerItem;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
 import 'package:tv_shows/src/presentation/bloc/top_rated_tv_shows/top_rated_tv_shows_bloc.dart';
 import 'package:tv_shows/src/presentation/pages/tv_show_detail_page.dart';
-import 'package:tv_shows/src/presentation/provider/top_rated_tv_shows_notifier.dart';
 
 class TopRatedTVShowsPage extends StatefulWidget {
   static const routeName = '/top-rated-tvshow';

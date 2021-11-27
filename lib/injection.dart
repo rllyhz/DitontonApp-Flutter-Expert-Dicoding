@@ -3,9 +3,21 @@ import 'package:ditonton/presentation/bloc/search/search_movies_bloc.dart';
 import 'package:ditonton/presentation/bloc/search/search_tv_shows_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:movies/movies.dart'
-    show MovieDetailBloc, MovieRecommendationsBloc, NowPlayingMoviesBloc, PopularMoviesBloc, TopRatedMoviesBloc, WatchlistMoviesBloc;
+    show
+        MovieDetailBloc,
+        MovieRecommendationsBloc,
+        NowPlayingMoviesBloc,
+        PopularMoviesBloc,
+        TopRatedMoviesBloc,
+        WatchlistMoviesBloc;
 import 'package:tv_shows/tv_shows.dart'
-    show NowPlayingTVShowsBloc, PopularTVShowsBloc, TVShowDetailBloc, TVShowRecommendationsBloc, TopRatedTVShowsBloc, WatchlistTVShowsBloc;
+    show
+        NowPlayingTVShowsBloc,
+        PopularTVShowsBloc,
+        TVShowDetailBloc,
+        TVShowRecommendationsBloc,
+        TopRatedTVShowsBloc,
+        WatchlistTVShowsBloc;
 
 final locator = GetIt.instance;
 
@@ -16,14 +28,24 @@ void init() {
   locator.registerFactory(() => MovieRecommendationsBloc(locator()));
   locator.registerFactory(() => TopRatedMoviesBloc(locator()));
   locator.registerFactory(() => MovieDetailBloc(locator()));
-  locator.registerFactory(() => WatchlistMoviesBloc(locator(), locator(), locator(), locator(),));
+  locator.registerFactory(() => WatchlistMoviesBloc(
+        locator(),
+        locator(),
+        locator(),
+        locator(),
+      ));
 
   locator.registerFactory(() => NowPlayingTVShowsBloc(locator()));
   locator.registerFactory(() => PopularTVShowsBloc(locator()));
   locator.registerFactory(() => TVShowRecommendationsBloc(locator()));
   locator.registerFactory(() => TopRatedTVShowsBloc(locator()));
   locator.registerFactory(() => TVShowDetailBloc(locator()));
-  locator.registerFactory(() => WatchlistTVShowsBloc(locator(), locator(), locator(), locator(),));
+  locator.registerFactory(() => WatchlistTVShowsBloc(
+        locator(),
+        locator(),
+        locator(),
+        locator(),
+      ));
 
   locator.registerFactory(() => SearchMoviesBloc(locator()));
   locator.registerFactory(() => SearchTVShowsBloc(locator()));

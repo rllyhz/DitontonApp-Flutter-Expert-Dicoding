@@ -12,23 +12,24 @@ class TopRatedTVShowsBloc
     extends Bloc<TopRatedTVShowsEvent, TopRatedTVShowsState> {
   final GetTopRatedTVShows _getTopRatedTVShows;
 
-  TopRatedTVShowsBloc(this._getTopRatedTVShows) : super(TopRatedTVShowsEmpty()) {
+  TopRatedTVShowsBloc(this._getTopRatedTVShows)
+      : super(TopRatedTVShowsEmpty()) {
     on<OnTopRatedTVShowsCalled>(_onTopRatedTVShowsCalled);
   }
 
   FutureOr<void> _onTopRatedTVShowsCalled(
-      OnTopRatedTVShowsCalled event,
-      Emitter<TopRatedTVShowsState> emit,
-      ) async {
+    OnTopRatedTVShowsCalled event,
+    Emitter<TopRatedTVShowsState> emit,
+  ) async {
     emit(TopRatedTVShowsLoading());
 
     final result = await _getTopRatedTVShows.execute();
 
     result.fold(
-          (failure) {
+      (failure) {
         emit(TopRatedTVShowsError(failure.message));
       },
-          (data) {
+      (data) {
         data.isEmpty
             ? emit(TopRatedTVShowsEmpty())
             : emit(TopRatedTVShowsHasData(data));

@@ -1,5 +1,4 @@
-import 'package:core_app/core_app.dart'
-    show ContentCardList, DrawerItem;
+import 'package:core_app/core_app.dart' show ContentCardList, DrawerItem;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
@@ -19,8 +18,8 @@ class _PopularTVShowsPageState extends State<PopularTVShowsPage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() =>
-        context.read<PopularTVShowsBloc>().add(OnPopularTVShowsCalled()));
+    Future.microtask(
+        () => context.read<PopularTVShowsBloc>().add(OnPopularTVShowsCalled()));
   }
 
   @override

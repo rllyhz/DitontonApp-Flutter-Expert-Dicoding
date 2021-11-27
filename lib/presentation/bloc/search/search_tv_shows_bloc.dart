@@ -24,11 +24,13 @@ class SearchTVShowsBloc extends Bloc<SearchTVShowsEvent, SearchTVShowsState> {
     final result = await _searchTVShows.execute(query);
 
     result.fold(
-          (failure) {
+      (failure) {
         emit(SearchTVShowsError(failure.message));
       },
-          (data) {
-        data.isEmpty ? emit(SearchTVShowsEmpty()) : emit(SearchTVShowsHasData(data));
+      (data) {
+        data.isEmpty
+            ? emit(SearchTVShowsEmpty())
+            : emit(SearchTVShowsHasData(data));
       },
     );
   }

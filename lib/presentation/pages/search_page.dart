@@ -1,11 +1,5 @@
 import 'package:core_app/core_app.dart'
-    show
-        ContentCardList,
-        DrawerItem,
-        Movie,
-        TVShow,
-        kBodyText,
-        kHeading6;
+    show ContentCardList, DrawerItem, Movie, TVShow, kBodyText, kHeading6;
 import 'package:ditonton/presentation/bloc/search/search_movies_bloc.dart';
 import 'package:ditonton/presentation/bloc/search/search_tv_shows_bloc.dart';
 import 'package:flutter/material.dart';
@@ -41,9 +35,13 @@ class SearchPage extends StatelessWidget {
             TextField(
               onSubmitted: (query) {
                 if (activeDrawerItem == DrawerItem.movie)
-                  context.read<SearchMoviesBloc>().add(OnQueryMoviesChange(query));
+                  context
+                      .read<SearchMoviesBloc>()
+                      .add(OnQueryMoviesChange(query));
                 else
-                  context.read<SearchTVShowsBloc>().add(OnQueryTVShowsChange(query));
+                  context
+                      .read<SearchTVShowsBloc>()
+                      .add(OnQueryTVShowsChange(query));
               },
               decoration: InputDecoration(
                 hintText: 'Search title',

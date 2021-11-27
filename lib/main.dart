@@ -11,9 +11,27 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies/movies.dart'
-    show MovieDetailBloc, MovieDetailPage, MovieRecommendationsBloc, NowPlayingMoviesBloc, PopularMoviesBloc, PopularMoviesNotifier, PopularMoviesPage, TopRatedMoviesBloc, TopRatedMoviesNotifier, TopRatedMoviesPage, WatchlistMovieNotifier, WatchlistMoviesBloc;
+    show
+        MovieDetailBloc,
+        MovieDetailPage,
+        MovieRecommendationsBloc,
+        NowPlayingMoviesBloc,
+        PopularMoviesBloc,
+        PopularMoviesPage,
+        TopRatedMoviesBloc,
+        TopRatedMoviesPage,
+        WatchlistMoviesBloc;
 import 'package:tv_shows/tv_shows.dart'
-    show NowPlayingTVShowsBloc, PopularTVShowsBloc, PopularTVShowsPage, TVShowDetailBloc, TVShowDetailPage, TVShowRecommendationsBloc, TopRatedTVShowsBloc, TopRatedTVShowsPage, WatchlistTVShowsBloc;
+    show
+        NowPlayingTVShowsBloc,
+        PopularTVShowsBloc,
+        PopularTVShowsPage,
+        TVShowDetailBloc,
+        TVShowDetailPage,
+        TVShowRecommendationsBloc,
+        TopRatedTVShowsBloc,
+        TopRatedTVShowsPage,
+        WatchlistTVShowsBloc;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -8,7 +8,8 @@ import 'package:meta/meta.dart';
 part 'popular_tv_shows_event.dart';
 part 'popular_tv_shows_state.dart';
 
-class PopularTVShowsBloc extends Bloc<PopularTVShowsEvent, PopularTVShowsState> {
+class PopularTVShowsBloc
+    extends Bloc<PopularTVShowsEvent, PopularTVShowsState> {
   final GetPopularTVShows _getPopularTVShows;
 
   PopularTVShowsBloc(this._getPopularTVShows) : super(PopularTVShowsEmpty()) {
@@ -16,18 +17,18 @@ class PopularTVShowsBloc extends Bloc<PopularTVShowsEvent, PopularTVShowsState> 
   }
 
   FutureOr<void> _onPopularTVShowsCalled(
-      OnPopularTVShowsCalled event,
-      Emitter<PopularTVShowsState> emit,
-      ) async {
+    OnPopularTVShowsCalled event,
+    Emitter<PopularTVShowsState> emit,
+  ) async {
     emit(PopularTVShowsLoading());
 
     final result = await _getPopularTVShows.execute();
 
     result.fold(
-          (failure) {
+      (failure) {
         emit(PopularTVShowsError(failure.message));
       },
-          (data) {
+      (data) {
         data.isEmpty
             ? emit(PopularTVShowsEmpty())
             : emit(PopularTVShowsHasData(data));

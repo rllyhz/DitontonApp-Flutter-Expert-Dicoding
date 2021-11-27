@@ -18,19 +18,19 @@ class TVShowRecommendationsBloc
   }
 
   FutureOr<void> _onTVShowRecommendationsCalled(
-      OnTVShowRecommendationsCalled event,
-      Emitter<TVShowRecommendationsState> emit,
-      ) async {
+    OnTVShowRecommendationsCalled event,
+    Emitter<TVShowRecommendationsState> emit,
+  ) async {
     final id = event.id;
     emit(TVShowRecommendationsLoading());
 
     final result = await _getTVShowRecommendations.execute(id);
 
     result.fold(
-          (failure) {
+      (failure) {
         emit(TVShowRecommendationsError(failure.message));
       },
-          (data) {
+      (data) {
         data.isEmpty
             ? emit(TVShowRecommendationsEmpty())
             : emit(TVShowRecommendationsHasData(data));

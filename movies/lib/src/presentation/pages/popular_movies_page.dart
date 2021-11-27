@@ -1,5 +1,4 @@
-import 'package:core_app/core_app.dart'
-    show ContentCardList, DrawerItem;
+import 'package:core_app/core_app.dart' show ContentCardList, DrawerItem;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies/movies.dart';

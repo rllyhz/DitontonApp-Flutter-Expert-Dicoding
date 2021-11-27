@@ -1,6 +1,19 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core_app/core_app.dart'
-    show ScrollableSheetContainer, TVShowDetail, baseImageUrl, failedToFetchDataMessage, getFormattedDurationFromList, getFormattedGenres, kGrey, kHeading5, kHeading6, kMikadoYellow, kRichBlack, watchlistAddSuccessMessage, watchlistRemoveSuccessMessage;
+    show
+        ScrollableSheetContainer,
+        TVShowDetail,
+        baseImageUrl,
+        failedToFetchDataMessage,
+        getFormattedDurationFromList,
+        getFormattedGenres,
+        kGrey,
+        kHeading5,
+        kHeading6,
+        kMikadoYellow,
+        kRichBlack,
+        watchlistAddSuccessMessage,
+        watchlistRemoveSuccessMessage;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -36,7 +49,7 @@ class _TVShowDetailPageState extends State<TVShowDetailPage> {
   @override
   Widget build(BuildContext context) {
     final isTVShowAddedToWatchlist = context.select<WatchlistTVShowsBloc, bool>(
-            (bloc) => (bloc.state is TVShowIsAddedToWatchlist)
+        (bloc) => (bloc.state is TVShowIsAddedToWatchlist)
             ? (bloc.state as TVShowIsAddedToWatchlist).isAdded
             : false);
 
@@ -68,7 +81,11 @@ class DetailContent extends StatelessWidget {
   final bool isTVShowAddedToWatchlist;
   final TVShowDetail tvShow;
 
-  const DetailContent({Key? key, required this.tvShow, required this.isTVShowAddedToWatchlist,});
+  const DetailContent({
+    Key? key,
+    required this.tvShow,
+    required this.isTVShowAddedToWatchlist,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -86,16 +103,23 @@ class DetailContent extends StatelessWidget {
                   .read<WatchlistTVShowsBloc>()
                   .add(AddTVShowToWatchlist(tvShow));
             } else {
-              context.read<WatchlistTVShowsBloc>().add(
-                  RemoveTVShowFromWatchlist(tvShow));
+              context
+                  .read<WatchlistTVShowsBloc>()
+                  .add(RemoveTVShowFromWatchlist(tvShow));
             }
 
-            final message = context.select<WatchlistTVShowsBloc, String>((value) {
+            final message =
+                context.select<WatchlistTVShowsBloc, String>((value) {
               if (value.state is TVShowIsAddedToWatchlist) {
-                final isAdded = (value.state as TVShowIsAddedToWatchlist).isAdded;
-                return isAdded ? watchlistAddSuccessMessage : watchlistRemoveSuccessMessage;
+                final isAdded =
+                    (value.state as TVShowIsAddedToWatchlist).isAdded;
+                return isAdded
+                    ? watchlistAddSuccessMessage
+                    : watchlistRemoveSuccessMessage;
               } else {
-                return !isTVShowAddedToWatchlist ? watchlistAddSuccessMessage : watchlistRemoveSuccessMessage;
+                return !isTVShowAddedToWatchlist
+                    ? watchlistAddSuccessMessage
+                    : watchlistRemoveSuccessMessage;
               }
             });
 
@@ -208,7 +232,7 @@ class DetailContent extends StatelessWidget {
                               ),
                             ),
                             errorWidget: (context, url, error) =>
-                            const Icon(Icons.error),
+                                const Icon(Icons.error),
                           ),
                         ),
                       ),
