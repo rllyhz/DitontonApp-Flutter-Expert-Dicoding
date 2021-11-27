@@ -77,51 +77,55 @@ class _TVShowDetailPageState extends State<TVShowDetailPage> {
   }
 }
 
-class DetailContent extends StatelessWidget {
-  final bool isTVShowAddedToWatchlist;
+class DetailContent extends StatefulWidget {
+  bool isTVShowAddedToWatchlist;
   final TVShowDetail tvShow;
 
-  const DetailContent({
+  DetailContent({
     Key? key,
     required this.tvShow,
     required this.isTVShowAddedToWatchlist,
   });
 
   @override
+  State<DetailContent> createState() => _DetailContentState();
+}
+
+class _DetailContentState extends State<DetailContent> {
+  @override
   Widget build(BuildContext context) {
     return ScrollableSheetContainer(
-      backgroundUrl: '$baseImageUrl${tvShow.posterPath}',
+      backgroundUrl: '$baseImageUrl${widget.tvShow.posterPath}',
       scrollableContents: [
         Text(
-          tvShow.name,
+          widget.tvShow.name,
           style: kHeading5,
         ),
         ElevatedButton(
           onPressed: () async {
-            if (!isTVShowAddedToWatchlist) {
+            if (!widget.isTVShowAddedToWatchlist) {
               context
                   .read<WatchlistTVShowsBloc>()
-                  .add(AddTVShowToWatchlist(tvShow));
+                  .add(AddTVShowToWatchlist(widget.tvShow));
             } else {
               context
                   .read<WatchlistTVShowsBloc>()
-                  .add(RemoveTVShowFromWatchlist(tvShow));
+                  .add(RemoveTVShowFromWatchlist(widget.tvShow));
             }
 
-            final message =
-                context.select<WatchlistTVShowsBloc, String>((value) {
-              if (value.state is TVShowIsAddedToWatchlist) {
-                final isAdded =
-                    (value.state as TVShowIsAddedToWatchlist).isAdded;
-                return isAdded
-                    ? watchlistAddSuccessMessage
-                    : watchlistRemoveSuccessMessage;
-              } else {
-                return !isTVShowAddedToWatchlist
-                    ? watchlistAddSuccessMessage
-                    : watchlistRemoveSuccessMessage;
-              }
-            });
+            final state = BlocProvider.of<WatchlistTVShowsBloc>(context).state;
+            String message = "";
+
+            if (state is TVShowIsAddedToWatchlist) {
+              final isAdded = state.isAdded;
+              message = isAdded == false
+                  ? watchlistAddSuccessMessage
+                  : watchlistRemoveSuccessMessage;
+            } else {
+              message = !widget.isTVShowAddedToWatchlist
+                  ? watchlistAddSuccessMessage
+                  : watchlistRemoveSuccessMessage;
+            }
 
             if (message == watchlistAddSuccessMessage ||
                 message == watchlistRemoveSuccessMessage) {
@@ -136,11 +140,16 @@ class DetailContent extends StatelessWidget {
                     );
                   });
             }
+
+            setState(() {
+              widget.isTVShowAddedToWatchlist =
+                  !widget.isTVShowAddedToWatchlist;
+            });
           },
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              isTVShowAddedToWatchlist
+              widget.isTVShowAddedToWatchlist
                   ? const Icon(Icons.check)
                   : const Icon(Icons.add),
               const SizedBox(width: 6.0),
@@ -150,17 +159,17 @@ class DetailContent extends StatelessWidget {
           ),
         ),
         Text(
-          getFormattedGenres(tvShow.genres),
+          getFormattedGenres(widget.tvShow.genres),
         ),
         Text(
-          tvShow.episodeRunTime.isNotEmpty
-              ? getFormattedDurationFromList(tvShow.episodeRunTime)
+          widget.tvShow.episodeRunTime.isNotEmpty
+              ? getFormattedDurationFromList(widget.tvShow.episodeRunTime)
               : 'N/A',
         ),
         Row(
           children: [
             RatingBarIndicator(
-              rating: tvShow.voteAverage / 2,
+              rating: widget.tvShow.voteAverage / 2,
               itemCount: 5,
               itemBuilder: (context, index) => const Icon(
                 Icons.star,
@@ -168,15 +177,15 @@ class DetailContent extends StatelessWidget {
               ),
               itemSize: 24,
             ),
-            Text('${tvShow.voteAverage}')
+            Text('${widget.tvShow.voteAverage}')
           ],
         ),
         const SizedBox(height: 12.0),
         Text(
-          'Total Episodes: ' + tvShow.numberOfEpisodes.toString(),
+          'Total Episodes: ' + widget.tvShow.numberOfEpisodes.toString(),
         ),
         Text(
-          'Total Seasons: ' + tvShow.numberOfSeasons.toString(),
+          'Total Seasons: ' + widget.tvShow.numberOfSeasons.toString(),
         ),
         const SizedBox(height: 16),
         Text(
@@ -184,7 +193,7 @@ class DetailContent extends StatelessWidget {
           style: kHeading6,
         ),
         Text(
-          tvShow.overview.isNotEmpty ? tvShow.overview : "-",
+          widget.tvShow.overview.isNotEmpty ? widget.tvShow.overview : "-",
         ),
         const SizedBox(height: 16),
         Text(
@@ -251,14 +260,14 @@ class DetailContent extends StatelessWidget {
           'Seasons',
           style: kHeading6,
         ),
-        tvShow.seasons.isNotEmpty
+        widget.tvShow.seasons.isNotEmpty
             ? Container(
                 height: 150,
                 margin: const EdgeInsets.only(top: 8.0),
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (ctx, index) {
-                    final season = tvShow.seasons[index];
+                    final season = widget.tvShow.seasons[index];
 
                     return Padding(
                       padding: const EdgeInsets.all(4.0),
@@ -308,7 +317,7 @@ class DetailContent extends StatelessWidget {
                       ),
                     );
                   },
-                  itemCount: tvShow.seasons.length,
+                  itemCount: widget.tvShow.seasons.length,
                 ),
               )
             : const Text('-'),
