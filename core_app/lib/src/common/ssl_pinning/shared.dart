@@ -21,9 +21,10 @@ class Shared {
               (await rootBundle.load('assets/cert/ssl_pinning_certificate.pem'))
                   .buffer
                   .asInt8List();
+          log('Successfully access and load certificate.pem file!');
         } catch (e) {
           certFileBytes = utf8.encode(_certificatedString);
-          log('Error access certificate.pem file.\n${e.toString()}');
+          log('Error access and load certificate.pem file.\n${e.toString()}');
         }
       }
 

@@ -36,7 +36,7 @@ import 'package:tv_shows/tv_shows.dart'
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  HttpSSLPinning.init();
+  await HttpSSLPinning.init();
 
   di.init();
 
