@@ -4,6 +4,7 @@ import 'package:core_app/core_app.dart'
         DrawerItem,
         failedToFetchDataMessage,
         kBodyText,
+        routeObserver,
         watchlistMovieEmptyMessage;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,13 +19,25 @@ class WatchlistMoviesPage extends StatefulWidget {
   _WatchlistMoviesPageState createState() => _WatchlistMoviesPageState();
 }
 
-class _WatchlistMoviesPageState extends State<WatchlistMoviesPage> {
+class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
+    with RouteAware {
   @override
   void initState() {
     super.initState();
     Future.microtask(() {
       context.read<WatchlistMoviesBloc>().add(OnFetchMovieWatchlist());
     });
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    routeObserver.subscribe(this, ModalRoute.of(context)!);
+  }
+
+  @override
+  void didPopNext() {
+    context.read<WatchlistMoviesBloc>().add(OnFetchMovieWatchlist());
   }
 
   @override
@@ -64,5 +77,11 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage> {
         },
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    routeObserver.unsubscribe(this);
+    super.dispose();
   }
 }
