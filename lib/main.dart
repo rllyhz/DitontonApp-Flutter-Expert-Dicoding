@@ -106,6 +106,7 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: kRichBlack,
           textTheme: kTextTheme,
         ),
+        navigatorObservers: [routeObserver],
         home: HomePage(),
         onGenerateRoute: (RouteSettings settings) {
           switch (settings.name) {
